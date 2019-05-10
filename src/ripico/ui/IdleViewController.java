@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,26 +24,26 @@ public class IdleViewController {
     @FXML
     private void initialize() {
         System.out.println("Idle View Initialized");
-
     }
 
     public void onClick_agreeTos(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
             // Get MainView RootElement
-            loader.setLocation(getClass().getResource("MainView.fxml"));
             Parent root = loader.load();
 
+            MainViewController controller = loader.getController();
+            controller.setMainApp(mainApp);
+
             Stage stage = new Stage(); // Neues Fenster
+            stage.setTitle("Ripico Sportwetten");
             stage.setScene(new Scene(root));
-            mainApp.setPrimaryStage(stage);
-
-            /*stage.setTitle("Ripico Sportwetten");
-            stage.setScene(scene);
-            stage.show();*/
+            stage.show();
 
 
-
+            // Set Icon
+            stage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "icon.png" )));
+            stage.setResizable(false);
             // Hide/Close TOS-Window
             ((Node)(event.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
@@ -56,8 +57,6 @@ public class IdleViewController {
     public void setMainApp(AppStart app){
         this.mainApp = app;
         System.out.println("IdleViewController: App loaded!");
-
-
     }
 
 }

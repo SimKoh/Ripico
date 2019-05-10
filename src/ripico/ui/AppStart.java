@@ -5,10 +5,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sun.applet.Main;
 
 import java.io.IOException;
+
+import static com.sun.org.apache.xerces.internal.utils.SecuritySupport.getResourceAsStream;
 
 
 public class AppStart extends Application {
@@ -19,19 +22,22 @@ public class AppStart extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        primaryStage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "icon.png" )));
+
         setupIdleView();
     }
 
-    private void setupIdleView(){
+    private void setupIdleView() {
         try {
-            // Calls Initialize usw.
-            primaryStage.setTitle("Ripico - Idle");
+            // ruft initialize auf
+            primaryStage.setTitle("Ripico Sportwetten");
 
-            // IdleView
+            // load IdleView
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("IdleView.fxml"));
             Parent root = (Parent) loader.load(); // !IMPORTANT! Needed to get Controller
             primaryStage.setScene(new Scene(root));
+            primaryStage.setResizable(false);
 
             IdleViewController idleViewController = loader.getController();
             idleViewController.setMainApp(this);
@@ -45,11 +51,6 @@ public class AppStart extends Application {
     }
 
 
-
-
-
-
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -61,8 +62,8 @@ public class AppStart extends Application {
         System.out.println("New Stage loaded!");
 
         // Main View laden FEHLER
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("MainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
+
         try {
             Parent root = (Parent) loader.load(); // !IMPORTANT! Needed to get Controller
         } catch (IOException e) {
