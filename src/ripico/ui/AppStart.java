@@ -9,10 +9,12 @@ import javafx.stage.Stage;
 import sun.applet.Main;
 
 import java.io.IOException;
+import java.util.Properties;
 
 
 public class AppStart extends Application {
 
+    public static Properties properties;
     private Stage primaryStage;
     private Parent rootLayout; // AnchorPane
 
@@ -22,7 +24,7 @@ public class AppStart extends Application {
         setupIdleView();
     }
 
-    private void setupIdleView(){
+    private void setupIdleView() {
         try {
             // Calls Initialize usw.
             primaryStage.setTitle("Ripico - Idle");
@@ -45,12 +47,8 @@ public class AppStart extends Application {
     }
 
 
-
-
-
-
-
     public static void main(String[] args) {
+        properties.setProperty("dummy","true");
         launch(args);
     }
 
