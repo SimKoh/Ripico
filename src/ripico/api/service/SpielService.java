@@ -2,9 +2,10 @@ package ripico.api.service;
 
 import ripico.api.domain.QuotenArt;
 import ripico.api.domain.Spiel;
-import sun.security.provider.ConfigFile;
+
+import java.util.List;
 
 public interface SpielService {
-    Spiel ladeSpiel();
+    List<Spiel> ladeSpiele();
     void setzteErgebnis(Spiel spiel, QuotenArt ergebnis);
 }

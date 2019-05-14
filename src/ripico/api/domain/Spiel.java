@@ -4,12 +4,21 @@ import java.util.*;
 
 public class Spiel {
 
+    private int spielId;
     private Map<QuotenArt, Float> quoten;
     private String sportart;
     private String mannschaftHeim;
     private String mannschaftAuswaerts;
     private Date datum;
     private QuotenArt ergebnis;
+
+    public int getSpielId() {
+        return spielId;
+    }
+
+    public void setSpielId(int spielId) {
+        this.spielId = spielId;
+    }
 
     public Map<QuotenArt, Float> getQuoten() {
         return quoten;

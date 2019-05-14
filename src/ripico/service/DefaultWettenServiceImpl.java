@@ -12,8 +12,8 @@ public class DefaultWettenServiceImpl implements WettenService {
 
     private final WettenAdapter wettenAdapter;
 
-    public DefaultWettenServiceImpl(WettenAdapter wettenAdapter) {
-        this.wettenAdapter = ServiceCreator.createWettenAdapter();
+    public DefaultWettenServiceImpl() {
+        this.wettenAdapter = ServiceCreator.createService(WettenAdapter.class);
     }
 
     @Override

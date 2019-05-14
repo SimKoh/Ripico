@@ -14,6 +14,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import ripico.api.domain.QuotenArt;
+import ripico.api.domain.Spiel;
+import ripico.api.service.SpielService;
+import ripico.service.DefaultSpielServiceImpl;
 
 import java.io.IOException;
 
@@ -21,6 +25,7 @@ import java.io.IOException;
 public class MainViewController {
 
     private AppStart mainApp;
+    private SpielService spielService = new DefaultSpielServiceImpl();
 
 
     @FXML
@@ -33,43 +38,30 @@ public class MainViewController {
     private void initialize() {
         System.out.println("MainViewController initialized");
 
-        ObservableList<Wett> wettList = FXCollections.<Wett>observableArrayList(
-                new Wett("Fussball", "BVB Dortmund", "Bayern München", 2.f, "08.05.2019 - 22:00"),
-                new Wett("Fussball", "Bayern München", "TE Leverkusen", 2.f, "08.05.2019 - 20:00"),
-                new Wett("Badminton", "Vfl Schwerte", "PUS Köln", 2.f, "09.05.2019 - 21:00"),
-                new Wett("Fussball", "Kgg Düsseldorf", "Arsenal London", 2.f, "10.05.2019 - 23:00"),
-                new Wett("Schwanzerei", "Kgg Schwerte", "TE Dortmund", 2.f, "10.05.2019 - 23:00"),
-                new Wett("Fussball", "Bayern München", "Bayern London", 2.f, "10.05.2019 - 23:00"),
-                new Wett("Schwanzerei", "Kgg Schwerte", "TE Dortmund", 2.f, "10.05.2019 - 23:00"),
-                new Wett("Schwanzerei", "Kgg Schwerte", "TE Dortmund", 2.f, "10.05.2019 - 23:00")
-
-                );
-
-
+        ObservableList<Spiel> wettList = FXCollections.observableArrayList(spielService.ladeSpiele());
 
 
         //ScrollPane
-            // VBOX - Alle Wetten
-                // PANE - Height: 230, width: 400
-                    // LABEL SportartDesc - X:20, Y:3
-                    // LABEL SportArt - X:70, Y:3
+        // VBOX - Alle Wetten
+        // PANE - Height: 230, width: 400
+        // LABEL SportartDesc - X:20, Y:3
+        // LABEL SportArt - X:70, Y:3
 
-                    // LABEL Zeitpunkt - X:215, Y:3
+        // LABEL Zeitpunkt - X:215, Y:3
 
-                    // LABEL Mannschaft1 - X:20, Y:20
-                    // LABEL : - X:170, Y:20
-                    // LABEL Mannschaft2 - X:200, Y:20
+        // LABEL Mannschaft1 - X:20, Y:20
+        // LABEL : - X:170, Y:20
+        // LABEL Mannschaft2 - X:200, Y:20
 
-                    // LABEL: Quote M1 - X:65, Y:45
-                    // LABEL: Quote UN - X:155, Y:45
-                    // LABEL: Quote M2 - X:245, Y:45
+        // LABEL: Quote M1 - X:65, Y:45
+        // LABEL: Quote UN - X:155, Y:45
+        // LABEL: Quote M2 - X:245, Y:45
 
 
         int counter = 0;
-        for (Wett wette: wettList) {
+        for (Spiel spiel : wettList) {
 
             Pane paneBet = new Pane();
-
 
 
             Label label_sportArtDesc = new Label("Sportart:");
@@ -77,17 +69,17 @@ public class MainViewController {
             label_sportArtDesc.setLayoutY(3);
             paneBet.getChildren().add(label_sportArtDesc);
 
-            Label label_sportArt = new Label(wette.getSportart());
+            Label label_sportArt = new Label(spiel.getSportart());
             label_sportArt.setLayoutX(70);
             label_sportArt.setLayoutY(3);
             paneBet.getChildren().add(label_sportArt);
 
-            Label label_zeitpunkt = new Label(wette.getZeit());
+            Label label_zeitpunkt = new Label(spiel.getDatum().toString());
             label_zeitpunkt.setLayoutX(240);
             label_zeitpunkt.setLayoutY(3);
             paneBet.getChildren().add(label_zeitpunkt);
 
-            Label label_mannschaft1 = new Label(wette.getMannschaft1());
+            Label label_mannschaft1 = new Label(spiel.getMannschaftHeim());
             label_mannschaft1.setLayoutX(20);
             label_mannschaft1.setLayoutY(20);
             label_mannschaft1.setFont(new Font("Arial", 19));
@@ -99,26 +91,26 @@ public class MainViewController {
             label_seperator.setFont(new Font("Arial", 19));
             paneBet.getChildren().add(label_seperator);
 
-            Label label_mannschaft2 = new Label(wette.getMannschaft2());
+            Label label_mannschaft2 = new Label(spiel.getMannschaftAuswaerts());
             label_mannschaft2.setLayoutX(240);
             label_mannschaft2.setLayoutY(20);
             label_mannschaft2.setFont(new Font("Arial", 19));
             paneBet.getChildren().add(label_mannschaft2);
 
 
-            Label label_quoteMannschaft1 = new Label(String.valueOf(wette.getQuote()));
+            Label label_quoteMannschaft1 = new Label(String.valueOf(spiel.getQuoten().get(QuotenArt.HEIM)));
             label_quoteMannschaft1.setLayoutX(65);
             label_quoteMannschaft1.setLayoutY(45);
             label_quoteMannschaft1.setFont(new Font("Arial", 19));
             paneBet.getChildren().add(label_quoteMannschaft1);
 
-            Label label_quoteUnentschieden = new Label(String.valueOf(wette.getQuote()));
+            Label label_quoteUnentschieden = new Label(String.valueOf(spiel.getQuoten().get(QuotenArt.UNENTSCHIEDEN)));
             label_quoteUnentschieden.setLayoutX(180);
             label_quoteUnentschieden.setLayoutY(45);
             label_quoteUnentschieden.setFont(new Font("Arial", 19));
             paneBet.getChildren().add(label_quoteUnentschieden);
 
-            Label label_quoteMannschaft2 = new Label(String.valueOf(wette.getQuote()));
+            Label label_quoteMannschaft2 = new Label(String.valueOf(spiel.getQuoten().get(QuotenArt.AUSWAERTS)));
             label_quoteMannschaft2.setLayoutX(275);
             label_quoteMannschaft2.setLayoutY(45);
             label_quoteMannschaft2.setFont(new Font("Arial", 19));
@@ -130,7 +122,7 @@ public class MainViewController {
             paneBet.setPrefWidth(460);
 
 
-            if(counter % 2 == 0){
+            if (counter % 2 == 0) {
                 paneBet.getStyleClass().add("betEntryEven");
 
             } else {
@@ -165,7 +157,7 @@ public class MainViewController {
 
 
             });
-                vBox_availableBets.getChildren().add(paneBet);
+            vBox_availableBets.getChildren().add(paneBet);
 
             counter++;
         }
@@ -173,11 +165,10 @@ public class MainViewController {
 
     }
 
-    public void setMainApp(AppStart app){
+    public void setMainApp(AppStart app) {
         mainApp = app;
         System.out.println("MainViewController: App loaded!");
     }
-
 
 
 }

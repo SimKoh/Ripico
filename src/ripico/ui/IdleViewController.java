@@ -48,7 +48,7 @@ public class IdleViewController {
             ((Node)(event.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
             System.out.println("Fehler 46:");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

@@ -17,11 +17,16 @@ public class WettenMock {
     public static final Spiel spiel3 = createSpiel3();
 
     public static final List<Wette> wettenListe = new ArrayList<>();
+    public static final List<Spiel> spielListe = new ArrayList<>();
 
     static {
         wettenListe.add(wette1);
         wettenListe.add(wette2);
         wettenListe.add(wette3);
+
+        spielListe.add(spiel1);
+        spielListe.add(spiel2);
+        spielListe.add(spiel3);
     }
 
     public static Wette createWette1() {
