@@ -10,12 +10,14 @@ import javafx.stage.Stage;
 import sun.applet.Main;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import static com.sun.org.apache.xerces.internal.utils.SecuritySupport.getResourceAsStream;
 
 
 public class AppStart extends Application {
 
+    public static Properties properties;
     private Stage primaryStage;
     private Parent rootLayout; // AnchorPane
 
@@ -52,6 +54,7 @@ public class AppStart extends Application {
 
 
     public static void main(String[] args) {
+        properties.setProperty("dummy","true");
         launch(args);
     }
 
