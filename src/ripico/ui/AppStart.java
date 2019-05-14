@@ -17,14 +17,14 @@ import static com.sun.org.apache.xerces.internal.utils.SecuritySupport.getResour
 
 public class AppStart extends Application {
 
-    public static Properties properties;
+    public static Properties properties = new Properties();
     private Stage primaryStage;
     private Parent rootLayout; // AnchorPane
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        primaryStage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "icon.png" )));
+        primaryStage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "../../resources/imgs/icon.png" )));
 
         setupIdleView();
     }
@@ -36,7 +36,7 @@ public class AppStart extends Application {
 
             // load IdleView
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("IdleView.fxml"));
+            loader.setLocation(getClass().getResource("../../resources/IdleView.fxml"));
             Parent root = (Parent) loader.load(); // !IMPORTANT! Needed to get Controller
             primaryStage.setScene(new Scene(root));
             primaryStage.setResizable(false);
@@ -65,7 +65,7 @@ public class AppStart extends Application {
         System.out.println("New Stage loaded!");
 
         // Main View laden FEHLER
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/MainView.fxml"));
 
         try {
             Parent root = (Parent) loader.load(); // !IMPORTANT! Needed to get Controller

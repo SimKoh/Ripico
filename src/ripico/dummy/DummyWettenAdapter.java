@@ -9,12 +9,13 @@ import java.util.Optional;
 public class DummyWettenAdapter implements WettenAdapter {
     @Override
     public Wette createWette(Wette wette) {
-        return null;
+        wette.setWettenId(4);
+        return wette;
     }
 
     @Override
     public Optional<Wette> readWette(int wettenId) {
-        return WettenMock.wettenListe.stream().filter(e-> e.getWettenId() == wettenId).findFirst();
+        return WettenMock.wettenListe.stream().filter(e -> e.getWettenId() == wettenId).findFirst();
     }
 
     @Override

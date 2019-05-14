@@ -1,16 +1,15 @@
 package ripico.api.domain;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Spiel {
 
-    private Map<QuotenArt,Float> quoten;
+    private Map<QuotenArt, Float> quoten;
     private String sportart;
     private String mannschaftHeim;
     private String mannschaftAuswaerts;
     private Date datum;
+    private QuotenArt ergebnis;
 
     public Map<QuotenArt, Float> getQuoten() {
         return quoten;
@@ -52,11 +51,19 @@ public class Spiel {
         this.datum = datum;
     }
 
+    public QuotenArt getErgebnis() {
+        return ergebnis;
+    }
+
+    public void setErgebnis(QuotenArt ergebnis) {
+        this.ergebnis = ergebnis;
+    }
+
     public void setQuoten(float heim, float auswaerts, float unentschieden) {
-        this.quoten = new HashMap<>();
-        this.quoten.put(QuotenArt.HEIM,heim);
-        this.quoten.put(QuotenArt.AUSWAERTS,auswaerts);
-        this.quoten.put(QuotenArt.UNENTSCHIEDEN,unentschieden);
+        this.quoten = new EnumMap<>(QuotenArt.class);
+        this.quoten.put(QuotenArt.HEIM, heim);
+        this.quoten.put(QuotenArt.AUSWAERTS, auswaerts);
+        this.quoten.put(QuotenArt.UNENTSCHIEDEN, unentschieden);
 
     }
 }

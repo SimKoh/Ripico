@@ -1,0 +1,13 @@
+package ripico.api.service;
+
+import ripico.api.domain.Wette;
+import ripico.api.domain.Wettschein;
+
+import java.util.List;
+
+public interface WettscheinService {
+    float berechneGesamtQuote(List<Wette> wetten);
+    boolean pruefeWettschein(int wettscheinId);
+    Wettschein speichereWettschein();
+
+}

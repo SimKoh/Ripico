@@ -28,7 +28,7 @@ public class IdleViewController {
 
     public void onClick_agreeTos(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/MainView.fxml"));
             // Get MainView RootElement
             Parent root = loader.load();
 
@@ -42,7 +42,7 @@ public class IdleViewController {
 
 
             // Set Icon
-            stage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "icon.png" )));
+            stage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "../../resources/imgs/icon.png" )));
             stage.setResizable(false);
             // Hide/Close TOS-Window
             ((Node)(event.getSource())).getScene().getWindow().hide();
