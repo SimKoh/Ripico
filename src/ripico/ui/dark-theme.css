@@ -1,0 +1,123 @@
+/*
+ * This is an adjustment of the original modena.css for a consistent dark theme.
+ * Original modena.css here: https://gist.github.com/maxd/63691840fc372f22f470.
+ */
+
+/* Redefine base colors */
+.root {
+    -fx-base: rgb(50, 50, 50);
+    -fx-background: rgb(50, 50, 50);
+
+    /* make controls (buttons, thumb, etc.) slightly lighter */
+    -fx-color: derive(-fx-base, 10%);
+
+
+    /* text fields and table rows background SOWIE OUTLINING VON SCROLLPANE*/
+    -fx-control-inner-background: rgb(255, 255, 255);
+    /* version of -fx-control-inner-background for alternative rows */
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 2.5%);
+
+    /* text colors depending on background's brightness */
+    -fx-light-text-color: rgb(220, 220, 220);
+    -fx-mid-text-color: rgb(100, 100, 100);
+    -fx-dark-text-color: rgb(20, 20, 20);
+
+    /* A bright blue for highlighting/accenting objects.  For example: selected
+     * text; selected items in menus, lists, trees, and tables; progress bars */
+    -fx-accent: rgb(0, 100, 37);
+
+    /* color of non-focused yet selected elements */
+    -fx-selection-bar-non-focused: rgb(6, 50, 16);
+
+    -fx-focus-color: transparent;
+}
+
+
+/* Fix derived prompt color for text fields */
+.text-input {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background, +50%);
+}
+
+/* Keep prompt invisible when focused (above color fix overrides it) */
+.text-input:focused {
+    -fx-prompt-text-fill: transparent;
+}
+
+/* Fix scroll bar buttons arrows colors */
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color,  rgb(209, 57, 50);
+}
+
+.scroll-bar > .increment-button:hover > .increment-arrow,
+.scroll-bar > .decrement-button:hover > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color,  rgb(209, 57, 50);
+}
+
+.scroll-bar > .increment-button:pressed > .increment-arrow,
+.scroll-bar > .decrement-button:pressed > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color,  rgb(209, 57, 50);
+}
+
+/* The main scrollbar **track** CSS class  */
+.scroll-bar:horizontal .track ,
+.scroll-bar:vertical .track{
+    /*-fx-background-color: transparent;*/
+    -fx-border-color:derive(gray,80%);
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(191, 38, 45, 0.8);
+}
+
+.betEntryEven{
+    -fx-background-color: rgb(80, 80, 80);
+    -fx-border-width: 0 1 0 0;
+
+    -fx-border-color: white;
+}
+
+.betEntryOdd{
+    -fx-background-color: rgb(50, 50, 50);
+    -fx-border-width: 0 1 0 0;
+
+    -fx-border-color: white;
+}
+
+.betEntryEven:hover{
+    -fx-background-color: rgba(209, 57, 50, 0.7);
+}
+
+.betEntryOdd:hover{
+    -fx-background-color: rgba(209, 57, 50, 0.7);
+}
+
+.scrollPaneDark{
+    -fx-border-width: 1;
+    -fx-border-style: solid ;
+    -fx-border-color: white;
+
+}
+.borderBottom {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-color: rgb(209, 57, 50);
+
+}
+
+
+.split {
+    -fx-border-width: 0 1 0 0;
+    -fx-border-style: hidden solid hidden hidden;
+    -fx-border-color: rgb(209, 57, 50);
+
+}
+
+.border{
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-border-color: rgb(209, 57, 50);
+}
+

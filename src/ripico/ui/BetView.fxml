@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPaneRoot" prefHeight="318.0" prefWidth="498.0" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.BetViewController">
+   <children>
+      <ImageView fitHeight="112.0" fitWidth="114.0" layoutX="54.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" styleClass="border" />
+      <ImageView fitHeight="112.0" fitWidth="114.0" layoutX="243.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" styleClass="border" />
+   </children>
+</AnchorPane>
