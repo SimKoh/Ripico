@@ -3,10 +3,19 @@ package ripico.ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class MainViewController {
@@ -129,7 +138,34 @@ public class MainViewController {
             }
 
 
-            vBox_availableBets.getChildren().add(paneBet);
+            paneBet.setOnMouseClicked(event ->
+            {
+//                try {
+//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("BetView.fxml"));
+//                    // Get MainView RootElement
+//                    Parent root = loader.load();
+//
+//                    Stage stage = new Stage(); // Neues Fenster
+//                    stage.setTitle("Ripico Sportwetten");
+//                    stage.setScene(new Scene(root));
+//                    stage.initModality(Modality.APPLICATION_MODAL);
+//
+//                    BetViewController controller = loader.getController();
+//
+//                    stage.show();
+//                    // Set Icon
+//                    stage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "icon.png" )));
+//                    stage.setResizable(false);
+//                    // Hide/Close TOS-Window
+//
+//                } catch (IOException e) {
+//                    System.out.println("Fehler 46:");
+//                    System.out.println(e.getMessage());
+//                }
+
+
+            });
+                vBox_availableBets.getChildren().add(paneBet);
 
             counter++;
         }
