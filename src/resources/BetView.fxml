@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPaneRoot" prefHeight="318.0" prefWidth="498.0" stylesheets="@stylesheets/dark-theme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.BetViewController">
+<AnchorPane fx:id="anchorPaneRoot" prefHeight="318.0" prefWidth="498.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.BetViewController">
    <children>
-      <ImageView fitHeight="112.0" fitWidth="114.0" layoutX="54.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" styleClass="border" />
-      <ImageView fitHeight="112.0" fitWidth="114.0" layoutX="243.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" styleClass="border" />
+      <ImageView fx:id="hLogo" fitHeight="90.0" fitWidth="90.0" layoutX="90.0" layoutY="103.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../Desktop/bb.png" />
+         </image>
+      </ImageView>
+
+      <ImageView fx:id="aLogo" fitHeight="90.0" fitWidth="90.0" layoutX="310.0" layoutY="100.0" pickOnBounds="true" styleClass="border">
+         <image>
+            <Image url="@../../../../Desktop/72ba388b695afaf0356023fe9006e136.jpg" />
+         </image>
+      </ImageView>
+
+
+      <Label fx:id="mannschaftHeimLabel" layoutX="97.0" layoutY="193.0" text="BVB Jerusalem" />
+      <Label fx:id="mamnnschaftAuswaertsLabel" layoutX="317.0" layoutY="193.0" text="BVB Jerusalem" />
    </children>
 </AnchorPane>

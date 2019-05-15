@@ -58,7 +58,9 @@ public class WettenMock {
         spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 13).getTime());
         spiel.setSportart("Fußball");
         spiel.setMannschaftHeim("BVB");
+        spiel.setMannschaftHeimLogoPfad("/imgs/logos/Fußball/bvb.gif");
         spiel.setMannschaftAuswaerts("SO4");
+        spiel.setMannschaftAuswaertsLogoPfad("/imgs/logos/Fußball/bvb.gif"); // TODO Schalke Logo einfügen
         spiel.setQuoten(3.02f, 1.89f, 2.57f);
         return spiel;
     }
@@ -68,7 +70,9 @@ public class WettenMock {
         spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 17).getTime());
         spiel.setSportart("Eishockey");
         spiel.setMannschaftHeim("Kölner Haie");
+        spiel.setMannschaftHeimLogoPfad("/resources/imgs/logos/Eishockey/koelnerHaie.gif");
         spiel.setMannschaftAuswaerts("Düsseldorfer EG");
+        spiel.setMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Eishockey/koelnerHaie.gif"); // TODO duesseldorferEg Logo einfügen
         spiel.setQuoten(1.01f, 10.70f, 9.53f);
         return spiel;
     }
@@ -87,8 +91,10 @@ public class WettenMock {
         Spiel spiel = new Spiel();
         spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 21).getTime());
         spiel.setSportart("Basketball");
-        spiel.setMannschaftHeim("Warriors");
+        spiel.setMannschaftHeim("Chicago Bulls");
+        spiel.setMannschaftHeimLogoPfad("/resources/imgs/logos/Basketball/chicagoBulls.png");
         spiel.setMannschaftAuswaerts("Rockets");
+        spiel.setMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Basketball/chicagoBulls.png"); // TODO rockets Logo einfügen
         spiel.setQuoten(1.22f, 5.89f, 7.57f);
         return spiel;
     }

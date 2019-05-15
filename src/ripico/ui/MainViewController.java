@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -134,30 +133,33 @@ public class MainViewController {
             }
 
 
+
+
             paneBet.setOnMouseClicked(event ->
             {
-//                try {
-//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("BetView.fxml"));
-//                    // Get MainView RootElement
-//                    Parent root = loader.load();
-//
-//                    Stage stage = new Stage(); // Neues Fenster
-//                    stage.setTitle("Ripico Sportwetten");
-//                    stage.setScene(new Scene(root));
-//                    stage.initModality(Modality.APPLICATION_MODAL);
-//
-//                    BetViewController controller = loader.getController();
-//
-//                    stage.show();
-//                    // Set Icon
-//                    stage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "icon.png" )));
-//                    stage.setResizable(false);
-//                    // Hide/Close TOS-Window
-//
-//                } catch (IOException e) {
-//                    System.out.println("Fehler 46:");
-//                    System.out.println(e.getMessage());
-//                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/BetView.fxml"));
+                    // Get MainView RootElement
+                    Parent root = loader.load();
+
+                    Stage stage = new Stage(); // Neues Fenster
+                    stage.setTitle("Ripico Sportwetten");
+                    stage.setScene(new Scene(root));
+                    stage.initModality(Modality.APPLICATION_MODAL);
+
+                    BetViewController controller = loader.getController();
+                    controller.setSpiel(spiel);
+
+                    stage.show();
+                    // Set Icon
+                    stage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "../../resources/imgs/icon.png" )));
+                    stage.setResizable(false);
+                    // Hide/Close TOS-Window
+
+                } catch (IOException e) {
+                    System.out.println("Fehler 46:");
+                    System.out.println(e.getMessage());
+                }
 
 
             });

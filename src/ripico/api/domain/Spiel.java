@@ -8,9 +8,13 @@ public class Spiel {
     private Map<QuotenArt, Float> quoten;
     private String sportart;
     private String mannschaftHeim;
+    private String mannschaftHeimLogoPfad;
     private String mannschaftAuswaerts;
+    private String mannschaftAuswaertsLogoPfad;
     private Date datum;
     private QuotenArt ergebnis;
+
+
 
     public int getSpielId() {
         return spielId;
@@ -66,6 +70,22 @@ public class Spiel {
 
     public void setErgebnis(QuotenArt ergebnis) {
         this.ergebnis = ergebnis;
+    }
+
+    public String getMannschaftHeimLogoPfad() {
+        return mannschaftHeimLogoPfad;
+    }
+
+    public void setMannschaftHeimLogoPfad(String mannschaftHeimLogoPfad) {
+        this.mannschaftHeimLogoPfad = mannschaftHeimLogoPfad;
+    }
+
+    public String getMannschaftAuswaertsLogoPfad() {
+        return mannschaftAuswaertsLogoPfad;
+    }
+
+    public void setMannschaftAuswaertsLogoPfad(String mannschaftAuswaertsLogoPfad) {
+        this.mannschaftAuswaertsLogoPfad = mannschaftAuswaertsLogoPfad;
     }
 
     public void setQuoten(float heim, float auswaerts, float unentschieden) {
