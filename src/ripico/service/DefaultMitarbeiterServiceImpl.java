@@ -1,5 +1,6 @@
 package ripico.service;
 
+import ripico.api.ServiceFactory;
 import ripico.api.dal.MitarbeiterAdapter;
 import ripico.api.domain.Mitarbeiter;
 import ripico.api.service.MitarbeiterService;
@@ -14,7 +15,7 @@ public class DefaultMitarbeiterServiceImpl implements MitarbeiterService {
     private MitarbeiterAdapter mitarbeiterAdapter;
 
     public DefaultMitarbeiterServiceImpl() {
-        this.mitarbeiterAdapter = ServiceCreator.createService(MitarbeiterAdapter.class);
+        this.mitarbeiterAdapter = ServiceFactory.createService(MitarbeiterAdapter.class);
     }
 
     @Override

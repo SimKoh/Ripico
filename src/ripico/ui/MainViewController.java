@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import ripico.api.ServiceFactory;
 import ripico.api.domain.QuotenArt;
 import ripico.api.domain.Spiel;
 import ripico.api.service.SpielService;
@@ -27,7 +28,7 @@ import java.util.Locale;
 public class MainViewController {
 
     private AppStart mainApp;
-    private SpielService spielService = new DefaultSpielServiceImpl();
+    private SpielService spielService = ServiceFactory.createService(SpielService.class);
 
 
     @FXML

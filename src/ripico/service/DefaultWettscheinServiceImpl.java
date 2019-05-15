@@ -1,5 +1,6 @@
 package ripico.service;
 
+import ripico.api.ServiceFactory;
 import ripico.api.dal.WettscheinAdapter;
 import ripico.api.domain.QuotenArt;
 import ripico.api.domain.Wette;
@@ -15,7 +16,7 @@ public class DefaultWettscheinServiceImpl implements WettscheinService {
     private WettscheinAdapter wettscheinAdapter;
 
     public DefaultWettscheinServiceImpl() {
-        this.wettscheinAdapter = ServiceCreator.createService(WettscheinAdapter.class);
+        this.wettscheinAdapter = ServiceFactory.createService(WettscheinAdapter.class);
     }
 
     @Override

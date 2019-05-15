@@ -1,5 +1,6 @@
 package ripico.service;
 
+import ripico.api.ServiceFactory;
 import ripico.api.dal.SpielAdapter;
 import ripico.api.domain.QuotenArt;
 import ripico.api.domain.Spiel;
@@ -13,7 +14,7 @@ public class DefaultSpielServiceImpl implements SpielService {
     private SpielAdapter spielAdapter;
 
     public DefaultSpielServiceImpl() {
-        this.spielAdapter = ServiceCreator.createService(SpielAdapter.class);
+        this.spielAdapter = ServiceFactory.createService(SpielAdapter.class);
     }
 
     @Override

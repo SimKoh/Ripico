@@ -54,7 +54,8 @@ public class AppStart extends Application {
 
 
     public static void main(String[] args) {
-        properties.setProperty("dummy","true");
+        //set adapterUsed to Dummy or Database (important the uppercase at start)
+        properties.setProperty("adapterUsed","Dummy");
         launch(args);
     }
 

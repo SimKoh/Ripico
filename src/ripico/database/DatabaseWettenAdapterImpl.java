@@ -6,7 +6,7 @@ import ripico.api.domain.Wette;
 import java.util.List;
 import java.util.Optional;
 
-public class DatabaseWettenAdapter implements WettenAdapter {
+public class DatabaseWettenAdapterImpl implements WettenAdapter {
 
     @Override
     public Wette createWette(Wette wette) {
