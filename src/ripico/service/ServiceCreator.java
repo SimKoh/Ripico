@@ -3,10 +3,12 @@ package ripico.service;
 import ripico.api.dal.MitarbeiterAdapter;
 import ripico.api.dal.SpielAdapter;
 import ripico.api.dal.WettenAdapter;
+import ripico.api.dal.WettscheinAdapter;
 import ripico.database.DatabaseWettenAdapter;
 import ripico.dummy.DummyMitarbeiterAdapterImpl;
 import ripico.dummy.DummySpielAdapterImpl;
 import ripico.dummy.DummyWettenAdapterImpl;
+import ripico.dummy.DummyWettscheinAdapterImpl;
 import ripico.ui.AppStart;
 
 import java.lang.reflect.InvocationTargetException;
@@ -23,6 +25,7 @@ public class ServiceCreator {
         dummyMap.put(WettenAdapter.class, DummyWettenAdapterImpl.class);
         dummyMap.put(SpielAdapter.class, DummySpielAdapterImpl.class);
         dummyMap.put(MitarbeiterAdapter.class, DummyMitarbeiterAdapterImpl.class);
+        dummyMap.put(WettscheinAdapter.class, DummyWettscheinAdapterImpl.class);
 
         //fill map for db
         classmap.put(WettenAdapter.class, DatabaseWettenAdapter.class);
