@@ -2,8 +2,12 @@ package ripico.api;
 
 import ripico.ui.AppStart;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 public class ServiceFactory {
 
@@ -19,8 +23,15 @@ public class ServiceFactory {
     }
 
     public static <T> T createService(Class<T> myInterface) {
-        String adapterUsed = AppStart.properties.getProperty("adapterUsed");
-        if(myInterface.getSimpleName().endsWith("Service")) {
+        InputStream propertiesStream = ServiceFactory.class.getResourceAsStream("../../resources/ripico.properties");
+        Properties properties = new Properties();
+        try {
+            properties.load(propertiesStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String adapterUsed = properties.getProperty("adapterUsed");
+        if (myInterface.getSimpleName().endsWith("Service")) {
             adapterUsed = "Default";
         }
         try {
