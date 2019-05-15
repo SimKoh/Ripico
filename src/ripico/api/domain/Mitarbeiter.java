@@ -1,20 +1,10 @@
 package ripico.api.domain;
 
 public class Mitarbeiter {
-    private int mitarbeiterId;
     private String vorname;
     private String nachname;
     private String benutzername;
     private String passwort;
-
-    public int getMitarbeiterId() {
-        return mitarbeiterId;
-    }
-
-    public void setMitarbeiterId(int mitarbeiterId) {
-        this.mitarbeiterId = mitarbeiterId;
-    }
-
     public String getVorname() {
         return vorname;
     }

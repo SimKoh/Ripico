@@ -6,7 +6,7 @@ import ripico.api.domain.Spiel;
 import java.util.List;
 import java.util.Optional;
 
-public class DummySpielAdapter implements SpielAdapter {
+public class DummySpielAdapterImpl implements SpielAdapter {
     @Override
     public Spiel createSpiel(Spiel spiel) {
         return spiel;
@@ -20,11 +20,6 @@ public class DummySpielAdapter implements SpielAdapter {
     @Override
     public Spiel updateSpiel(Spiel spiel) {
         return spiel;
-    }
-
-    @Override
-    public boolean deleteSpiel(int spielId) {
-        return true;
     }
 
     @Override

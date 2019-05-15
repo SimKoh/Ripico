@@ -1,10 +1,12 @@
 package ripico.service;
 
+import ripico.api.dal.MitarbeiterAdapter;
 import ripico.api.dal.SpielAdapter;
 import ripico.api.dal.WettenAdapter;
 import ripico.database.DatabaseWettenAdapter;
-import ripico.dummy.DummySpielAdapter;
-import ripico.dummy.DummyWettenAdapter;
+import ripico.dummy.DummyMitarbeiterAdapterImpl;
+import ripico.dummy.DummySpielAdapterImpl;
+import ripico.dummy.DummyWettenAdapterImpl;
 import ripico.ui.AppStart;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,8 +20,9 @@ public class ServiceCreator {
 
     static {
         //fill dummymap
-        dummyMap.put(WettenAdapter.class, DummyWettenAdapter.class);
-        dummyMap.put(SpielAdapter.class, DummySpielAdapter.class);
+        dummyMap.put(WettenAdapter.class, DummyWettenAdapterImpl.class);
+        dummyMap.put(SpielAdapter.class, DummySpielAdapterImpl.class);
+        dummyMap.put(MitarbeiterAdapter.class, DummyMitarbeiterAdapterImpl.class);
 
         //fill map for db
         classmap.put(WettenAdapter.class, DatabaseWettenAdapter.class);
@@ -28,7 +31,7 @@ public class ServiceCreator {
     public static <T> T createService(Class<T> clazz) {
         try {
             if ("true".equals(AppStart.properties.getProperty("dummy"))) {
-                return (T)dummyMap.get(clazz).getDeclaredConstructor().newInstance();
+                return (T) dummyMap.get(clazz).getDeclaredConstructor().newInstance();
             }
             return (T) classmap.get(clazz).getDeclaredConstructor().newInstance();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {

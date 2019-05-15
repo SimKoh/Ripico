@@ -8,8 +8,4 @@ public interface WettscheinAdapter {
     Wettschein createWettschein(Wettschein wettschein);
 
     Optional<Wettschein> readWettschein(int wettenscheinId);
-
-    Wettschein updateWettschein(Wettschein wettschein);
-
-    boolean deleteWettschein(Wettschein wettschein);
 }

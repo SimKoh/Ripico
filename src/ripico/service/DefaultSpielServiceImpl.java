@@ -20,12 +20,12 @@ public class DefaultSpielServiceImpl implements SpielService {
     public List<Spiel> ladeSpiele() {
         return spielAdapter.getAllSpiele()
                 .stream()
-                .filter(e -> e.getDatum().before(new Date()))
+                .filter(e -> e.getDatum().after(new Date()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void setzteErgebnis(Spiel spiel, QuotenArt ergebnis) {
+    public void setzeErgebnis(Spiel spiel, QuotenArt ergebnis) {
 
     }
 }

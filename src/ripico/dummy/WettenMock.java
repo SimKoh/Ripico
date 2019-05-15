@@ -65,7 +65,7 @@ public class WettenMock {
 
     public static Spiel createSpiel2() {
         Spiel spiel = new Spiel();
-        spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 13).getTime());
+        spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 17).getTime());
         spiel.setSportart("Eishockey");
         spiel.setMannschaftHeim("Kölner Haie");
         spiel.setMannschaftAuswaerts("Düsseldorfer EG");
@@ -75,7 +75,17 @@ public class WettenMock {
 
     public static Spiel createSpiel3() {
         Spiel spiel = new Spiel();
-        spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 13).getTime());
+        spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 19).getTime());
+        spiel.setSportart("Basketball");
+        spiel.setMannschaftHeim("Warriors");
+        spiel.setMannschaftAuswaerts("Rockets");
+        spiel.setQuoten(1.22f, 5.89f, 7.57f);
+        return spiel;
+    }
+
+    public static Spiel createSpiel4() {
+        Spiel spiel = new Spiel();
+        spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 21).getTime());
         spiel.setSportart("Basketball");
         spiel.setMannschaftHeim("Warriors");
         spiel.setMannschaftAuswaerts("Rockets");

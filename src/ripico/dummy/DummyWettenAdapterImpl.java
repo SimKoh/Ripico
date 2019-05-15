@@ -6,7 +6,7 @@ import ripico.api.domain.Wette;
 import java.util.List;
 import java.util.Optional;
 
-public class DummyWettenAdapter implements WettenAdapter {
+public class DummyWettenAdapterImpl implements WettenAdapter {
     @Override
     public Wette createWette(Wette wette) {
         wette.setWettenId(4);
@@ -21,11 +21,6 @@ public class DummyWettenAdapter implements WettenAdapter {
     @Override
     public Wette updateWette(Wette wette) {
         return wette;
-    }
-
-    @Override
-    public boolean deleteWette(Wette wette) {
-        return true;
     }
 
     @Override

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface SpielService {
     List<Spiel> ladeSpiele();
-    void setzteErgebnis(Spiel spiel, QuotenArt ergebnis);
+    void setzeErgebnis(Spiel spiel, QuotenArt ergebnis);
 }

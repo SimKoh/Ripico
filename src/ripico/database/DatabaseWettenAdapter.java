@@ -24,11 +24,6 @@ public class DatabaseWettenAdapter implements WettenAdapter {
     }
 
     @Override
-    public boolean deleteWette(Wette wette) {
-        return false;
-    }
-
-    @Override
     public List<Wette> getAllWetten() {
         return null;
     }

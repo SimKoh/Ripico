@@ -12,8 +12,6 @@ public interface WettenAdapter {
 
     Wette updateWette(Wette wette);
 
-    boolean deleteWette(Wette wette);
-
     List<Wette> getAllWetten();
 
 }

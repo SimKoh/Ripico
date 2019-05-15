@@ -20,6 +20,9 @@ import ripico.api.service.SpielService;
 import ripico.service.DefaultSpielServiceImpl;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 
 public class MainViewController {
@@ -59,6 +62,7 @@ public class MainViewController {
 
 
         int counter = 0;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:MM");
         for (Spiel spiel : wettList) {
 
             Pane paneBet = new Pane();
@@ -74,7 +78,7 @@ public class MainViewController {
             label_sportArt.setLayoutY(3);
             paneBet.getChildren().add(label_sportArt);
 
-            Label label_zeitpunkt = new Label(spiel.getDatum().toString());
+            Label label_zeitpunkt = new Label(simpleDateFormat.format(spiel.getDatum()));
             label_zeitpunkt.setLayoutX(240);
             label_zeitpunkt.setLayoutY(3);
             paneBet.getChildren().add(label_zeitpunkt);

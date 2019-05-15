@@ -12,7 +12,5 @@ public interface SpielAdapter {
 
     Spiel updateSpiel(Spiel spiel);
 
-    boolean deleteSpiel(int spielId);
-
     List<Spiel> getAllSpiele();
 }
