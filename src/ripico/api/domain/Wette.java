@@ -1,10 +1,9 @@
 package ripico.api.domain;
 
-import java.util.Date;
-
 public class Wette {
     private int wettenId;
-    private Spiel spiel;
+    private int spielId;
+    private int wettscheinId;
     private QuotenArt gesetzteWette;
 
 
@@ -17,12 +16,20 @@ public class Wette {
         this.wettenId = wettenId;
     }
 
-    public Spiel getSpiel() {
-        return spiel;
+    public int getSpielId() {
+        return spielId;
     }
 
-    public void setSpiel(Spiel spiel) {
-        this.spiel = spiel;
+    public void setSpielId(int spielId) {
+        this.spielId = spielId;
+    }
+
+    public int getWettscheinId() {
+        return wettscheinId;
+    }
+
+    public void setWettscheinId(int wettscheinId) {
+        this.wettscheinId = wettscheinId;
     }
 
     public QuotenArt getGesetzteWette() {

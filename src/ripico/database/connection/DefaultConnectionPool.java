@@ -10,8 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DefaultConnectionPool {
+    private static final Logger logger = Logger.getLogger(DefaultConnectionPool.class.getName());
+
     private final String url;
     private final String user;
     private final String password;
@@ -21,19 +25,16 @@ public class DefaultConnectionPool {
     private static final int MAX_POOL_SIZE = 20;
 
 
-    private static DefaultConnectionPool create(String url, String user, String password) throws SQLException {
-        InputStream propertiesStream = ServiceFactory.class.getResourceAsStream("../../resources/ripico.properties");
-        Properties properties = new Properties();
-        try {
-            properties.load(propertiesStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static DefaultConnectionPool create() throws SQLException {
+        Properties properties = loadProperties();
+        String url = properties.getProperty("db_url");
+        String user = properties.getProperty("db_username");
+        String password = properties.getProperty("db_password");
         List<Connection> pool = new ArrayList<>(INITIAL_POOL_SIZE);
         for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
             pool.add(createConnection(url, user, password));
         }
-        return new DefaultConnectionPool(properties.getProperty("db_url"), properties.getProperty("db_url"), properties.getProperty("db_password"), pool);
+        return new DefaultConnectionPool(url, user, password, pool);
     }
 
     private DefaultConnectionPool(String url, String user, String password, List<Connection> connectionPool) {
@@ -43,14 +44,13 @@ public class DefaultConnectionPool {
         this.connectionPool = connectionPool;
     }
 
-    // standard constructors
-
     public Connection getConnection() throws SQLException {
         if (connectionPool.isEmpty()) {
             if (usedConnections.size() < MAX_POOL_SIZE) {
                 connectionPool.add(createConnection(url, user, password));
             } else {
-                throw new RuntimeException("Ma connections!");
+                logger.log(Level.WARNING, "Connection konnte nicht erstellt werden, da die maximale Anzahl der Connections erreicht wurde");
+                throw new RuntimeException("Max connections!");
             }
         }
 
@@ -68,19 +68,22 @@ public class DefaultConnectionPool {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public int getSize() {
-        return connectionPool.size() + usedConnections.size();
-    }
-
-    public List<Connection> getConnectionPool() {
-        return connectionPool;
-    }
-
     public void shutdown() throws SQLException {
         usedConnections.forEach(this::releaseConnection);
         for (Connection c : connectionPool) {
             c.close();
         }
         connectionPool.clear();
+    }
+
+    private static Properties loadProperties() {
+        InputStream propertiesStream = ServiceFactory.class.getResourceAsStream("../../resources/ripico.properties");
+        Properties properties = new Properties();
+        try {
+            properties.load(propertiesStream);
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Fehler beim laden der Properties-Datei", e);
+        }
+        return properties;
     }
 }

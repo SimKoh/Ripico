@@ -7,9 +7,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import ripico.api.domain.Spiel;
+import ripico.database.DatabaseMitarbeiterAdapterImpl;
+import ripico.database.DatabaseSpielAdapterImpl;
+import ripico.service.exception.ResourceNotFoundException;
 import sun.applet.Main;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Optional;
 import java.util.Properties;
 
 import static com.sun.org.apache.xerces.internal.utils.SecuritySupport.getResourceAsStream;
@@ -17,7 +23,6 @@ import static com.sun.org.apache.xerces.internal.utils.SecuritySupport.getResour
 
 public class AppStart extends Application {
 
-    public static Properties properties = new Properties();
     private Stage primaryStage;
     private Parent rootLayout; // AnchorPane
 
@@ -54,6 +59,17 @@ public class AppStart extends Application {
 
 
     public static void main(String[] args) {
+        try {
+            DatabaseSpielAdapterImpl databaseSpielAdapter = new DatabaseSpielAdapterImpl();
+            DatabaseMitarbeiterAdapterImpl databaseMitarbeiterAdapter = new DatabaseMitarbeiterAdapterImpl();
+            Optional<Spiel> spiel = databaseSpielAdapter.readSpiel(1);
+            Optional<Spiel> spiel2 = databaseSpielAdapter.readSpiel(1);
+            Optional<Spiel> spiel3 = databaseSpielAdapter.readSpiel(1);
+            Optional<Spiel> spiel4 = databaseSpielAdapter.readSpiel(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         launch(args);
     }
 
