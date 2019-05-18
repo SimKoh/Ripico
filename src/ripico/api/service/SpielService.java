@@ -1,6 +1,6 @@
 package ripico.api.service;
 
-import ripico.api.domain.QuotenArt;
+import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Spiel;
 
 import java.util.List;

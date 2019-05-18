@@ -9,6 +9,10 @@ public class Mitarbeiter {
         return vorname;
     }
 
+    Mitarbeiter () {
+
+    }
+
     public void setVorname(String vorname) {
         this.vorname = vorname;
     }

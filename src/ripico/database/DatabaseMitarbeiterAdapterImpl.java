@@ -21,7 +21,7 @@ public class DatabaseMitarbeiterAdapterImpl implements MitarbeiterAdapter {
 
     @Override
     public Optional<Mitarbeiter> readMitarbeiter(String username) {
-        Connection connection = null;
+        Connection connection;
         try {
             connection = connectionPool.getConnection();
         } catch (SQLException e) {

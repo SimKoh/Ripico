@@ -2,6 +2,7 @@ package ripico.database;
 
 import ripico.api.dal.SpielAdapter;
 import ripico.api.domain.*;
+import ripico.api.domain.enums.QuotenArt;
 import ripico.database.connection.DefaultConnectionPool;
 import ripico.service.exception.ResourceNotFoundException;
 
@@ -44,17 +45,17 @@ public class DatabaseSpielAdapterImpl implements SpielAdapter {
 
     @Override
     public Optional<Spiel> readSpiel(int spielNr) {
-        Connection connection = null;
+        Connection connection   ;
         try {
             connection = connectionPool.getConnection();
         } catch (SQLException e) {
             return Optional.empty();
         }
-        try (
-                PreparedStatement preparedStatement = createPreparedStatementRead(connection, spielNr);
-                ResultSet resultSet = preparedStatement.executeQuery()) {
+        try (PreparedStatement preparedStatement = createPreparedStatementRead(connection, spielNr);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             SpielBuilder spielBuilder = SpielBuilder
                     .newSpiel();
+            Spiel spiel = null;
             while (resultSet.next()) {
                 spielBuilder
                         .withSpielId(resultSet.getInt(1))
@@ -69,10 +70,10 @@ public class DatabaseSpielAdapterImpl implements SpielAdapter {
                     spielBuilder
                             .withErgebnis(QuotenArt.valueOf(quotenArtString));
                 }
+                Map<QuotenArt, Float> quotenFromDatabase = getQuotenFromDatabase(spielNr, connection);
+                spiel = spielBuilder.withQuoten(quotenFromDatabase).build();
             }
             connectionPool.releaseConnection(connection);
-            Map<QuotenArt, Float> quotenFromDatabase = getQuotenFromDatabase(spielNr);
-            Spiel spiel = spielBuilder.withQuoten(quotenFromDatabase).build();
             if (spiel == null) {
                 return Optional.empty();
             }
@@ -116,13 +117,7 @@ public class DatabaseSpielAdapterImpl implements SpielAdapter {
     }
 
 
-    private Map<QuotenArt, Float> getQuotenFromDatabase(int spielNr) throws ResourceNotFoundException {
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-        } catch (SQLException e) {
-            throw new  ResourceNotFoundException();
-        }
+    private Map<QuotenArt, Float> getQuotenFromDatabase(int spielNr, Connection connection) throws ResourceNotFoundException {
         try (PreparedStatement preparedStatement = createPreparedStatementReadQuoten(connection, spielNr);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             Map<QuotenArt, Float> quoten = new EnumMap<>(QuotenArt.class);
@@ -142,10 +137,10 @@ public class DatabaseSpielAdapterImpl implements SpielAdapter {
     }
 
     private Date convertTimestampToDate(Timestamp timestamp) {
-        Date date;
+        Date date = null;
         if (timestamp != null) {
             date = new Date(timestamp.getTime());
         }
-        return timestamp;
+        return date;
     }
 }

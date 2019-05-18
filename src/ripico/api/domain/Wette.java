@@ -1,12 +1,16 @@
 package ripico.api.domain;
 
+import ripico.api.domain.enums.QuotenArt;
+
 public class Wette {
     private int wettenId;
-    private int spielId;
+    private Spiel spiel;
     private int wettscheinId;
     private QuotenArt gesetzteWette;
 
+    Wette() {
 
+    }
 
     public int getWettenId() {
         return wettenId;
@@ -16,12 +20,12 @@ public class Wette {
         this.wettenId = wettenId;
     }
 
-    public int getSpielId() {
-        return spielId;
+    public Spiel getSpiel() {
+        return spiel;
     }
 
-    public void setSpielId(int spielId) {
-        this.spielId = spielId;
+    public void setSpiel(Spiel spiel) {
+        this.spiel = spiel;
     }
 
     public int getWettscheinId() {

@@ -1,5 +1,7 @@
 package ripico.api.domain;
 
+import ripico.api.domain.enums.QuotenArt;
+
 import java.util.Date;
 import java.util.Map;
 

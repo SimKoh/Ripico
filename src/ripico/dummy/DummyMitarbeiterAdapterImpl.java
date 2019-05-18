@@ -2,6 +2,7 @@ package ripico.dummy;
 
 import ripico.api.dal.MitarbeiterAdapter;
 import ripico.api.domain.Mitarbeiter;
+import ripico.api.domain.MitarbeiterBuilder;
 
 import java.util.Optional;
 
@@ -16,11 +17,12 @@ public class DummyMitarbeiterAdapterImpl implements MitarbeiterAdapter {
     }
 
     private Mitarbeiter createMitartbeiter() {
-        Mitarbeiter mitarbeiter = new Mitarbeiter();
-        mitarbeiter.setBenutzername("admin");
-        mitarbeiter.setPasswort("admin");
-        mitarbeiter.setVorname("Rip");
-        mitarbeiter.setNachname("Ico");
-        return mitarbeiter;
+        return MitarbeiterBuilder
+                .newMitarbeiter()
+                .withBenutzername("admin")
+                .withPasswort("admin")
+                .withVorname("Rip")
+                .withNachname("Ico")
+                .build();
     }
 }

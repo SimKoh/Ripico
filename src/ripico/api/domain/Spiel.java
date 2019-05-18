@@ -1,5 +1,7 @@
 package ripico.api.domain;
 
+import ripico.api.domain.enums.QuotenArt;
+
 import java.util.*;
 
 public class Spiel {
@@ -14,7 +16,10 @@ public class Spiel {
     private Date datum;
     private QuotenArt ergebnis;
 
+    //TODO make packge private -> fix dummy
+    public Spiel() {
 
+    }
 
     public int getSpielId() {
         return spielId;

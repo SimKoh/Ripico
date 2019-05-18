@@ -20,6 +20,6 @@ public class DefaultWettenServiceImpl implements WettenService {
     @Override
     public List<Wette> getOffeneWetten() {
         List<Wette> allWetten = wettenAdapter.getAllWetten();
-        return allWetten.stream().filter(e -> e.getSpiel().getDatum().before(new Date())).collect(Collectors.toList());
+        return allWetten;
     }
 }

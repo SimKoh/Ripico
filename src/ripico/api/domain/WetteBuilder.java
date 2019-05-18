@@ -1,8 +1,10 @@
 package ripico.api.domain;
 
+import ripico.api.domain.enums.QuotenArt;
+
 public final class WetteBuilder {
     private int wettenId;
-    private int spielId;
+    private Spiel spiel;
     private int wettscheinId;
     private QuotenArt gesetzteWette;
 
@@ -18,8 +20,8 @@ public final class WetteBuilder {
         return this;
     }
 
-    public WetteBuilder withSpielId(int spielId) {
-        this.spielId = spielId;
+    public WetteBuilder withSpiel(Spiel spiel) {
+        this.spiel = spiel;
         return this;
     }
 
@@ -36,7 +38,7 @@ public final class WetteBuilder {
     public Wette build() {
         Wette wette = new Wette();
         wette.setWettenId(wettenId);
-        wette.setSpielId(spielId);
+        wette.setSpiel(spiel);
         wette.setWettscheinId(wettscheinId);
         wette.setGesetzteWette(gesetzteWette);
         return wette;

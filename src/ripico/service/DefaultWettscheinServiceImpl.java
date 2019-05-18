@@ -2,7 +2,7 @@ package ripico.service;
 
 import ripico.api.ServiceFactory;
 import ripico.api.dal.WettscheinAdapter;
-import ripico.api.domain.QuotenArt;
+import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Wette;
 import ripico.api.domain.Wettschein;
 import ripico.api.service.WettscheinService;

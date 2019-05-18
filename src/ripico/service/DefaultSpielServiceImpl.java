@@ -2,7 +2,7 @@ package ripico.service;
 
 import ripico.api.ServiceFactory;
 import ripico.api.dal.SpielAdapter;
-import ripico.api.domain.QuotenArt;
+import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Spiel;
 import ripico.api.service.SpielService;
 

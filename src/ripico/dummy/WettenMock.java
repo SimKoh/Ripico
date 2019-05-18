@@ -1,8 +1,9 @@
 package ripico.dummy;
 
-import ripico.api.domain.QuotenArt;
+import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Spiel;
 import ripico.api.domain.Wette;
+import ripico.api.domain.WetteBuilder;
 
 import java.util.*;
 
@@ -30,27 +31,30 @@ public class WettenMock {
     }
 
     public static Wette createWette1() {
-        Wette wette = new Wette();
-        wette.setWettenId(1);
-        wette.setSpiel(createSpiel1());
-        wette.setGesetzteWette(QuotenArt.AUSWAERTS);
-        return wette;
+        return WetteBuilder.newWette()
+                .withWettenId(1)
+                .withSpiel(createSpiel1())
+                .withWettscheinId(1)
+                .withGesetzteWette(QuotenArt.AUSWAERTS)
+                .build();
     }
 
     public static Wette createWette2() {
-        Wette wette = new Wette();
-        wette.setWettenId(2);
-        wette.setSpiel(createSpiel2());
-        wette.setGesetzteWette(QuotenArt.HEIM);
-        return wette;
+        return WetteBuilder.newWette()
+                .withWettenId(2)
+                .withSpiel(createSpiel2())
+                .withWettscheinId(1)
+                .withGesetzteWette(QuotenArt.HEIM)
+                .build();
     }
 
     public static Wette createWette3() {
-        Wette wette = new Wette();
-        wette.setWettenId(3);
-        wette.setSpiel(createSpiel3());
-        wette.setGesetzteWette(QuotenArt.UNENTSCHIEDEN);
-        return wette;
+        return WetteBuilder.newWette()
+                .withWettenId(3)
+                .withSpiel(createSpiel3())
+                .withWettscheinId(2)
+                .withGesetzteWette(QuotenArt.UNENTSCHIEDEN)
+                .build();
     }
 
     public static Spiel createSpiel1() {

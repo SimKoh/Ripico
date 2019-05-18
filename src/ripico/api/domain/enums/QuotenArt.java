@@ -1,4 +1,4 @@
-package ripico.api.domain;
+package ripico.api.domain.enums;
 
 public enum QuotenArt {
     HEIM,

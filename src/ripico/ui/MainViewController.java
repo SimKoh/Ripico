@@ -14,15 +14,12 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ripico.api.ServiceFactory;
-import ripico.api.domain.QuotenArt;
+import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Spiel;
 import ripico.api.service.SpielService;
-import ripico.service.DefaultSpielServiceImpl;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 
 public class MainViewController {
