@@ -8,8 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import ripico.api.domain.Spiel;
+import ripico.database.DatabaseMannschaftAdapterImpl;
 import ripico.database.DatabaseMitarbeiterAdapterImpl;
 import ripico.database.DatabaseSpielAdapterImpl;
+import ripico.database.DatabaseWettscheinAdapterImpl;
 import ripico.service.exception.ResourceNotFoundException;
 import sun.applet.Main;
 
@@ -60,12 +62,9 @@ public class AppStart extends Application {
 
     public static void main(String[] args) {
         try {
-            DatabaseSpielAdapterImpl databaseSpielAdapter = new DatabaseSpielAdapterImpl();
-            DatabaseMitarbeiterAdapterImpl databaseMitarbeiterAdapter = new DatabaseMitarbeiterAdapterImpl();
-            Optional<Spiel> spiel = databaseSpielAdapter.readSpiel(1);
-            Optional<Spiel> spiel2 = databaseSpielAdapter.readSpiel(1);
-            Optional<Spiel> spiel3 = databaseSpielAdapter.readSpiel(1);
-            Optional<Spiel> spiel4 = databaseSpielAdapter.readSpiel(1);
+            DatabaseMannschaftAdapterImpl databaseMannschaftAdapter = new DatabaseMannschaftAdapterImpl();
+            databaseMannschaftAdapter.alleManschaften();
+
 
         } catch (SQLException e) {
             e.printStackTrace();

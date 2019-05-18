@@ -19,7 +19,7 @@ public class DatabaseMannschaftAdapterImpl implements MannschaftAdapter {
 
     private final DefaultConnectionPool connectionPool;
 
-    public DatabaseMannschaftAdapterImpl(DefaultConnectionPool connectionPool) throws SQLException {
+    public DatabaseMannschaftAdapterImpl() throws SQLException {
         this.connectionPool = DefaultConnectionPool.create();
     }
 
