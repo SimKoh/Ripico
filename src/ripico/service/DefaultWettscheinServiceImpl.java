@@ -8,7 +8,6 @@ import ripico.api.domain.Wette;
 import ripico.api.domain.Wettschein;
 import ripico.api.service.WettscheinService;
 import ripico.service.exception.ResourceNotFoundException;
-import ripico.ui.Wett;
 
 import java.util.ArrayList;
 import java.util.List;
