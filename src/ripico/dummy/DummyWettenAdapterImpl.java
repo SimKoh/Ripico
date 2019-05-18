@@ -12,19 +12,4 @@ public class DummyWettenAdapterImpl implements WettenAdapter {
         wette.setWettenId(4);
         return wette;
     }
-
-    @Override
-    public Optional<Wette> readWette(int wettenId) {
-        return WettenMock.wettenListe.stream().filter(e -> e.getWettenId() == wettenId).findFirst();
-    }
-
-    @Override
-    public Wette updateWette(Wette wette) {
-        return wette;
-    }
-
-    @Override
-    public List<Wette> getAllWetten() {
-        return WettenMock.wettenListe;
-    }
 }
