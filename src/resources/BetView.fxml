@@ -4,23 +4,34 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPaneRoot" prefHeight="318.0" prefWidth="498.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.BetViewController">
+<AnchorPane fx:id="anchorPaneRoot" prefHeight="318.0" prefWidth="498.0" stylesheets="@stylesheets/dark-theme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.BetViewController">
    <children>
-      <ImageView fx:id="hLogo" fitHeight="90.0" fitWidth="90.0" layoutX="90.0" layoutY="103.0" pickOnBounds="true">
+      <ImageView fx:id="hLogo" fitHeight="128.0" fitWidth="128.0" layoutX="50.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: transparent;">
          <image>
-            <Image url="@../../../../Desktop/bb.png" />
+            <Image url="@../resources/imgs/logos/Fußball/hannover96.png" />
          </image>
       </ImageView>
 
-      <ImageView fx:id="aLogo" fitHeight="90.0" fitWidth="90.0" layoutX="310.0" layoutY="100.0" pickOnBounds="true" styleClass="border">
+      <ImageView fx:id="aLogo" fitHeight="128.0" fitWidth="128.0" layoutX="310.0" layoutY="60.0" pickOnBounds="true" style="-fx-background-color: transparent;">
          <image>
-            <Image url="@../../../../Desktop/72ba388b695afaf0356023fe9006e136.jpg" />
+            <Image url="@../resources/imgs/logos/Fußball/hannover96.png" />
          </image>
       </ImageView>
 
 
-      <Label fx:id="mannschaftHeimLabel" layoutX="97.0" layoutY="193.0" text="BVB Jerusalem" />
-      <Label fx:id="mamnnschaftAuswaertsLabel" layoutX="317.0" layoutY="193.0" text="BVB Jerusalem" />
+      <Label fx:id="mannschaftHeimLabel" layoutX="70.0" layoutY="190.0" text="Mannschaft 1">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label fx:id="mamnnschaftAuswaertsLabel" layoutX="330.0" layoutY="190.0" text="Mannschaft 2">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label layoutX="232.0" layoutY="100.0" prefHeight="0.0" prefWidth="35.0" text=":">
+         <font>
+            <Font size="40.0" />
+         </font></Label>
    </children>
 </AnchorPane>

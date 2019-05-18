@@ -23,9 +23,18 @@
          <children>
             <Pane prefHeight="150.0" prefWidth="260.0">
                <children>
-                  <Label layoutY="5.0" text="Scheinnummer:" />
-                  <Label layoutY="25.0" text="Datum:" />
-                  <Label layoutY="45.0" text="Gesamtquote:" />
+                  <Label layoutY="5.0" text="Scheinnummer:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label layoutY="25.0" text="Datum:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label layoutY="45.0" text="Gesamtquote:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
                </children></Pane>
             <ScrollPane fx:id="scrollPane_availableBets" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="460.0" styleClass="edge-to-edge">
                <content>

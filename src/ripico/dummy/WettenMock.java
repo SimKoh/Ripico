@@ -68,9 +68,9 @@ public class WettenMock {
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 27).getTime())
                 .withSportart("Fußball")
                 .withMannschaftHeim("BVB")
-                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Fußball/bvb.gif")
-                .withMannschaftAuswaerts("S04")
-                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Fußball/bvb.gif") // TODO Schalke Logo einfügen
+                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Fußball/bvb.png")
+                .withMannschaftAuswaerts("Barcelona")
+                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Fußball/barcelona.png")
                 .withQuoten(quoten)
                 .build();
     }
@@ -85,9 +85,9 @@ public class WettenMock {
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 21).getTime())
                 .withSportart("Eishockey")
                 .withMannschaftHeim("Kölner Haie")
-                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Eishockey/koelnerHaie.gif")
-                .withMannschaftAuswaerts("Düsseldorfer EG") // TODO duesseldorferEg Logo einfügen
-                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Eishockey/koelnerHaie.gif")
+                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Eishockey/koelnerHaie.png")
+                .withMannschaftAuswaerts("Düsseldorfer EG")
+                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Eishockey/duesseldorferEG.png")
                 .withQuoten(quoten)
                 .build();
     }
@@ -101,8 +101,10 @@ public class WettenMock {
                 .newSpiel()
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 19).getTime())
                 .withSportart("Basketball")
-                .withMannschaftHeim("Warriors")
-                .withMannschaftAuswaerts("Rockets")
+                .withMannschaftHeim("Boston Celtics")
+                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Basketball/bostonCeltics.png")
+                .withMannschaftAuswaerts("Miami Heat")
+                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Basketball/miamiHeat.png")
                 .withQuoten(quoten)
                 .build();
     }
@@ -118,8 +120,8 @@ public class WettenMock {
                 .withSportart("Basketball")
                 .withMannschaftHeim("Chicago Bulls")
                 .withMannschaftHeimLogoPfad("/resources/imgs/logos/Basketball/chicagoBulls.png")
-                .withMannschaftAuswaerts("Rockets")
-                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Basketball/chicagoBulls.png") // TODO rockets Logo einfügen
+                .withMannschaftAuswaerts("LA Lakers")
+                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Basketball/laLakers.png")
                 .withQuoten(quoten)
                 .build();
     }

@@ -1,7 +1,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
-
+USE ripico;
 DROP TABLE IF EXISTS `mannschaft`;
 CREATE TABLE `mannschaft` (
   `mannschaft_id` int(11) NOT NULL,
