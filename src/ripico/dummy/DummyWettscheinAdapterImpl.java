@@ -6,10 +6,6 @@ import ripico.api.domain.Wettschein;
 import java.util.Optional;
 
 public class DummyWettscheinAdapterImpl implements WettscheinAdapter {
-    @Override
-    public Wettschein createWettschein(Wettschein wettschein) {
-        return createWettschein();
-    }
 
     @Override
     public Optional<Wettschein> readWettschein(int wettenscheinId) {

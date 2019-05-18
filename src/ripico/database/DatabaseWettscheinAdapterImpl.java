@@ -26,11 +26,6 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
     }
 
     @Override
-    public Wettschein createWettschein(Wettschein wettschein) {
-        return null;
-    }
-
-    @Override
     public Optional<Wettschein> readWettschein(int wettenscheinId) {
         Connection connection;
         try {
