@@ -6,6 +6,10 @@ public class Wettschein {
     private int wettscheinId;
     private List<Wette> wetten;
 
+    Wettschein() {
+
+    }
+
     public int getWettscheinId() {
         return wettscheinId;
     }

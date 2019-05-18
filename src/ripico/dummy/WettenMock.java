@@ -1,5 +1,6 @@
 package ripico.dummy;
 
+import ripico.api.domain.SpielBuilder;
 import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Spiel;
 import ripico.api.domain.Wette;
@@ -58,48 +59,68 @@ public class WettenMock {
     }
 
     public static Spiel createSpiel1() {
-        Spiel spiel = new Spiel();
-        spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 13).getTime());
-        spiel.setSportart("Fußball");
-        spiel.setMannschaftHeim("BVB");
-        spiel.setMannschaftHeimLogoPfad("/imgs/logos/Fußball/bvb.gif");
-        spiel.setMannschaftAuswaerts("SO4");
-        spiel.setMannschaftAuswaertsLogoPfad("/imgs/logos/Fußball/bvb.gif"); // TODO Schalke Logo einfügen
-        spiel.setQuoten(3.02f, 1.89f, 2.57f);
-        return spiel;
+        Map<QuotenArt, Float> quoten = new EnumMap<>(QuotenArt.class);
+        quoten.put(QuotenArt.HEIM, 3.02f);
+        quoten.put(QuotenArt.UNENTSCHIEDEN, 2.57f);
+        quoten.put(QuotenArt.AUSWAERTS, 1.87f);
+        return SpielBuilder
+                .newSpiel()
+                .withDatum(new GregorianCalendar(2019, Calendar.MAY, 27).getTime())
+                .withSportart("Fußball")
+                .withMannschaftHeim("BVB")
+                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Fußball/bvb.gif")
+                .withMannschaftAuswaerts("S04")
+                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Fußball/bvb.gif") // TODO Schalke Logo einfügen
+                .withQuoten(quoten)
+                .build();
     }
 
     public static Spiel createSpiel2() {
-        Spiel spiel = new Spiel();
-        spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 17).getTime());
-        spiel.setSportart("Eishockey");
-        spiel.setMannschaftHeim("Kölner Haie");
-        spiel.setMannschaftHeimLogoPfad("/resources/imgs/logos/Eishockey/koelnerHaie.gif");
-        spiel.setMannschaftAuswaerts("Düsseldorfer EG");
-        spiel.setMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Eishockey/koelnerHaie.gif"); // TODO duesseldorferEg Logo einfügen
-        spiel.setQuoten(1.01f, 10.70f, 9.53f);
-        return spiel;
+        Map<QuotenArt, Float> quoten = new EnumMap<>(QuotenArt.class);
+        quoten.put(QuotenArt.HEIM, 1.01f);
+        quoten.put(QuotenArt.UNENTSCHIEDEN, 10.7f);
+        quoten.put(QuotenArt.AUSWAERTS, 9.57f);
+        return SpielBuilder
+                .newSpiel()
+                .withDatum(new GregorianCalendar(2019, Calendar.MAY, 21).getTime())
+                .withSportart("Eishockey")
+                .withMannschaftHeim("Kölner Haie")
+                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Eishockey/koelnerHaie.gif")
+                .withMannschaftAuswaerts("Düsseldorfer EG") // TODO duesseldorferEg Logo einfügen
+                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Eishockey/koelnerHaie.gif")
+                .withQuoten(quoten)
+                .build();
     }
 
     public static Spiel createSpiel3() {
-        Spiel spiel = new Spiel();
-        spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 19).getTime());
-        spiel.setSportart("Basketball");
-        spiel.setMannschaftHeim("Warriors");
-        spiel.setMannschaftAuswaerts("Rockets");
-        spiel.setQuoten(1.22f, 5.89f, 7.57f);
-        return spiel;
+        Map<QuotenArt, Float> quoten = new EnumMap<>(QuotenArt.class);
+        quoten.put(QuotenArt.HEIM, 1.45f);
+        quoten.put(QuotenArt.UNENTSCHIEDEN, 2.21f);
+        quoten.put(QuotenArt.AUSWAERTS, 4.19f);
+        return SpielBuilder
+                .newSpiel()
+                .withDatum(new GregorianCalendar(2019, Calendar.MAY, 19).getTime())
+                .withSportart("Basketball")
+                .withMannschaftHeim("Warriors")
+                .withMannschaftAuswaerts("Rockets")
+                .withQuoten(quoten)
+                .build();
     }
 
     public static Spiel createSpiel4() {
-        Spiel spiel = new Spiel();
-        spiel.setDatum(new GregorianCalendar(2019, Calendar.MAY, 21).getTime());
-        spiel.setSportart("Basketball");
-        spiel.setMannschaftHeim("Chicago Bulls");
-        spiel.setMannschaftHeimLogoPfad("/resources/imgs/logos/Basketball/chicagoBulls.png");
-        spiel.setMannschaftAuswaerts("Rockets");
-        spiel.setMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Basketball/chicagoBulls.png"); // TODO rockets Logo einfügen
-        spiel.setQuoten(1.22f, 5.89f, 7.57f);
-        return spiel;
+        Map<QuotenArt, Float> quoten = new EnumMap<>(QuotenArt.class);
+        quoten.put(QuotenArt.HEIM, 1.22f);
+        quoten.put(QuotenArt.UNENTSCHIEDEN, 5.98f);
+        quoten.put(QuotenArt.AUSWAERTS, 7.57f);
+        return SpielBuilder
+                .newSpiel()
+                .withDatum(new GregorianCalendar(2019, Calendar.MAY, 21).getTime())
+                .withSportart("Basketball")
+                .withMannschaftHeim("Chicago Bulls")
+                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Basketball/chicagoBulls.png")
+                .withMannschaftAuswaerts("Rockets")
+                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Basketball/chicagoBulls.png") // TODO rockets Logo einfügen
+                .withQuoten(quoten)
+                .build();
     }
 }

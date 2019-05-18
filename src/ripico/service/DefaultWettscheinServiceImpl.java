@@ -1,22 +1,27 @@
 package ripico.service;
 
 import ripico.api.ServiceFactory;
+import ripico.api.dal.WettenAdapter;
 import ripico.api.dal.WettscheinAdapter;
 import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Wette;
 import ripico.api.domain.Wettschein;
 import ripico.api.service.WettscheinService;
 import ripico.service.exception.ResourceNotFoundException;
+import ripico.ui.Wett;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class DefaultWettscheinServiceImpl implements WettscheinService {
 
     private WettscheinAdapter wettscheinAdapter;
+    private WettenAdapter wettenAdapter;
 
     public DefaultWettscheinServiceImpl() {
         this.wettscheinAdapter = ServiceFactory.createService(WettscheinAdapter.class);
+        this.wettenAdapter = ServiceFactory.createService(WettenAdapter.class);
     }
 
     @Override
@@ -45,13 +50,17 @@ public class DefaultWettscheinServiceImpl implements WettscheinService {
         if (wettschein.getWetten() == null) {
             throw new IllegalArgumentException();
         } else {
+            List<Wette> wettenReturn = new ArrayList<>();
             for (Wette wette : wettschein.getWetten()) {
                 if (wette.getGesetzteWette() == null) {
                     throw new IllegalArgumentException();
+                } else {
+                    wettenReturn.add(wettenAdapter.createWette(wette));
                 }
             }
+            wettschein.setWetten(wettenReturn);
         }
-        return wettscheinAdapter.createWettschein(wettschein);
+        return wettschein;
     }
 
     private float getQuoteFromWette(Wette wette) {

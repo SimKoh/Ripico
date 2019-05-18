@@ -47,7 +47,7 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
                             .withGesetzteWette(QuotenArt.valueOf(quotenArtString));
                 }
                 Optional<Spiel> spiel = spielAdapter.readSpiel(resultSet.getInt(3));
-                wetteBuilder.withSpiel(spiel.orElse(new Spiel()));
+                wetteBuilder.withSpiel(spiel.orElse(SpielBuilder.newSpiel().build()));
                 wetten.add(wetteBuilder.build());
             }
             Wettschein wettschein = WettscheinBuilder

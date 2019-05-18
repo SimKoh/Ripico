@@ -8,6 +8,10 @@ public class Mannschaft {
     private String mannschaftLogo;
     private Sportart sportart;
 
+    Mannschaft() {
+
+    }
+
     public int getMannschaftId() {
         return mannschaftId;
     }

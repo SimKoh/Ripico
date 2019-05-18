@@ -16,8 +16,7 @@ public class Spiel {
     private Date datum;
     private QuotenArt ergebnis;
 
-    //TODO make packge private -> fix dummy
-    public Spiel() {
+    Spiel() {
 
     }
 
