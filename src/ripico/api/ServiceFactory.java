@@ -1,15 +1,15 @@
 package ripico.api;
 
-import ripico.ui.AppStart;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServiceFactory {
+    private static final Logger logger = Logger.getLogger(ServiceFactory.class.getName());
 
     private ServiceFactory() {
     }
@@ -28,7 +28,7 @@ public class ServiceFactory {
         try {
             properties.load(propertiesStream);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Konnte keine Implementierung finden", e);
         }
         String adapterUsed = properties.getProperty("adapterUsed");
         if (myInterface.getSimpleName().endsWith("Service")) {
