@@ -70,7 +70,7 @@ public class MainViewController {
             label_sportArtDesc.setLayoutY(3);
             paneBet.getChildren().add(label_sportArtDesc);
 
-            Label label_sportArt = new Label(spiel.getSportart().toString());
+            Label label_sportArt = new Label(spiel.getSportart().getBezeichnung());
             label_sportArt.setLayoutX(70);
             label_sportArt.setLayoutY(3);
             paneBet.getChildren().add(label_sportArt);

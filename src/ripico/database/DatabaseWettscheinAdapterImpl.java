@@ -98,7 +98,6 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
         String sqlStatement = "SELECT count(*) " +
                 "FROM ripico.wette w " +
                 "group by wettschein_id";
-        PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
-        return preparedStatement;
+        return connection.prepareStatement(sqlStatement);
     }
 }

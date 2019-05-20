@@ -3,8 +3,6 @@ package ripico.database;
 import ripico.api.dal.MannschaftAdapter;
 import ripico.api.domain.Mannschaft;
 import ripico.api.domain.MannschaftBuilder;
-import ripico.api.domain.Mitarbeiter;
-import ripico.api.domain.MitarbeiterBuilder;
 import ripico.api.domain.enums.Sportart;
 import ripico.database.connection.DefaultConnectionPool;
 
@@ -52,7 +50,6 @@ public class DatabaseMannschaftAdapterImpl implements MannschaftAdapter {
 
     private PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
         String sqlStatement = "SELECT mannschaft_id, mannschaft_name, logopfad, sportart_id FROM ripico.mannschaft";
-        PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
-        return preparedStatement;
+        return connection.prepareStatement(sqlStatement);
     }
 }

@@ -63,17 +63,6 @@ public class AppStart extends Application {
 
 
     public static void main(String[] args) {
-        try {
-            DatabaseSpielAdapterImpl databaseSpielAdapter = new DatabaseSpielAdapterImpl();
-            Spiel spiel = WettenMock.createSpiel1();
-            spiel.getMannschaftHeim().setMannschaftId(1);
-            spiel.getMannschaftAuswaerts().setMannschaftId(1);
-            databaseSpielAdapter.createSpiel(spiel);
-            spiel.setErgebnis(QuotenArt.HEIM);
-            databaseSpielAdapter.updateSpiel(spiel);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         launch(args);
     }
 
