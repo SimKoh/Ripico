@@ -40,13 +40,14 @@ public class AppStart extends Application {
     private void setupIdleView() {
         try {
             // ruft initialize auf
-            primaryStage.setTitle("Ripico Sportwetten");
+            primaryStage.setTitle("Ripico");
 
             // load IdleView
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("../../resources/IdleView.fxml"));
             Parent root = (Parent) loader.load(); // !IMPORTANT! Needed to get Controller
-            primaryStage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
             primaryStage.setResizable(false);
 
             IdleViewController idleViewController = loader.getController();

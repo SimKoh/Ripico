@@ -1,9 +1,6 @@
-/*
- * This is an adjustment of the original modena.css for a consistent dark theme.
- * Original modena.css here: https://gist.github.com/maxd/63691840fc372f22f470.
- */
+/* Main Color Theme: red:#B83020*/
 
-/* Redefine base colors */
+
 .root {
     -fx-base: rgb(50, 50, 50);
     -fx-background: rgb(50, 50, 50);
@@ -128,4 +125,26 @@
     -fx-mid-text-color: rgb(100, 100, 100);
     -fx-dark-text-color: rgb(20, 20, 20);
 
+}
+
+/*button*/
+.dark-blue {
+    -fx-background-color: #9a291d;
+
+
+    -fx-background-radius: 5, 4, 3, 5;
+    -fx-background-insets: 0, 1, 2, 0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
+}
+
+.dark-blue:hover{
+    -fx-cursor: hand;
+}
+.dark-blue Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }

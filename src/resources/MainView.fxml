@@ -43,8 +43,8 @@
             </ScrollPane>
             <Pane prefHeight="120.0" prefWidth="260.0">
                <children>
-                  <Button layoutX="302.0" layoutY="13.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="158.0" text="Submit" />
-                  <Button layoutY="13.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="158.0" text="Abbrechen" />
+                  <Button layoutX="302.0" layoutY="13.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="158.0" styleClass="dark-blue" text="Submit" />
+                  <Button layoutY="13.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="158.0" styleClass="dark-blue" text="Abbrechen" />
                </children>
             </Pane>
          </children>
