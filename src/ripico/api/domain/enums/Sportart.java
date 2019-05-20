@@ -1,9 +1,9 @@
 package ripico.api.domain.enums;
 
 public enum Sportart {
-    FUSSBALL(1),
-    BASKETBALL(2),
-    EISHOCKEY(3);
+    Fussball(1),
+    Basketball(2),
+    Eishockey(3);
 
     private int id;
 

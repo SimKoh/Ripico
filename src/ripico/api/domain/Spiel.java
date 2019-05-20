@@ -1,6 +1,7 @@
 package ripico.api.domain;
 
 import ripico.api.domain.enums.QuotenArt;
+import ripico.api.domain.enums.Sportart;
 
 import java.util.*;
 
@@ -8,11 +9,9 @@ public class Spiel {
 
     private int spielId;
     private Map<QuotenArt, Float> quoten;
-    private String sportart;
-    private String mannschaftHeim;
-    private String mannschaftHeimLogoPfad;
-    private String mannschaftAuswaerts;
-    private String mannschaftAuswaertsLogoPfad;
+    private Sportart sportart;
+    private Mannschaft mannschaftHeim;
+    private Mannschaft mannschaftAuswaerts;
     private Date datum;
     private QuotenArt ergebnis;
 
@@ -36,28 +35,12 @@ public class Spiel {
         this.quoten = quoten;
     }
 
-    public String getSportart() {
+    public Sportart getSportart() {
         return sportart;
     }
 
-    public void setSportart(String sportart) {
+    public void setSportart(Sportart sportart) {
         this.sportart = sportart;
-    }
-
-    public String getMannschaftHeim() {
-        return mannschaftHeim;
-    }
-
-    public void setMannschaftHeim(String mannschaftHeim) {
-        this.mannschaftHeim = mannschaftHeim;
-    }
-
-    public String getMannschaftAuswaerts() {
-        return mannschaftAuswaerts;
-    }
-
-    public void setMannschaftAuswaerts(String mannschaftAuswaerts) {
-        this.mannschaftAuswaerts = mannschaftAuswaerts;
     }
 
     public Date getDatum() {
@@ -76,20 +59,21 @@ public class Spiel {
         this.ergebnis = ergebnis;
     }
 
-    public String getMannschaftHeimLogoPfad() {
-        return mannschaftHeimLogoPfad;
+
+    public Mannschaft getMannschaftAuswaerts() {
+        return mannschaftAuswaerts;
     }
 
-    public void setMannschaftHeimLogoPfad(String mannschaftHeimLogoPfad) {
-        this.mannschaftHeimLogoPfad = mannschaftHeimLogoPfad;
+    public void setMannschaftAuswaerts(Mannschaft mannschaftAuswaerts) {
+        this.mannschaftAuswaerts = mannschaftAuswaerts;
     }
 
-    public String getMannschaftAuswaertsLogoPfad() {
-        return mannschaftAuswaertsLogoPfad;
+    public Mannschaft getMannschaftHeim() {
+        return mannschaftHeim;
     }
 
-    public void setMannschaftAuswaertsLogoPfad(String mannschaftAuswaertsLogoPfad) {
-        this.mannschaftAuswaertsLogoPfad = mannschaftAuswaertsLogoPfad;
+    public void setMannschaftHeim(Mannschaft mannschaftHeim) {
+        this.mannschaftHeim = mannschaftHeim;
     }
 
     public void setQuoten(float heim, float auswaerts, float unentschieden) {

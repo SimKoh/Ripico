@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface WettscheinAdapter {
     Optional<Wettschein> readWettschein(int wettenscheinId);
+    int zaehleWettschein();
 }

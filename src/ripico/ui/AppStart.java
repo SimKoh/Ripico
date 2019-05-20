@@ -8,10 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import ripico.api.domain.Spiel;
-import ripico.database.DatabaseMannschaftAdapterImpl;
-import ripico.database.DatabaseMitarbeiterAdapterImpl;
-import ripico.database.DatabaseSpielAdapterImpl;
-import ripico.database.DatabaseWettscheinAdapterImpl;
+import ripico.api.domain.Wette;
+import ripico.api.domain.WetteBuilder;
+import ripico.api.domain.enums.QuotenArt;
+import ripico.database.*;
+import ripico.dummy.WettenMock;
 import ripico.service.exception.ResourceNotFoundException;
 import sun.applet.Main;
 
@@ -31,7 +32,7 @@ public class AppStart extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        primaryStage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "../../resources/imgs/icon.png" )));
+        primaryStage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
 
         setupIdleView();
     }
@@ -62,10 +63,13 @@ public class AppStart extends Application {
 
     public static void main(String[] args) {
         try {
-            DatabaseMannschaftAdapterImpl databaseMannschaftAdapter = new DatabaseMannschaftAdapterImpl();
-            databaseMannschaftAdapter.alleManschaften();
-
-
+            DatabaseSpielAdapterImpl databaseSpielAdapter = new DatabaseSpielAdapterImpl();
+            Spiel spiel = WettenMock.createSpiel1();
+            spiel.getMannschaftHeim().setMannschaftId(1);
+            spiel.getMannschaftAuswaerts().setMannschaftId(1);
+            databaseSpielAdapter.createSpiel(spiel);
+            spiel.setErgebnis(QuotenArt.HEIM);
+            databaseSpielAdapter.updateSpiel(spiel);
         } catch (SQLException e) {
             e.printStackTrace();
         }

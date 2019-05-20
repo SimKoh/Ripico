@@ -70,7 +70,7 @@ public class MainViewController {
             label_sportArtDesc.setLayoutY(3);
             paneBet.getChildren().add(label_sportArtDesc);
 
-            Label label_sportArt = new Label(spiel.getSportart());
+            Label label_sportArt = new Label(spiel.getSportart().toString());
             label_sportArt.setLayoutX(70);
             label_sportArt.setLayoutY(3);
             paneBet.getChildren().add(label_sportArt);
@@ -80,7 +80,7 @@ public class MainViewController {
             label_zeitpunkt.setLayoutY(3);
             paneBet.getChildren().add(label_zeitpunkt);
 
-            Label label_mannschaft1 = new Label(spiel.getMannschaftHeim());
+            Label label_mannschaft1 = new Label(spiel.getMannschaftHeim().getMannschaftsName());
             label_mannschaft1.setLayoutX(20);
             label_mannschaft1.setLayoutY(20);
             label_mannschaft1.setFont(new Font("Arial", 19));
@@ -92,7 +92,7 @@ public class MainViewController {
             label_seperator.setFont(new Font("Arial", 19));
             paneBet.getChildren().add(label_seperator);
 
-            Label label_mannschaft2 = new Label(spiel.getMannschaftAuswaerts());
+            Label label_mannschaft2 = new Label(spiel.getMannschaftAuswaerts().getMannschaftsName());
             label_mannschaft2.setLayoutX(240);
             label_mannschaft2.setLayoutY(20);
             label_mannschaft2.setFont(new Font("Arial", 19));
@@ -131,8 +131,6 @@ public class MainViewController {
             }
 
 
-
-
             paneBet.setOnMouseClicked(event ->
             {
                 try {
@@ -150,7 +148,7 @@ public class MainViewController {
 
                     stage.show();
                     // Set Icon
-                    stage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "../../resources/imgs/icon.png" )));
+                    stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
                     stage.setResizable(false);
                     // Hide/Close TOS-Window
 

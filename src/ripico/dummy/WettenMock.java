@@ -1,10 +1,8 @@
 package ripico.dummy;
 
-import ripico.api.domain.SpielBuilder;
+import ripico.api.domain.*;
 import ripico.api.domain.enums.QuotenArt;
-import ripico.api.domain.Spiel;
-import ripico.api.domain.Wette;
-import ripico.api.domain.WetteBuilder;
+import ripico.api.domain.enums.Sportart;
 
 import java.util.*;
 
@@ -66,11 +64,9 @@ public class WettenMock {
         return SpielBuilder
                 .newSpiel()
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 27).getTime())
-                .withSportart("Fußball")
-                .withMannschaftHeim("BVB")
-                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Fußball/bvb.png")
-                .withMannschaftAuswaerts("Barcelona")
-                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Fußball/barcelona.png")
+                .withSportart(Sportart.Fussball)
+                .withMannschaftHeim(MannschaftBuilder.newMannschaft().withMannschaftsName("BVB").withMannschaftLogo("/resources/imgs/logos/Fußball/bvb.png").build())
+                .withMannschaftAuswaerts(MannschaftBuilder.newMannschaft().withMannschaftsName("Barcelona").withMannschaftLogo("/resources/imgs/logos/Fußball/barcelona.png").build())
                 .withQuoten(quoten)
                 .build();
     }
@@ -83,11 +79,9 @@ public class WettenMock {
         return SpielBuilder
                 .newSpiel()
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 21).getTime())
-                .withSportart("Eishockey")
-                .withMannschaftHeim("Kölner Haie")
-                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Eishockey/koelnerHaie.png")
-                .withMannschaftAuswaerts("Düsseldorfer EG")
-                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Eishockey/duesseldorferEG.png")
+                .withSportart(Sportart.Eishockey)
+                .withMannschaftHeim(MannschaftBuilder.newMannschaft().withMannschaftsName("Kölner Haie").withMannschaftLogo("/resources/imgs/logos/Eishockey/koelnerHaie.png").build())
+                .withMannschaftAuswaerts(MannschaftBuilder.newMannschaft().withMannschaftsName("Düsseldorfer EG").withMannschaftLogo("/resources/imgs/logos/Eishockey/duesseldorferEG.png").build())
                 .withQuoten(quoten)
                 .build();
     }
@@ -100,11 +94,9 @@ public class WettenMock {
         return SpielBuilder
                 .newSpiel()
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 19).getTime())
-                .withSportart("Basketball")
-                .withMannschaftHeim("Boston Celtics")
-                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Basketball/bostonCeltics.png")
-                .withMannschaftAuswaerts("Miami Heat")
-                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Basketball/miamiHeat.png")
+                .withSportart(Sportart.Basketball)
+                .withMannschaftHeim(MannschaftBuilder.newMannschaft().withMannschaftsName("Boston Celtics").withMannschaftLogo("/resources/imgs/logos/Basketball/bostonCeltics.png").build())
+                .withMannschaftAuswaerts(MannschaftBuilder.newMannschaft().withMannschaftsName("Miami Heat").withMannschaftLogo("/resources/imgs/logos/Basketball/miamiHeat.png").build())
                 .withQuoten(quoten)
                 .build();
     }
@@ -117,11 +109,9 @@ public class WettenMock {
         return SpielBuilder
                 .newSpiel()
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 21).getTime())
-                .withSportart("Basketball")
-                .withMannschaftHeim("Chicago Bulls")
-                .withMannschaftHeimLogoPfad("/resources/imgs/logos/Basketball/chicagoBulls.png")
-                .withMannschaftAuswaerts("LA Lakers")
-                .withMannschaftAuswaertsLogoPfad("/resources/imgs/logos/Basketball/laLakers.png")
+                .withSportart(Sportart.Basketball)
+                .withMannschaftHeim(MannschaftBuilder.newMannschaft().withMannschaftsName("Chicago Bulls").withMannschaftLogo("/resources/imgs/logos/Basketball/chicagoBulls.png").build())
+                .withMannschaftAuswaerts(MannschaftBuilder.newMannschaft().withMannschaftsName("LA Lakers").withMannschaftLogo("/resources/imgs/logos/Basketball/laLakers.png").build())
                 .withQuoten(quoten)
                 .build();
     }

@@ -8,7 +8,6 @@ import javafx.scene.layout.AnchorPane;
 import ripico.api.domain.Spiel;
 
 
-
 public class BetViewController {
 
     @FXML
@@ -27,17 +26,15 @@ public class BetViewController {
     Label mamnnschaftAuswaertsLabel;
 
 
-
     public void setSpiel(Spiel spiel) {
         this.spiel = spiel;
-        this.mamnnschaftAuswaertsLabel.setText(spiel.getMannschaftAuswaerts());
-        this.mannschaftHeimLabel.setText(spiel.getMannschaftHeim());
-        this.hLogo.setImage(new Image(getClass().getResource(spiel.getMannschaftHeimLogoPfad()).toString(), true));
-        this.aLogo.setImage(new Image(getClass().getResource(spiel.getMannschaftAuswaertsLogoPfad()).toString(), true));
+        this.mamnnschaftAuswaertsLabel.setText(spiel.getMannschaftAuswaerts().getMannschaftsName());
+        this.mannschaftHeimLabel.setText(spiel.getMannschaftHeim().getMannschaftsName());
+        this.hLogo.setImage(new Image(getClass().getResource(spiel.getMannschaftHeim().getMannschaftLogo()).toString(), true));
+        this.aLogo.setImage(new Image(getClass().getResource(spiel.getMannschaftAuswaerts().getMannschaftLogo()).toString(), true));
     }
 
     private Spiel spiel;
-
 
 
 }

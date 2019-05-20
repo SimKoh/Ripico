@@ -65,12 +65,40 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
         }
     }
 
+    @Override
+    public int zaehleWettschein() {
+        Connection connection;
+        try {
+            connection = connectionPool.getConnection();
+        } catch (SQLException e) {
+            return 0;
+        }
+        try (PreparedStatement preparedStatement = createPreparedStatementCount(connection);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            int count = 0;
+            while (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+            return count;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
     private PreparedStatement createPreparedStatementRead(Connection connection, int wettscheinNr) throws SQLException {
         String sqlStatement = "SELECT wettschein_id,wette_id, spiel_id, gesetzte_wette " +
                 "FROM ripico.wette w " +
                 "WHERE wettschein_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
         preparedStatement.setInt(1, wettscheinNr);
+        return preparedStatement;
+    }
+
+    private PreparedStatement createPreparedStatementCount(Connection connection) throws SQLException {
+        String sqlStatement = "SELECT count(*) " +
+                "FROM ripico.wette w " +
+                "group by wettschein_id";
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
         return preparedStatement;
     }
 }

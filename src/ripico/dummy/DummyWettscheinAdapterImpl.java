@@ -20,4 +20,9 @@ public class DummyWettscheinAdapterImpl implements WettscheinAdapter {
         }
         return Optional.empty();
     }
+
+    @Override
+    public int zaehleWettschein() {
+        return 1;
+    }
 }

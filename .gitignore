@@ -11,4 +11,5 @@
 *./.project
 *./.settings
 out/
+/out/ripico
 out\ripico

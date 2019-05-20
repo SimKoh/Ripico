@@ -1,6 +1,7 @@
 package ripico.api.domain;
 
 import ripico.api.domain.enums.QuotenArt;
+import ripico.api.domain.enums.Sportart;
 
 import java.util.Date;
 import java.util.Map;
@@ -8,11 +9,9 @@ import java.util.Map;
 public final class SpielBuilder {
     private int spielId;
     private Map<QuotenArt, Float> quoten;
-    private String sportart;
-    private String mannschaftHeim;
-    private String mannschaftHeimLogoPfad;
-    private String mannschaftAuswaerts;
-    private String mannschaftAuswaertsLogoPfad;
+    private Sportart sportart;
+    private Mannschaft mannschaftHeim;
+    private Mannschaft mannschaftAuswaerts;
     private Date datum;
     private QuotenArt ergebnis;
 
@@ -33,28 +32,18 @@ public final class SpielBuilder {
         return this;
     }
 
-    public SpielBuilder withSportart(String sportart) {
+    public SpielBuilder withSportart(Sportart sportart) {
         this.sportart = sportart;
         return this;
     }
 
-    public SpielBuilder withMannschaftHeim(String mannschaftHeim) {
+    public SpielBuilder withMannschaftHeim(Mannschaft mannschaftHeim) {
         this.mannschaftHeim = mannschaftHeim;
         return this;
     }
 
-    public SpielBuilder withMannschaftHeimLogoPfad(String mannschaftHeimLogoPfad) {
-        this.mannschaftHeimLogoPfad = mannschaftHeimLogoPfad;
-        return this;
-    }
-
-    public SpielBuilder withMannschaftAuswaerts(String mannschaftAuswaerts) {
+    public SpielBuilder withMannschaftAuswaerts(Mannschaft mannschaftAuswaerts) {
         this.mannschaftAuswaerts = mannschaftAuswaerts;
-        return this;
-    }
-
-    public SpielBuilder withMannschaftAuswaertsLogoPfad(String mannschaftAuswaertsLogoPfad) {
-        this.mannschaftAuswaertsLogoPfad = mannschaftAuswaertsLogoPfad;
         return this;
     }
 
@@ -74,9 +63,7 @@ public final class SpielBuilder {
         spiel.setQuoten(quoten);
         spiel.setSportart(sportart);
         spiel.setMannschaftHeim(mannschaftHeim);
-        spiel.setMannschaftHeimLogoPfad(mannschaftHeimLogoPfad);
         spiel.setMannschaftAuswaerts(mannschaftAuswaerts);
-        spiel.setMannschaftAuswaertsLogoPfad(mannschaftAuswaertsLogoPfad);
         spiel.setDatum(datum);
         spiel.setErgebnis(ergebnis);
         return spiel;
