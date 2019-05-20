@@ -64,7 +64,7 @@ public class WettenMock {
         return SpielBuilder
                 .newSpiel()
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 27).getTime())
-                .withSportart(Sportart.Fussball)
+                .withSportart(Sportart.FUSSBALL)
                 .withMannschaftHeim(MannschaftBuilder.newMannschaft().withMannschaftsName("BVB").withMannschaftLogo("/resources/imgs/logos/Fußball/bvb.png").build())
                 .withMannschaftAuswaerts(MannschaftBuilder.newMannschaft().withMannschaftsName("Barcelona").withMannschaftLogo("/resources/imgs/logos/Fußball/barcelona.png").build())
                 .withQuoten(quoten)
@@ -79,7 +79,7 @@ public class WettenMock {
         return SpielBuilder
                 .newSpiel()
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 21).getTime())
-                .withSportart(Sportart.Eishockey)
+                .withSportart(Sportart.EISHOCKEY)
                 .withMannschaftHeim(MannschaftBuilder.newMannschaft().withMannschaftsName("Kölner Haie").withMannschaftLogo("/resources/imgs/logos/Eishockey/koelnerHaie.png").build())
                 .withMannschaftAuswaerts(MannschaftBuilder.newMannschaft().withMannschaftsName("Düsseldorfer EG").withMannschaftLogo("/resources/imgs/logos/Eishockey/duesseldorferEG.png").build())
                 .withQuoten(quoten)
@@ -94,7 +94,7 @@ public class WettenMock {
         return SpielBuilder
                 .newSpiel()
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 19).getTime())
-                .withSportart(Sportart.Basketball)
+                .withSportart(Sportart.BASKETBALL)
                 .withMannschaftHeim(MannschaftBuilder.newMannschaft().withMannschaftsName("Boston Celtics").withMannschaftLogo("/resources/imgs/logos/Basketball/bostonCeltics.png").build())
                 .withMannschaftAuswaerts(MannschaftBuilder.newMannschaft().withMannschaftsName("Miami Heat").withMannschaftLogo("/resources/imgs/logos/Basketball/miamiHeat.png").build())
                 .withQuoten(quoten)
@@ -109,7 +109,7 @@ public class WettenMock {
         return SpielBuilder
                 .newSpiel()
                 .withDatum(new GregorianCalendar(2019, Calendar.MAY, 21).getTime())
-                .withSportart(Sportart.Basketball)
+                .withSportart(Sportart.BASKETBALL)
                 .withMannschaftHeim(MannschaftBuilder.newMannschaft().withMannschaftsName("Chicago Bulls").withMannschaftLogo("/resources/imgs/logos/Basketball/chicagoBulls.png").build())
                 .withMannschaftAuswaerts(MannschaftBuilder.newMannschaft().withMannschaftsName("LA Lakers").withMannschaftLogo("/resources/imgs/logos/Basketball/laLakers.png").build())
                 .withQuoten(quoten)
