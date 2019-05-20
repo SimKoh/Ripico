@@ -19,12 +19,6 @@
     -fx-mid-text-color: rgb(100, 100, 100);
     -fx-dark-text-color: rgb(20, 20, 20);
 
-    /* A bright blue for highlighting/accenting objects.  For example: selected
-     * text; selected items in menus, lists, trees, and tables; progress bars */
-    -fx-accent: rgb(0, 100, 37);
-
-    /* color of non-focused yet selected elements */
-    -fx-selection-bar-non-focused: rgb(6, 50, 16);
 
     -fx-focus-color: transparent;
 }
@@ -128,7 +122,7 @@
 }
 
 /*button*/
-.dark-blue {
+.ripicoBtn {
     -fx-background-color: #9a291d;
 
 
@@ -138,13 +132,31 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
     -fx-font-family: "Arial";
     -fx-text-fill: linear-gradient(white, #d0d0d0);
-    -fx-font-size: 12px;
-    -fx-padding: 10 20 10 20;
+    /*-fx-font-size: 12px;*/
+    /*-fx-padding: 10 20 10 20;*/
 }
 
-.dark-blue:hover{
+.ripicoBtn:hover{
     -fx-cursor: hand;
 }
-.dark-blue Text {
+.ripicoBtn Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }
+
+.succesBtn {
+    -fx-background-color: #3a9a3c;
+    -fx-background-radius: 5, 4, 3, 5;
+    -fx-background-insets: 0, 1, 2, 0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+}
+
+.succesBtn:hover{
+    -fx-cursor: hand;
+}
+.succesBtn Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+}
+

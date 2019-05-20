@@ -14,18 +14,28 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ripico.api.ServiceFactory;
+import ripico.api.domain.Wette;
 import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Spiel;
 import ripico.api.service.SpielService;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainViewController {
 
     private AppStart mainApp;
     private SpielService spielService = ServiceFactory.createService(SpielService.class);
+
+    public static List<Wette> getMeineWettenListe() {
+        return meineWettenListe;
+    }
+
+    private static List<Wette> meineWettenListe;
+
 
 
     @FXML
@@ -39,6 +49,8 @@ public class MainViewController {
         System.out.println("MainViewController initialized");
 
         ObservableList<Spiel> wettList = FXCollections.observableArrayList(spielService.ladeSpiele());
+        meineWettenListe = new ArrayList<>(); // TODO auslagern
+
 
 
         //ScrollPane
@@ -144,6 +156,7 @@ public class MainViewController {
                     stage.initModality(Modality.APPLICATION_MODAL);
 
                     BetViewController controller = loader.getController();
+                    controller.setBetViewStage(stage);
                     controller.setSpiel(spiel);
 
                     stage.show();

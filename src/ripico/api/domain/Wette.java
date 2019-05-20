@@ -12,6 +12,8 @@ public class Wette {
 
     }
 
+
+
     public int getWettenId() {
         return wettenId;
     }

@@ -7,21 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import ripico.api.domain.Spiel;
-import ripico.api.domain.Wette;
-import ripico.api.domain.WetteBuilder;
-import ripico.api.domain.enums.QuotenArt;
-import ripico.database.*;
-import ripico.dummy.WettenMock;
-import ripico.service.exception.ResourceNotFoundException;
-import sun.applet.Main;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Optional;
-import java.util.Properties;
-
-import static com.sun.org.apache.xerces.internal.utils.SecuritySupport.getResourceAsStream;
 
 
 public class AppStart extends Application {
