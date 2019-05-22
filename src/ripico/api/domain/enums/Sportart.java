@@ -29,4 +29,9 @@ public enum Sportart {
         }
         throw new IllegalArgumentException();
     }
+
+    @Override
+    public String toString() {
+        return getBezeichnung();
+    }
 }

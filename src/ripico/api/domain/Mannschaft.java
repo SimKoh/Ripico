@@ -43,4 +43,9 @@ public class Mannschaft {
     public void setSportart(Sportart sportart) {
         this.sportart = sportart;
     }
+
+    @Override
+    public String toString() {
+        return getMannschaftsName();
+    }
 }

@@ -3,7 +3,7 @@
 
 .root {
     -fx-base: rgb(50, 50, 50);
-    -fx-background: rgb(40, 40, 40);
+    -fx-background: rgb(50, 50, 50);
 
     /* make controls (buttons, thumb, etc.) slightly lighter */
     -fx-color: derive(-fx-base, 10%);
@@ -102,8 +102,6 @@
     -fx-border-width: 1;
     -fx-border-style: solid;
     -fx-border-color: white;
-    -fx-border-radius: 5;
-
 
 }
 
@@ -127,6 +125,13 @@
     -fx-border-style: solid;
     -fx-border-color: rgb(209, 57, 50);
 }
+
+.borderClear {
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-border-color: #efefef;
+}
+
 
 
 .betView {
@@ -184,4 +189,8 @@
 
 .errorMessage{
     -fx-text-fill: red;
+}
+
+.successMessage{
+    -fx-text-fill: green;
 }

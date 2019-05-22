@@ -39,6 +39,6 @@
       </Label>
       <ComboBox fx:id="cbHeimMannschaft" layoutX="31.0" layoutY="100.0" prefWidth="150.0" />
       <ComboBox fx:id="cbAuswaertsMannschaft" layoutX="348.0" layoutY="100.0" prefWidth="150.0" />
-      <Label fx:id="label_errorMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="220.0" prefHeight="17.0" prefWidth="463.0" text="ErrorMessage" visible="false" />
+      <Label fx:id="label_StatusMessage" alignment="CENTER" layoutX="33.0" layoutY="223.0" prefHeight="17.0" prefWidth="463.0" styleClass="errorMessage" text="ERROR-MESSAGE" visible="false" />
    </children>
 </AnchorPane>
