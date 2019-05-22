@@ -25,4 +25,9 @@ public class DummyWettscheinAdapterImpl implements WettscheinAdapter {
     public int zaehleWettscheine() {
         return 1;
     }
+
+    @Override
+    public Wettschein createWettschein(Wettschein wettschein) {
+        return null;
+    }
 }
