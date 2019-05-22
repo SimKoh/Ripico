@@ -14,32 +14,29 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ripico.api.ServiceFactory;
-import ripico.api.domain.Wette;
+import ripico.api.domain.*;
 import ripico.api.domain.enums.QuotenArt;
-import ripico.api.domain.Spiel;
 import ripico.api.service.SpielService;
+import ripico.api.service.WettscheinService;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class MainViewController {
+public class MainViewController<wettList> {
 
     private static final Logger logger = Logger.getLogger(MainViewController.class.getName());
 
     private AppStart mainApp;
     private SpielService spielService = ServiceFactory.createService(SpielService.class);
 
-    public static List<Wette> getMeineWettenListe() {
-        return meineWettenListe;
-    }
 
-    private static List<Wette> meineWettenListe;
-
+    Wettschein wettschein;
 
 
     @FXML
@@ -49,13 +46,38 @@ public class MainViewController {
     private ScrollPane scrollPane_availableBets;
 
     @FXML
+    private Label labelWettscheinId;
+
+    @FXML
+    private Label labelDatumSchein;
+
+    @FXML
+    private Label labelGesamtquote;
+
+
+    static List<Spiel> verfuergbareSpieleList;
+    private static List<Wette> meineWettenListe;
+    private static WettscheinService wettscheinService;
+
+
+    @FXML
     private void initialize() {
         Logger.getLogger(getClass().getName()).info("PENIS MainViewController initialized");
 
-        ObservableList<Spiel> wettList = FXCollections.observableArrayList(spielService.ladeSpiele());
-        meineWettenListe = new ArrayList<>(); // TODO auslagern
+
+        // Setup Start-Variablen
+        verfuergbareSpieleList = new ArrayList<>(spielService.ladeSpiele());
+        meineWettenListe = new ArrayList<Wette>();
+        wettscheinService = ServiceFactory.createService(WettscheinService.class);
+        // Erstelle leeren, neuen Wettschein
+        wettschein = wettscheinService.erstelleLeerenWettschein();
+
+        aktualisiereGesamtquote();
 
 
+        // Setup Controls
+        labelDatumSchein.setText(new SimpleDateFormat("dd.MM.yyyy HH:mm").format(new Date()));
+        labelWettscheinId.setText(String.valueOf(wettschein.getWettscheinId()));
 
         //ScrollPane
         // VBOX - Alle Wetten
@@ -76,7 +98,7 @@ public class MainViewController {
 
         int counter = 0;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:MM");
-        for (Spiel spiel : wettList) {
+        for (Spiel spiel : verfuergbareSpieleList) {
 
             Pane paneBet = new Pane();
 
@@ -184,10 +206,18 @@ public class MainViewController {
 
     }
 
+    private void aktualisiereGesamtquote() {
+        float gesamtQuote = wettscheinService.berechneGesamtQuote(meineWettenListe);
+        labelGesamtquote.setText(String.valueOf(gesamtQuote));
+    }
+
     public void setMainApp(AppStart app) {
         mainApp = app;
         logger.info("MainViewController: App loaded!");
     }
 
+    public static List<Wette> getMeineWettenListe() {
+        return meineWettenListe;
+    }
 
 }

@@ -26,6 +26,7 @@ public class DefaultWettscheinServiceImpl implements WettscheinService {
 
     @Override
     public float berechneGesamtQuote(List<Wette> wetten) {
+        if(wetten.size()<1) return 0.f;
         float gesamtQuote = getQuoteFromWette(wetten.get(0));
         for (int i = 1; i < wetten.size(); i++) {
             gesamtQuote *= getQuoteFromWette(wetten.get(i));

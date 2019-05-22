@@ -1,16 +1,14 @@
 package ripico.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import ripico.api.domain.Spiel;
 import ripico.api.domain.Wette;
+import ripico.api.domain.WetteBuilder;
 import ripico.api.domain.enums.QuotenArt;
 
 
@@ -60,6 +58,16 @@ public class BetViewController {
     @FXML
     Button btnAddBet;
 
+    ToggleGroup toggleGroup;
+
+    @FXML
+    void initialize(){
+        toggleGroup = new ToggleGroup();
+        radioHeim.setToggleGroup(toggleGroup);
+        radioAuswaerts.setToggleGroup(toggleGroup);
+        radioUnentschieden.setToggleGroup(toggleGroup);
+    }
+
     public void setSpiel(Spiel spiel) {
         this.spiel = spiel;
         this.mannschaftAuswaertsLabel.setText(spiel.getMannschaftAuswaerts().getMannschaftsName());
@@ -73,6 +81,22 @@ public class BetViewController {
     }
 
     public void addBetToWettschein(){
+        RadioButton selectedRadioButton = (RadioButton)toggleGroup.getSelectedToggle();
+        String radioButtonId = selectedRadioButton.getId();
+
+
+        switch (radioButtonId) {
+            case "radioHeim":
+                Wette heim = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
+                break;
+            case "radioUnentschieden":
+                Wette unentschieden = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
+                break;
+            case "radioAuswaerts":
+                Wette auswaerts = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
+                break;
+        }
+
     }
 
     public void cancelBet(){
