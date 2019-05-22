@@ -2,7 +2,6 @@ package ripico.service;
 
 import ripico.api.ServiceFactory;
 import ripico.api.dal.MitarbeiterAdapter;
-import ripico.api.domain.Mannschaft;
 import ripico.api.domain.Mitarbeiter;
 import ripico.api.service.MitarbeiterService;
 import ripico.service.exception.InvalidCredentialsException;
