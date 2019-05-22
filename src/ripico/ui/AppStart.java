@@ -7,8 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import ripico.database.DatabaseWettscheinAdapterImpl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 public class AppStart extends Application {
@@ -49,7 +51,9 @@ public class AppStart extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        DatabaseWettscheinAdapterImpl databaseWettscheinAdapter = new DatabaseWettscheinAdapterImpl();
+        databaseWettscheinAdapter.readWettschein(1);
         launch(args);
     }
 

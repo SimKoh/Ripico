@@ -7,10 +7,7 @@ import ripico.api.domain.*;
 import ripico.api.domain.enums.QuotenArt;
 import ripico.database.connection.DefaultConnectionPool;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -92,6 +89,25 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
         }
     }
 
+    @Override
+    public Wettschein createWettschein(Wettschein wettschein) {
+        Connection connection;
+        try {
+            connection = connectionPool.getConnection();
+        } catch (SQLException e) {
+            return null;
+        }
+        try (PreparedStatement preparedStatement = createPreparedStatement(connection, wettschein)) {
+            int ergebnis = preparedStatement.executeUpdate();
+            if (ergebnis == 0) {
+                return null;
+            }
+            return wettschein;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
     private PreparedStatement createPreparedStatementRead(Connection connection, int wettscheinNr) throws SQLException {
         String sqlStatement = "SELECT wettschein_id,wette_id, spiel_id, gesetzte_wette " +
                 "FROM ripico.wette w " +
@@ -114,5 +130,13 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
         String sqlStatement = "SELECT count(*) " +
                 "FROM ripico.wettschein";
         return connection.prepareStatement(sqlStatement);
+    }
+
+    private PreparedStatement createPreparedStatement(Connection connection, Wettschein wettschein) throws SQLException {
+        String sqlStatement = "INSERT INTO ripico.wettschein(wettschein_id, einsatz) values (?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
+        preparedStatement.setInt(1, wettschein.getWettscheinId());
+        preparedStatement.setFloat(2, wettschein.getEinsatz());
+        return preparedStatement;
     }
 }

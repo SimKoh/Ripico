@@ -50,15 +50,18 @@ public class DefaultWettscheinServiceImpl implements WettscheinService {
         if (wettschein.getWetten() == null) {
             throw new IllegalArgumentException();
         } else {
-            List<Wette> wettenReturn = new ArrayList<>();
-            for (Wette wette : wettschein.getWetten()) {
-                if (wette.getGesetzteWette() == null) {
-                    throw new IllegalArgumentException();
-                } else {
-                    wettenReturn.add(wettenAdapter.createWette(wette));
+            wettschein = wettscheinAdapter.createWettschein(wettschein);
+            if (wettschein != null) {
+                List<Wette> wettenReturn = new ArrayList<>();
+                for (Wette wette : wettschein.getWetten()) {
+                    if (wette.getGesetzteWette() == null) {
+                        throw new IllegalArgumentException();
+                    } else {
+                        wettenReturn.add(wettenAdapter.createWette(wette));
+                    }
                 }
+                wettschein.setWetten(wettenReturn);
             }
-            wettschein.setWetten(wettenReturn);
         }
         return wettschein;
     }
