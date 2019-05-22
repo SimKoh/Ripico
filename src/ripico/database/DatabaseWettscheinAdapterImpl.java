@@ -34,6 +34,8 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
             return Optional.empty();
         }
         try (PreparedStatement preparedStatement = createPreparedStatementRead(connection, wettenscheinId);
+             PreparedStatement preparedStatementEinsatz = createPreparedStatementEinsatz(connection, wettenscheinId);
+             ResultSet resultSetEinsatz = preparedStatementEinsatz.executeQuery();
              ResultSet resultSet = preparedStatement.executeQuery()) {
             List<Wette> wetten = new ArrayList<>();
             while (resultSet.next()) {
@@ -50,10 +52,15 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
                 wetteBuilder.withSpiel(spiel.orElse(SpielBuilder.newSpiel().build()));
                 wetten.add(wetteBuilder.build());
             }
+            float einsatz = 0;
+            while (resultSetEinsatz.next()) {
+                einsatz = resultSetEinsatz.getFloat(1);
+            }
             Wettschein wettschein = WettscheinBuilder
                     .newWettschein()
                     .withWettscheinId(wettenscheinId)
                     .withWetten(wetten)
+                    .withEinsatz(einsatz)
                     .build();
             connectionPool.releaseConnection(connection);
             if (wettschein == null) {
@@ -66,7 +73,7 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
     }
 
     @Override
-    public int zaehleWettschein() {
+    public int zaehleWettscheine() {
         Connection connection;
         try {
             connection = connectionPool.getConnection();
@@ -94,10 +101,18 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
         return preparedStatement;
     }
 
+    private PreparedStatement createPreparedStatementEinsatz(Connection connection, int wettscheinId) throws SQLException {
+        String sqlStatement = "SELECT einsatz " +
+                "FROM ripico.wettschein w " +
+                "WHERE wettschein_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
+        preparedStatement.setInt(1, wettscheinId);
+        return preparedStatement;
+    }
+
     private PreparedStatement createPreparedStatementCount(Connection connection) throws SQLException {
         String sqlStatement = "SELECT count(*) " +
-                "FROM ripico.wette w " +
-                "group by wettschein_id";
+                "FROM ripico.wettschein";
         return connection.prepareStatement(sqlStatement);
     }
 }

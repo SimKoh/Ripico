@@ -27,6 +27,7 @@ public class DefaultSpielServiceImpl implements SpielService {
 
     @Override
     public void setzeErgebnis(Spiel spiel, QuotenArt ergebnis) {
-
+        spiel.setErgebnis(ergebnis);
+        spielAdapter.updateSpiel(spiel);
     }
 }

@@ -22,7 +22,7 @@ public class DummyWettscheinAdapterImpl implements WettscheinAdapter {
     }
 
     @Override
-    public int zaehleWettschein() {
+    public int zaehleWettscheine() {
         return 1;
     }
 }

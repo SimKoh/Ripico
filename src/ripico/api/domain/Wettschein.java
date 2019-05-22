@@ -5,6 +5,7 @@ import java.util.List;
 public class Wettschein {
     private int wettscheinId;
     private List<Wette> wetten;
+    private float einsatz;
 
     Wettschein() {
 
@@ -24,5 +25,13 @@ public class Wettschein {
 
     public void setWetten(List<Wette> wetten) {
         this.wetten = wetten;
+    }
+
+    public float getEinsatz() {
+        return einsatz;
+    }
+
+    public void setEinsatz(float einsatz) {
+        this.einsatz = einsatz;
     }
 }

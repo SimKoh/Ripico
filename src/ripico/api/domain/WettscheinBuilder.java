@@ -5,6 +5,7 @@ import java.util.List;
 public final class WettscheinBuilder {
     private int wettscheinId;
     private List<Wette> wetten;
+    private float einsatz;
 
     private WettscheinBuilder() {
     }
@@ -23,10 +24,16 @@ public final class WettscheinBuilder {
         return this;
     }
 
+    public WettscheinBuilder withEinsatz(float einsatz) {
+        this.einsatz = einsatz;
+        return this;
+    }
+
     public Wettschein build() {
         Wettschein wettschein = new Wettschein();
         wettschein.setWettscheinId(wettscheinId);
         wettschein.setWetten(wetten);
+        wettschein.setEinsatz(einsatz);
         return wettschein;
     }
 }

@@ -3,6 +3,7 @@ package ripico.service;
 import ripico.api.ServiceFactory;
 import ripico.api.dal.WettenAdapter;
 import ripico.api.dal.WettscheinAdapter;
+import ripico.api.domain.WettscheinBuilder;
 import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Wette;
 import ripico.api.domain.Wettschein;
@@ -60,6 +61,15 @@ public class DefaultWettscheinServiceImpl implements WettscheinService {
             wettschein.setWetten(wettenReturn);
         }
         return wettschein;
+    }
+
+    @Override
+    public Wettschein erstelleLeerenWettschein() {
+        return WettscheinBuilder
+                .newWettschein()
+                .withWettscheinId(wettscheinAdapter.zaehleWettscheine() + 1)
+                .withWetten(new ArrayList<>())
+                .build();
     }
 
     private float getQuoteFromWette(Wette wette) {
