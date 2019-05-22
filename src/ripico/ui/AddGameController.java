@@ -47,10 +47,11 @@ public class AddGameController {
         System.out.println("Bin Login geladen");
         cbSportart.setItems(FXCollections.observableArrayList(Sportart.values()));
 
+        // TODO mannschaften basierend auf gewählter Sportart filtern
         MannschaftService mannschaftService = ServiceFactory.createService(MannschaftService.class);
         cbAuswaertsMannschaft.setItems(FXCollections.observableArrayList(mannschaftService.alleMannschaften()));
         cbHeimMannschaft.setItems(FXCollections.observableArrayList(mannschaftService.alleMannschaften()));
-//        cbHeimMannschaft.setItems(FXCollections.observableArrayList(mannschaftService.alleMannschaften().stream().map(mannschaft -> mannschaft.getMannschaftsName()).collect(Collectors.toList())));
+        //cbHeimMannschaft.setItems(FXCollections.observableArrayList(mannschaftService.alleMannschaften().stream().map(mannschaft -> mannschaft.getMannschaftsName()).collect(Collectors.toList())));
 
 
         addQuotenValidierung(tfHeimQuote, tfUnentschiedenQuote, tfAuswaertsQuote);
@@ -119,7 +120,9 @@ public class AddGameController {
         }
     }
 
-    private void clearControls(){
+
+    // TODO smoother maken
+    private void clearControls() {
         tfHeimQuote.clear();
         tfUnentschiedenQuote.clear();
         tfAuswaertsQuote.clear();
