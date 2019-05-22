@@ -12,9 +12,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class IdleViewController {
+
+    private static final Logger logger = Logger.getLogger(IdleViewController.class.getName());
 
     private AppStart mainApp;
 
@@ -23,10 +27,10 @@ public class IdleViewController {
 
     @FXML
     private void initialize() {
-        System.out.println("Idle View Initialized");
+        logger.info("Idle View Initialized");
     }
 
-    public void onClick_agreeTos(ActionEvent event){
+    public void onClick_agreeTos(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/MainView.fxml"));
             // Get MainView RootElement
@@ -42,21 +46,19 @@ public class IdleViewController {
 
 
             // Set Icon
-            stage.getIcons().add(new Image(AppStart.class.getResourceAsStream( "../../resources/imgs/icon.png" )));
+            stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
             stage.setResizable(false);
             // Hide/Close TOS-Window
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            ((Node) (event.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
-            System.out.println("Fehler 46:");
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Fehler 46:", e);
         }
     }
 
 
-
-    public void setMainApp(AppStart app){
+    public void setMainApp(AppStart app) {
         this.mainApp = app;
-        System.out.println("IdleViewController: App loaded!");
+        logger.info("IdleViewController: App loaded!");
     }
 
 }

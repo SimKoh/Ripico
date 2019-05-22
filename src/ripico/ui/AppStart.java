@@ -7,13 +7,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import ripico.database.DatabaseWettscheinAdapterImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class AppStart extends Application {
+
+    private static final Logger logger = Logger.getLogger(AppStart.class.getName());
 
     private Stage primaryStage;
     private Parent rootLayout; // AnchorPane
@@ -45,15 +48,14 @@ public class AppStart extends Application {
             primaryStage.show();
 
         } catch (Exception ex) {
-            System.out.println("FEHLER 45:");
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, "FEHLER 45:", ex);
         }
     }
 
 
     public static void main(String[] args) throws SQLException {
-        DatabaseWettscheinAdapterImpl databaseWettscheinAdapter = new DatabaseWettscheinAdapterImpl();
-        databaseWettscheinAdapter.readWettschein(1);
+        System.setProperty("java.util.logging.SimpleFormatter.format",
+                "[%1$tF %1$tT] [%4$-7s] %5$s %n");
         launch(args);
     }
 
@@ -61,7 +63,7 @@ public class AppStart extends Application {
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
 
-        System.out.println("New Stage loaded!");
+        logger.info("New Stage loaded!");
 
         // Main View laden FEHLER
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/MainView.fxml"));
@@ -69,7 +71,7 @@ public class AppStart extends Application {
         try {
             Parent root = (Parent) loader.load(); // !IMPORTANT! Needed to get Controller
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Fehler beim setzten der primaryStage", e);
         }
 
         MainViewController mainViewController = loader.getController();

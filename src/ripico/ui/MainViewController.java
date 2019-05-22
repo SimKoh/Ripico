@@ -23,9 +23,13 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class MainViewController {
+
+    private static final Logger logger = Logger.getLogger(MainViewController.class.getName());
 
     private AppStart mainApp;
     private SpielService spielService = ServiceFactory.createService(SpielService.class);
@@ -46,7 +50,7 @@ public class MainViewController {
 
     @FXML
     private void initialize() {
-        System.out.println("MainViewController initialized");
+        Logger.getLogger(getClass().getName()).info("PENIS MainViewController initialized");
 
         ObservableList<Spiel> wettList = FXCollections.observableArrayList(spielService.ladeSpiele());
         meineWettenListe = new ArrayList<>(); // TODO auslagern
@@ -166,8 +170,8 @@ public class MainViewController {
                     // Hide/Close TOS-Window
 
                 } catch (IOException e) {
-                    System.out.println("Fehler 46:");
-                    System.out.println(e.getMessage());
+                    logger.severe("Fehler 46:");
+                    logger.severe(e.getMessage());
                 }
 
 
@@ -182,7 +186,7 @@ public class MainViewController {
 
     public void setMainApp(AppStart app) {
         mainApp = app;
-        System.out.println("MainViewController: App loaded!");
+        logger.info("MainViewController: App loaded!");
     }
 
 
