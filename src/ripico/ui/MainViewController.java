@@ -34,7 +34,7 @@ public class MainViewController<wettList> {
 
     private AppStart mainApp;
     private SpielService spielService = ServiceFactory.createService(SpielService.class);
-
+    private Scene scene;
 
     Wettschein wettschein;
 
@@ -60,6 +60,7 @@ public class MainViewController<wettList> {
     private static WettscheinService wettscheinService;
 
 
+    // NOT FULLY INITIALIZED..
     @FXML
     private void initialize() {
         Logger.getLogger(getClass().getName()).info("PENIS MainViewController initialized");
@@ -72,7 +73,7 @@ public class MainViewController<wettList> {
         // Erstelle leeren, neuen Wettschein
         wettschein = wettscheinService.erstelleLeerenWettschein();
 
-        aktualisiereGesamtquote();
+        this.aktualisiereGesamtquote();
 
 
         // Setup Controls
@@ -184,6 +185,7 @@ public class MainViewController<wettList> {
                     BetViewController controller = loader.getController();
                     controller.setBetViewStage(stage);
                     controller.setSpiel(spiel);
+                    controller.setMainView(this);
 
                     stage.show();
                     // Set Icon
@@ -192,8 +194,7 @@ public class MainViewController<wettList> {
                     // Hide/Close TOS-Window
 
                 } catch (IOException e) {
-                    logger.severe("Fehler 46:");
-                    logger.severe(e.getMessage());
+                    logger.log(Level.SEVERE,e.getMessage(), e);
                 }
 
 
@@ -206,7 +207,7 @@ public class MainViewController<wettList> {
 
     }
 
-    private void aktualisiereGesamtquote() {
+     void aktualisiereGesamtquote() {
         float gesamtQuote = wettscheinService.berechneGesamtQuote(meineWettenListe);
         labelGesamtquote.setText(String.valueOf(gesamtQuote));
     }

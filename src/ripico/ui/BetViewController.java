@@ -11,8 +11,11 @@ import ripico.api.domain.Wette;
 import ripico.api.domain.WetteBuilder;
 import ripico.api.domain.enums.QuotenArt;
 
+import java.util.logging.Logger;
+
 
 public class BetViewController {
+    private static final Logger logger = Logger.getLogger(BetViewController.class.getName());
     private Spiel spiel;
     Stage betViewStage;
 
@@ -59,9 +62,10 @@ public class BetViewController {
     Button btnAddBet;
 
     ToggleGroup toggleGroup;
+    private MainViewController mainView;
 
     @FXML
-    void initialize(){
+    void initialize() {
         toggleGroup = new ToggleGroup();
         radioHeim.setToggleGroup(toggleGroup);
         radioAuswaerts.setToggleGroup(toggleGroup);
@@ -80,26 +84,29 @@ public class BetViewController {
 
     }
 
-    public void addBetToWettschein(){
-        RadioButton selectedRadioButton = (RadioButton)toggleGroup.getSelectedToggle();
+    public void addBetToWettschein() {
+        RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
         String radioButtonId = selectedRadioButton.getId();
-
-
+        Wette wette;
         switch (radioButtonId) {
             case "radioHeim":
-                Wette heim = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
+                wette = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
                 break;
             case "radioUnentschieden":
-                Wette unentschieden = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
+                wette = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
                 break;
             case "radioAuswaerts":
-                Wette auswaerts = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
+                wette = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
                 break;
+            default:
+                logger.severe("Wette kann nicht erstellt werden, RadioButton nicht erkannt!");
+                return;
         }
-
+        MainViewController.getMeineWettenListe().add(wette);
+        mainView.aktualisiereGesamtquote();
     }
 
-    public void cancelBet(){
+    public void cancelBet() {
         betViewStage.close();
     }
 
@@ -112,4 +119,7 @@ public class BetViewController {
     }
 
 
+    public void setMainView(MainViewController mainViewController) {
+        this.mainView = mainViewController;
+    }
 }
