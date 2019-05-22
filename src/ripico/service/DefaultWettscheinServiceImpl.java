@@ -26,7 +26,7 @@ public class DefaultWettscheinServiceImpl implements WettscheinService {
 
     @Override
     public float berechneGesamtQuote(List<Wette> wetten) {
-        if(wetten.size()<1) return 0.f;
+        if (wetten.size() < 1) return 0.f;
         float gesamtQuote = getQuoteFromWette(wetten.get(0));
         for (int i = 1; i < wetten.size(); i++) {
             gesamtQuote *= getQuoteFromWette(wetten.get(i));
@@ -48,7 +48,7 @@ public class DefaultWettscheinServiceImpl implements WettscheinService {
 
     @Override
     public Wettschein speichereWettschein(Wettschein wettschein) {
-        if (wettschein.getWetten() == null) {
+        if (wettschein.getWetten() == null || wettschein.getWetten().isEmpty()) {
             throw new IllegalArgumentException();
         } else {
             wettschein = wettscheinAdapter.createWettschein(wettschein);
@@ -58,6 +58,7 @@ public class DefaultWettscheinServiceImpl implements WettscheinService {
                     if (wette.getGesetzteWette() == null) {
                         throw new IllegalArgumentException();
                     } else {
+                        wette.setWettscheinId(wettschein.getWettscheinId());
                         wettenReturn.add(wettenAdapter.createWette(wette));
                     }
                 }
