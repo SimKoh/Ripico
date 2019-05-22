@@ -6,6 +6,7 @@ import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Spiel;
 import ripico.api.service.SpielService;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,5 +30,14 @@ public class DefaultSpielServiceImpl implements SpielService {
     public void setzeErgebnis(Spiel spiel, QuotenArt ergebnis) {
         spiel.setErgebnis(ergebnis);
         spielAdapter.updateSpiel(spiel);
+    }
+
+    @Override
+    public void erstelleSpiel(Spiel spiel) {
+        try {
+            spielAdapter.createSpiel(spiel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

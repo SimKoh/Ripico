@@ -8,7 +8,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,6 +23,12 @@ public class IdleViewController {
     private static final Logger logger = Logger.getLogger(IdleViewController.class.getName());
 
     private AppStart mainApp;
+
+    @FXML
+    private Hyperlink aEinloggen;
+
+    @FXML
+    private Hyperlink aWettscheinPruefen;
 
     @FXML
     private Button btn_agreeTos;
@@ -53,6 +61,36 @@ public class IdleViewController {
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Fehler 46:", e);
         }
+    }
+
+    @FXML
+    void login(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/LoginView.fxml"));
+            // Get MainView RootElement
+            Parent root = loader.load();
+
+            LoginViewController controller = loader.getController();
+
+            Stage stage = new Stage(); // Neues Fenster
+            stage.setTitle("Ripico");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+
+            // Set Icon
+            stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
+            stage.setResizable(false);
+
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Fehler 46:", e);
+        }
+    }
+
+    @FXML
+    void pruefeWettschein(){
+
     }
 
 

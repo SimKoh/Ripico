@@ -37,24 +37,25 @@
 /* Fix scroll bar buttons arrows colors */
 .scroll-bar > .increment-button > .increment-arrow,
 .scroll-bar > .decrement-button > .decrement-arrow {
-    -fx-background-color: -fx-mark-highlight-color,  rgb(209, 57, 50);
+    -fx-background-color: -fx-mark-highlight-color, rgb(209, 57, 50);
+
 }
 
 .scroll-bar > .increment-button:hover > .increment-arrow,
 .scroll-bar > .decrement-button:hover > .decrement-arrow {
-    -fx-background-color: -fx-mark-highlight-color,  rgb(209, 57, 50);
+    -fx-background-color: -fx-mark-highlight-color, rgb(209, 57, 50);
 }
 
 .scroll-bar > .increment-button:pressed > .increment-arrow,
 .scroll-bar > .decrement-button:pressed > .decrement-arrow {
-    -fx-background-color: -fx-mark-highlight-color,  rgb(209, 57, 50);
+    -fx-background-color: -fx-mark-highlight-color, rgb(209, 57, 50);
 }
 
 /* The main scrollbar **track** CSS class  */
-.scroll-bar:horizontal .track ,
-.scroll-bar:vertical .track{
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
     /*-fx-background-color: transparent;*/
-    -fx-border-color:derive(gray,80%);
+    -fx-border-color: derive(gray, 80%);
 }
 
 /* The main scrollbar **thumb** CSS class which we drag every time (movable) */
@@ -63,34 +64,47 @@
     -fx-background-color: rgba(191, 38, 45, 0.8);
 }
 
-.betEntryEven{
-    -fx-background-color: rgb(80, 80, 80);
-    -fx-border-width: 0 1 0 0;
-
-    -fx-border-color: white;
-}
-
-.betEntryOdd{
+.betEntry {
     -fx-background-color: rgb(50, 50, 50);
-    -fx-border-width: 0 1 0 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: white;
+}
+
+.betEntry:hover {
+    -fx-background-color: rgba(209, 57, 50, 0.7);
+}
+
+
+.betEntryEven {
+    -fx-background-color: rgb(80, 80, 80);
+    -fx-border-width: 0 0 1 0;
 
     -fx-border-color: white;
 }
 
-.betEntryEven:hover{
+.betEntryOdd {
+    -fx-background-color: rgb(50, 50, 50);
+    -fx-border-width: 0 0 1 0;
+
+    -fx-border-color: white;
+
+}
+
+.betEntryEven:hover {
     -fx-background-color: rgba(209, 57, 50, 0.7);
 }
 
-.betEntryOdd:hover{
+.betEntryOdd:hover {
     -fx-background-color: rgba(209, 57, 50, 0.7);
 }
 
-.scrollPaneDark{
+.scrollPaneDark {
     -fx-border-width: 1;
-    -fx-border-style: solid ;
+    -fx-border-style: solid;
     -fx-border-color: white;
 
 }
+
 .borderBottom {
     -fx-border-width: 0 0 1 0;
     -fx-border-style: hidden hidden solid hidden;
@@ -106,14 +120,14 @@
 
 }
 
-.border{
+.border {
     -fx-border-width: 1;
     -fx-border-style: solid;
     -fx-border-color: rgb(209, 57, 50);
 }
 
 
-.betView{
+.betView {
     -fx-background-color: rgba(202, 202, 202, 0.7);
     -fx-light-text-color: rgb(220, 220, 220);
     -fx-mid-text-color: rgb(100, 100, 100);
@@ -136,11 +150,12 @@
     /*-fx-padding: 10 20 10 20;*/
 }
 
-.ripicoBtn:hover{
+.ripicoBtn:hover {
     -fx-cursor: hand;
 }
+
 .ripicoBtn Text {
-    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.9), 1, 0.0, 0, 1);
 }
 
 .succesBtn {
@@ -153,10 +168,11 @@
     -fx-text-fill: linear-gradient(white, #d0d0d0);
 }
 
-.succesBtn:hover{
+.succesBtn:hover {
     -fx-cursor: hand;
 }
+
 .succesBtn Text {
-    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.9), 1, 0.0, 0, 1);
 }
 

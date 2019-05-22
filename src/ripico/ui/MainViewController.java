@@ -1,12 +1,13 @@
 package ripico.ui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -14,7 +15,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ripico.api.ServiceFactory;
-import ripico.api.domain.*;
+import ripico.api.domain.Spiel;
+import ripico.api.domain.Wette;
+import ripico.api.domain.Wettschein;
 import ripico.api.domain.enums.QuotenArt;
 import ripico.api.service.SpielService;
 import ripico.api.service.WettscheinService;
@@ -31,39 +34,40 @@ import java.util.logging.Logger;
 public class MainViewController<wettList> {
 
     private static final Logger logger = Logger.getLogger(MainViewController.class.getName());
-
-    private AppStart mainApp;
-    private SpielService spielService = ServiceFactory.createService(SpielService.class);
-    private Scene scene;
-
-    Wettschein wettschein;
-
-
-    @FXML
-    private VBox vBox_availableBets;
-
-    @FXML
-    private ScrollPane scrollPane_availableBets;
-
-    @FXML
-    private Label labelWettscheinId;
-
-    @FXML
-    private Label labelDatumSchein;
-
-    @FXML
-    private Label labelGesamtquote;
-
-
     static List<Spiel> verfuergbareSpieleList;
     private static List<Wette> meineWettenListe;
     private static WettscheinService wettscheinService;
+    Wettschein wettschein;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:MM");
+    private AppStart mainApp;
+    private SpielService spielService = ServiceFactory.createService(SpielService.class);
+    private Scene scene;
+    @FXML
+    private VBox vBox_availableBets;
+    @FXML
+    private VBox vBox_meineWetten;
+    @FXML
+    private ScrollPane scrollPane_availableBets;
+    @FXML
+    private Label labelWettscheinId;
+    @FXML
+    private Label labelDatumSchein;
+    @FXML
+    private Label labelGesamtquote;
 
+    @FXML
+    private TextField tfBetEinsatz;
+    @FXML
+    private Button btnSubmitWettschein;
+
+    public static List<Wette> getMeineWettenListe() {
+        return meineWettenListe;
+    }
 
     // NOT FULLY INITIALIZED..
     @FXML
     private void initialize() {
-        Logger.getLogger(getClass().getName()).info("PENIS MainViewController initialized");
+        Logger.getLogger(getClass().getName()).info("MainViewController initialized");
 
 
         // Setup Start-Variablen
@@ -73,11 +77,11 @@ public class MainViewController<wettList> {
         // Erstelle leeren, neuen Wettschein
         wettschein = wettscheinService.erstelleLeerenWettschein();
 
-        this.aktualisiereGesamtquote();
+        this.aktualisiereAnsicht(null, null);
 
 
         // Setup Controls
-        labelDatumSchein.setText(new SimpleDateFormat("dd.MM.yyyy HH:mm").format(new Date()));
+        labelDatumSchein.setText(simpleDateFormat.format(new Date()));
         labelWettscheinId.setText(String.valueOf(wettschein.getWettscheinId()));
 
         //ScrollPane
@@ -98,77 +102,10 @@ public class MainViewController<wettList> {
 
 
         int counter = 0;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:MM");
+
         for (Spiel spiel : verfuergbareSpieleList) {
 
-            Pane paneBet = new Pane();
-
-
-            Label label_sportArtDesc = new Label("Sportart:");
-            label_sportArtDesc.setLayoutX(20);
-            label_sportArtDesc.setLayoutY(3);
-            paneBet.getChildren().add(label_sportArtDesc);
-
-            Label label_sportArt = new Label(spiel.getSportart().getBezeichnung());
-            label_sportArt.setLayoutX(70);
-            label_sportArt.setLayoutY(3);
-            paneBet.getChildren().add(label_sportArt);
-
-            Label label_zeitpunkt = new Label(simpleDateFormat.format(spiel.getDatum()));
-            label_zeitpunkt.setLayoutX(240);
-            label_zeitpunkt.setLayoutY(3);
-            paneBet.getChildren().add(label_zeitpunkt);
-
-            Label label_mannschaft1 = new Label(spiel.getMannschaftHeim().getMannschaftsName());
-            label_mannschaft1.setLayoutX(20);
-            label_mannschaft1.setLayoutY(20);
-            label_mannschaft1.setFont(new Font("Arial", 19));
-            paneBet.getChildren().add(label_mannschaft1);
-
-            Label label_seperator = new Label(":");
-            label_seperator.setLayoutX(190);
-            label_seperator.setLayoutY(20);
-            label_seperator.setFont(new Font("Arial", 19));
-            paneBet.getChildren().add(label_seperator);
-
-            Label label_mannschaft2 = new Label(spiel.getMannschaftAuswaerts().getMannschaftsName());
-            label_mannschaft2.setLayoutX(240);
-            label_mannschaft2.setLayoutY(20);
-            label_mannschaft2.setFont(new Font("Arial", 19));
-            paneBet.getChildren().add(label_mannschaft2);
-
-
-            Label label_quoteMannschaft1 = new Label(String.valueOf(spiel.getQuoten().get(QuotenArt.HEIM)));
-            label_quoteMannschaft1.setLayoutX(65);
-            label_quoteMannschaft1.setLayoutY(45);
-            label_quoteMannschaft1.setFont(new Font("Arial", 19));
-            paneBet.getChildren().add(label_quoteMannschaft1);
-
-            Label label_quoteUnentschieden = new Label(String.valueOf(spiel.getQuoten().get(QuotenArt.UNENTSCHIEDEN)));
-            label_quoteUnentschieden.setLayoutX(180);
-            label_quoteUnentschieden.setLayoutY(45);
-            label_quoteUnentschieden.setFont(new Font("Arial", 19));
-            paneBet.getChildren().add(label_quoteUnentschieden);
-
-            Label label_quoteMannschaft2 = new Label(String.valueOf(spiel.getQuoten().get(QuotenArt.AUSWAERTS)));
-            label_quoteMannschaft2.setLayoutX(275);
-            label_quoteMannschaft2.setLayoutY(45);
-            label_quoteMannschaft2.setFont(new Font("Arial", 19));
-            paneBet.getChildren().add(label_quoteMannschaft2);
-
-
-            paneBet.setMinHeight(75);
-            paneBet.setMaxHeight(75);
-            paneBet.setPrefWidth(460);
-
-
-            if (counter % 2 == 0) {
-                paneBet.getStyleClass().add("betEntryEven");
-
-            } else {
-                paneBet.getStyleClass().add("betEntryOdd");
-            }
-
+            Pane paneBet = createBetRow(counter, spiel);
 
             paneBet.setOnMouseClicked(event ->
             {
@@ -194,22 +131,90 @@ public class MainViewController<wettList> {
                     // Hide/Close TOS-Window
 
                 } catch (IOException e) {
-                    logger.log(Level.SEVERE,e.getMessage(), e);
+                    logger.log(Level.SEVERE, e.getMessage(), e);
                 }
 
-
             });
-            vBox_availableBets.getChildren().add(paneBet);
 
+            vBox_availableBets.getChildren().add(paneBet);
             counter++;
         }
         scrollPane_availableBets.setContent(vBox_availableBets);
-
     }
 
-     void aktualisiereGesamtquote() {
-        float gesamtQuote = wettscheinService.berechneGesamtQuote(meineWettenListe);
-        labelGesamtquote.setText(String.valueOf(gesamtQuote));
+    private Pane createBetRow(int counter, Spiel spiel) {
+        Pane paneBet = new Pane();
+
+
+        Label label_sportArtDesc = new Label("Sportart:");
+        label_sportArtDesc.setLayoutX(20);
+        label_sportArtDesc.setLayoutY(3);
+        paneBet.getChildren().add(label_sportArtDesc);
+
+        Label label_sportArt = new Label(spiel.getSportart().getBezeichnung());
+        label_sportArt.setLayoutX(70);
+        label_sportArt.setLayoutY(3);
+        paneBet.getChildren().add(label_sportArt);
+
+        Label label_zeitpunkt = new Label(simpleDateFormat.format(spiel.getDatum()));
+        label_zeitpunkt.setLayoutX(240);
+        label_zeitpunkt.setLayoutY(3);
+        paneBet.getChildren().add(label_zeitpunkt);
+
+        Label label_mannschaft1 = new Label(spiel.getMannschaftHeim().getMannschaftsName());
+        label_mannschaft1.setLayoutX(20);
+        label_mannschaft1.setLayoutY(20);
+        label_mannschaft1.setFont(new Font("Arial", 19));
+        paneBet.getChildren().add(label_mannschaft1);
+
+        Label label_seperator = new Label(":");
+        label_seperator.setLayoutX(190);
+        label_seperator.setLayoutY(20);
+        label_seperator.setFont(new Font("Arial", 19));
+        paneBet.getChildren().add(label_seperator);
+
+        Label label_mannschaft2 = new Label(spiel.getMannschaftAuswaerts().getMannschaftsName());
+        label_mannschaft2.setLayoutX(240);
+        label_mannschaft2.setLayoutY(20);
+        label_mannschaft2.setFont(new Font("Arial", 19));
+        paneBet.getChildren().add(label_mannschaft2);
+
+
+        Label label_quoteMannschaft1 = new Label(String.valueOf(spiel.getQuoten().get(QuotenArt.HEIM)));
+        label_quoteMannschaft1.setLayoutX(65);
+        label_quoteMannschaft1.setLayoutY(45);
+        label_quoteMannschaft1.setFont(new Font("Arial", 19));
+        paneBet.getChildren().add(label_quoteMannschaft1);
+
+        Label label_quoteUnentschieden = new Label(String.valueOf(spiel.getQuoten().get(QuotenArt.UNENTSCHIEDEN)));
+        label_quoteUnentschieden.setLayoutX(180);
+        label_quoteUnentschieden.setLayoutY(45);
+        label_quoteUnentschieden.setFont(new Font("Arial", 19));
+        paneBet.getChildren().add(label_quoteUnentschieden);
+
+        Label label_quoteMannschaft2 = new Label(String.valueOf(spiel.getQuoten().get(QuotenArt.AUSWAERTS)));
+        label_quoteMannschaft2.setLayoutX(275);
+        label_quoteMannschaft2.setLayoutY(45);
+        label_quoteMannschaft2.setFont(new Font("Arial", 19));
+        paneBet.getChildren().add(label_quoteMannschaft2);
+
+
+        paneBet.setMinHeight(75);
+        paneBet.setMaxHeight(75);
+        paneBet.setPrefWidth(460);
+
+        paneBet.getStyleClass().add("betEntry");
+
+
+        // TODO AUS UGLY HUEBSCH MACHEN
+//        if (counter % 2 == 0) {
+//            paneBet.getStyleClass().add("betEntryEven");
+//
+//        } else {
+//            paneBet.getStyleClass().add("betEntryOdd");
+//        }
+
+        return paneBet;
     }
 
     public void setMainApp(AppStart app) {
@@ -217,8 +222,34 @@ public class MainViewController<wettList> {
         logger.info("MainViewController: App loaded!");
     }
 
-    public static List<Wette> getMeineWettenListe() {
-        return meineWettenListe;
+    /**
+     * @param spiel Spiel, welches aus den verfügbaren Wetten und der GUI entfernt wird
+     * @param wette Wette, welche als Resultat eines Hinzufügens "meinerListe" hinzugefügt wird
+     */
+    public void aktualisiereAnsicht(Wette wette, Spiel spiel) {
+        if (wette == null || spiel == null) {
+            return;
+        }
+
+        // Add Wette to meineWetten
+        meineWettenListe.add(wette);
+
+        float gesamtQuote = wettscheinService.berechneGesamtQuote(meineWettenListe);
+        labelGesamtquote.setText(String.format("%.2f",gesamtQuote));
+
+        // Remove Spiel from available Bets and GUI
+        int i = verfuergbareSpieleList.indexOf(spiel);
+        verfuergbareSpieleList.remove(i);
+        vBox_availableBets.getChildren().remove(i);
+
+
+        Pane paneBet = createBetRow(1, spiel);
+        vBox_meineWetten.getChildren().add(paneBet);
     }
 
+    public void submitWettschein(){
+        wettschein.setEinsatz(Float.parseFloat(tfBetEinsatz.getText()));
+        this.wettschein.setWetten(meineWettenListe);
+        wettscheinService.speichereWettschein(wettschein);
+    }
 }

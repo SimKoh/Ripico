@@ -93,17 +93,20 @@ public class BetViewController {
                 wette = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
                 break;
             case "radioUnentschieden":
-                wette = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
+                wette = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.UNENTSCHIEDEN).build();
                 break;
             case "radioAuswaerts":
-                wette = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.HEIM).build();
+                wette = WetteBuilder.newWette().withSpiel(spiel).withGesetzteWette(QuotenArt.AUSWAERTS).build();
                 break;
             default:
                 logger.severe("Wette kann nicht erstellt werden, RadioButton nicht erkannt!");
                 return;
         }
-        MainViewController.getMeineWettenListe().add(wette);
-        mainView.aktualisiereGesamtquote();
+        mainView.aktualisiereAnsicht(wette, wette.getSpiel());
+
+        // AFTER ADD
+
+        betViewStage.close();
     }
 
     public void cancelBet() {

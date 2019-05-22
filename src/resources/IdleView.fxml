@@ -28,9 +28,10 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="71.0" layoutY="226.0" prefHeight="6.0" prefWidth="110.0" text="© Ripico Ltd. 2019" />
-      <Hyperlink alignment="CENTER" contentDisplay="CENTER" layoutX="182.0" style="-fx-text-fill: #efefef;" text="einloggen" underline="true" />
+      <Label layoutX="76.0" layoutY="225.0" prefHeight="6.0" prefWidth="110.0" text="© Ripico Ltd. 2019" />
+      <Hyperlink fx:id="aEinloggen" alignment="CENTER" contentDisplay="CENTER" layoutX="182.0" layoutY="-1.0" onAction="#login" style="-fx-text-fill: #efefef;" text="einloggen" underline="true" />
       <Separator layoutX="-13.0" layoutY="219.0" prefHeight="4.0" prefWidth="263.0" />
+      <Hyperlink fx:id="aWettscheinPruefen" alignment="CENTER" contentDisplay="CENTER" layoutX="73.0" layoutY="193.0" onAction="#pruefeWettschein" style="-fx-text-fill: #efefef;" text="Wettschein prüfen" underline="true" />
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

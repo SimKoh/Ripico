@@ -22,7 +22,7 @@ public class DatabaseMannschaftAdapterImpl implements MannschaftAdapter {
     }
 
     @Override
-    public List<Mannschaft> alleManschaften() {
+    public List<Mannschaft> alleMannschaften() {
         Connection connection;
         try {
             connection = connectionPool.getConnection();

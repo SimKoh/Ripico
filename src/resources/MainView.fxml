@@ -14,7 +14,7 @@
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@stylesheets/dark-theme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.MainViewController">
 
    <children>
-      <VBox depthTest="DISABLE" prefHeight="500.0" prefWidth="500.0" styleClass="split">
+      <VBox fx:id="vBox_ersteHaelfte" depthTest="DISABLE" prefHeight="500.0" prefWidth="500.0" styleClass="split">
          <HBox.margin>
             <Insets />
          </HBox.margin>
@@ -38,19 +38,22 @@
                      </font></Label>
                   <Label fx:id="labelWettscheinId" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" layoutY="5.0" prefWidth="150.0" text="00000000000000" textAlignment="RIGHT" />
                   <Label fx:id="labelDatumSchein" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" layoutY="25.0" prefWidth="150.0" text="00000000000000" textAlignment="RIGHT" />
-                  <Label fx:id="labelGesamtquote" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" layoutY="45.0" prefWidth="150.0" text="00000000000000" textAlignment="RIGHT" />
+                  <Label fx:id="labelGesamtquote" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" layoutY="45.0" prefWidth="150.0" text="0.00" textAlignment="RIGHT" />
                </children></Pane>
-            <ScrollPane fx:id="scrollPane_availableBets" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="460.0" styleClass="edge-to-edge">
+            <ScrollPane fx:id="scrollPane_meineWetten" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="460.0">
                <content>
-                  <VBox fx:id="vBox_availableBets" fillWidth="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="350.0" prefWidth="460.0" />
+                  <VBox fx:id="vBox_meineWetten" fillWidth="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="350.0" prefWidth="460.0" />
                </content>
+               <styleClass>
+                  <String fx:value="scrollPaneDark" />
+                  <String fx:value="edge-to-edge" />
+               </styleClass>
             </ScrollPane>
             <Pane prefHeight="120.0" prefWidth="260.0">
                <children>
-                  <Button layoutX="302.0" layoutY="13.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="158.0" styleClass="ripicoBtn" text="Submit" />
-                  <TextField fx:id="tfBetEinsatz" layoutX="163.0" layoutY="12.0" prefHeight="28.0" prefWidth="136.0" promptText="Einsatz" style="-fx-text-fill: black;" />
-
-                  <Button layoutY="13.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="158.0" styleClass="ripicoBtn" text="Abbrechen" />
+                  <Button fx:id="btnSubmitWettschein" layoutX="276.0" layoutY="13.0" mnemonicParsing="false" onAction="#submitWettschein" prefHeight="28.0" prefWidth="184.0" styleClass="ripicoBtn" text="Wettschein bestätigen" />
+                  <TextField fx:id="tfBetEinsatz" layoutX="57.0" layoutY="14.0" prefHeight="28.0" prefWidth="210.0" promptText="Einsatz" style="-fx-text-fill: black;" />
+                  <Label layoutX="5.0" layoutY="19.0" text="Einsatz:" />
                </children>
             </Pane>
          </children>
@@ -70,7 +73,7 @@
                      </font>
                   </Label>
                </children></Pane>
-            <ScrollPane fx:id="scrollPane_availableBets" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="460.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+            <ScrollPane fx:id="scrollPane_availableBets" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="460.0" VBox.vgrow="ALWAYS">
                 <VBox fx:id="vBox_availableBets" fillWidth="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="460.0" />
                <styleClass>
                   <String fx:value="scrollPaneDark" />

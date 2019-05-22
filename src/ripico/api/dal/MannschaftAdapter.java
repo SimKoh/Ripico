@@ -5,5 +5,5 @@ import ripico.api.domain.Mannschaft;
 import java.util.List;
 
 public interface MannschaftAdapter {
-    List<Mannschaft> alleManschaften();
+    List<Mannschaft> alleMannschaften();
 }
