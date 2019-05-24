@@ -11,18 +11,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@stylesheets/dark-theme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.MainViewController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@stylesheets/dark-theme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.MainViewController">
 
    <children>
-      <VBox fx:id="vBox_ersteHaelfte" depthTest="DISABLE" prefHeight="500.0" prefWidth="500.0" styleClass="split">
+      <VBox fx:id="vBox_ersteHaelfte" depthTest="DISABLE" styleClass="split">
          <HBox.margin>
             <Insets />
          </HBox.margin>
          <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <children>
-            <Pane prefHeight="150.0" prefWidth="260.0">
+            <Pane prefHeight="131.0" prefWidth="475.0">
                <children>
                   <Label layoutY="5.0" text="Scheinnummer:">
                      <font>
@@ -36,45 +36,51 @@
                      <font>
                         <Font size="16.0" />
                      </font></Label>
-                  <Label fx:id="labelWettscheinId" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" layoutY="5.0" prefWidth="150.0" text="00000000000000" textAlignment="RIGHT" />
-                  <Label fx:id="labelDatumSchein" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" layoutY="25.0" prefWidth="150.0" text="00000000000000" textAlignment="RIGHT" />
-                  <Label fx:id="labelGesamtquote" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" layoutY="45.0" prefWidth="150.0" text="0.00" textAlignment="RIGHT" />
+                  <Label fx:id="labelWettscheinId" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="320.0" layoutY="10.0" prefWidth="150.0" text="12312414151" textAlignment="RIGHT" />
+                  <Label fx:id="labelDatumSchein" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="320.0" layoutY="30.0" prefWidth="150.0" text="24.05.2019 15:00" textAlignment="RIGHT" />
+                  <Label fx:id="labelGesamtquote" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="320.0" layoutY="50.0" prefWidth="150.0" text="0.00" textAlignment="RIGHT" />
+                  <Label layoutY="65.0" text="Gesamtgewinn:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelGesamtquote1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="320.0" layoutY="70.0" prefWidth="150.0" text="0.00€" textAlignment="RIGHT" />
                </children></Pane>
-            <ScrollPane fx:id="scrollPane_meineWetten" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="460.0">
+            <ScrollPane fx:id="scrollPane_meineWetten" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="475.0">
                <content>
-                  <VBox fx:id="vBox_meineWetten" fillWidth="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="350.0" prefWidth="460.0" />
+                  <VBox fx:id="vBox_meineWetten" fillWidth="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="341.0" prefWidth="475.0" />
                </content>
                <styleClass>
                   <String fx:value="scrollPaneDark" />
                   <String fx:value="edge-to-edge" />
                </styleClass>
             </ScrollPane>
-            <Pane prefHeight="120.0" prefWidth="260.0">
+            <Pane prefHeight="65.0" prefWidth="475.0">
                <children>
-                  <Button fx:id="btnSubmitWettschein" layoutX="276.0" layoutY="13.0" mnemonicParsing="false" onAction="#submitWettschein" prefHeight="28.0" prefWidth="184.0" styleClass="ripicoBtn" text="Wettschein bestätigen" />
-                  <TextField fx:id="tfBetEinsatz" layoutX="57.0" layoutY="14.0" prefHeight="28.0" prefWidth="210.0" promptText="Einsatz" style="-fx-text-fill: black;" />
-                  <Label layoutX="5.0" layoutY="19.0" text="Einsatz:" />
+                  <Button fx:id="btnSubmitWettschein" layoutX="276.0" layoutY="7.0" mnemonicParsing="false" onAction="#submitWettschein" prefHeight="28.0" prefWidth="198.0" styleClass="ripicoBtn" text="Wettschein bestätigen" />
+                  <TextField fx:id="tfBetEinsatz" layoutX="57.0" layoutY="8.0" prefHeight="28.0" prefWidth="210.0" promptText="Einsatz" style="-fx-text-fill: black;" />
+                  <Label layoutX="5.0" layoutY="12.0" text="Einsatz:" />
                </children>
             </Pane>
          </children>
       </VBox>
-      <VBox fx:id="vBox_zweiteHaelfte" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
+      <VBox fx:id="vBox_zweiteHaelfte" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="505.0">
          <children>
-            <Pane prefHeight="140.0" prefWidth="460.0">
+            <Pane prefHeight="110.0" prefWidth="460.0">
                <children>
-                  <Label layoutX="316.0" style="-fx-text-fill: white;" text="Guthaben:">
+                  <Label layoutX="274.0" style="-fx-text-fill: white;" text="Guthaben:">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="414.0" style="-fx-text-fill: white;" text="0,00€">
+                  <Label fx:id="label_Guthaben" alignment="CENTER_RIGHT" layoutX="372.0" prefHeight="28.0" prefWidth="87.0" style="-fx-text-fill: white;" text="0,00€">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
                </children></Pane>
-            <ScrollPane fx:id="scrollPane_availableBets" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="460.0" VBox.vgrow="ALWAYS">
-                <VBox fx:id="vBox_availableBets" fillWidth="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="460.0" />
+            <ScrollPane fx:id="scrollPane_availableBets" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="475.0" VBox.vgrow="ALWAYS">
+                <VBox fx:id="vBox_availableBets" fillWidth="false" nodeOrientation="LEFT_TO_RIGHT" />
                <styleClass>
                   <String fx:value="scrollPaneDark" />
                   <String fx:value="edge-to-edge" />
@@ -82,7 +88,7 @@
             </ScrollPane>
          </children>
          <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </VBox>
    </children>

@@ -22,12 +22,11 @@ public class LoginViewController {
 
 
     @FXML
+    public Label label_errorMessage;
+    @FXML
     TextField tfUsername;
     @FXML
     TextField tfPassword;
-
-    @FXML
-    Label label_ErrorMessage;
 
 
     @FXML
@@ -47,8 +46,8 @@ public class LoginViewController {
             if (mitarbeiter == null) throw new InvalidCredentialsException("Mitarbeiter ist null, Error!");
 
         } catch (InvalidCredentialsException e) {
-            label_ErrorMessage.setText("Login nicht möglich! Benutzer/Passwort fehlerhaft?");
-            label_ErrorMessage.setVisible(true);
+            label_errorMessage.setText("Login nicht möglich! Benutzer/Passwort fehlerhaft?");
+            label_errorMessage.setVisible(true);
             e.printStackTrace();
             return;
         }

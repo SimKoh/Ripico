@@ -3,7 +3,7 @@
 
 .root {
     -fx-base: rgb(50, 50, 50);
-    -fx-background: rgb(50, 50, 50);
+    -fx-background: rgb(40, 40, 40);
 
     /* make controls (buttons, thumb, etc.) slightly lighter */
     -fx-color: derive(-fx-base, 10%);
@@ -102,6 +102,8 @@
     -fx-border-width: 1;
     -fx-border-style: solid;
     -fx-border-color: white;
+    -fx-border-radius: 5;
+
 
 }
 
@@ -178,4 +180,8 @@
 
 .button {
     -fx-text-fill: #efefef;
+}
+
+.errorMessage{
+    -fx-text-fill: red;
 }

@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import ripico.api.ServiceFactory;
 import ripico.api.domain.enums.Sportart;
@@ -28,6 +29,8 @@ public class AddGameController {
     public DatePicker dpSpielDatum;
     @FXML
     public TextField tfSpielZeit;
+    @FXML
+    public Label label_errorMessage;
     @FXML
     ComboBox cbSportart;
     @FXML

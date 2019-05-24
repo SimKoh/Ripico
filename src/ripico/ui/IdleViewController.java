@@ -38,14 +38,40 @@ public class IdleViewController {
         logger.info("Idle View Initialized");
     }
 
+    // LOAD MAINAPP DIREKT
+//    public void onClick_agreeTos(ActionEvent event) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/MainView.fxml"));
+//            // Get MainView RootElement
+//            Parent root = loader.load();
+//
+//            MainViewController controller = loader.getController();
+//            controller.setMainApp(mainApp);
+//
+//            Stage stage = new Stage(); // Neues Fenster
+//            stage.setTitle("Ripico Sportwetten");
+//            stage.setScene(new Scene(root));
+//            stage.show();
+//
+//
+//            // Set Icon
+//            stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
+//            stage.setResizable(false);
+//            // Hide/Close TOS-Window
+//            ((Node) (event.getSource())).getScene().getWindow().hide();
+//        } catch (IOException e) {
+//            logger.log(Level.SEVERE, "Fehler 46:", e);
+//        }
+//    }
+
+    // LOAD EINZAHLEN DIREKT
     public void onClick_agreeTos(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/AddCurrencyView.fxml"));
             // Get MainView RootElement
             Parent root = loader.load();
 
-            MainViewController controller = loader.getController();
-            controller.setMainApp(mainApp);
+            AddCurrencyViewController controller = loader.getController();
 
             Stage stage = new Stage(); // Neues Fenster
             stage.setTitle("Ripico Sportwetten");

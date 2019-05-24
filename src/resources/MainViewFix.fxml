@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" stylesheets="@stylesheets/dark-theme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.MainViewController">
+   <children>
+      <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <AnchorPane GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <children>
+                  <AnchorPane layoutX="20.0" layoutY="20.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <children>
+                        <AnchorPane layoutY="5.0" AnchorPane.bottomAnchor="550.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label text="Scheinnummer:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutY="20.0" text="Zeit" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutY="40.0" text="Gesamtquote:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelWettscheinId" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" text="00000000000000" textAlignment="RIGHT" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Label fx:id="labelDatumSchein" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" layoutY="20.0" text="00000000000000" textAlignment="RIGHT" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                              <Label fx:id="labelGesamtquote" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" layoutY="40.0" text="0.00" textAlignment="RIGHT" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                           </children>
+                        </AnchorPane>
+                        <ScrollPane fx:id="scrollPane_meineWetten" fitToWidth="true" hbarPolicy="NEVER" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                           <content>
+                              <VBox fx:id="vBox_meineWetten" nodeOrientation="LEFT_TO_RIGHT" />
+                           </content>
+                           <styleClass>
+                              <String fx:value="scrollPaneDark" />
+                              <String fx:value="edge-to-edge" />
+                           </styleClass>
+                        </ScrollPane>
+                        <AnchorPane layoutX="5.0" layoutY="609.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <Button fx:id="btnSubmitWettschein" layoutX="271.0" layoutY="4.0" mnemonicParsing="false" onAction="#submitWettschein" prefHeight="28.0" prefWidth="184.0" styleClass="ripicoBtn" text="Wettschein bestätigen" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0" />
+                              <TextField fx:id="tfBetEinsatz" layoutX="52.0" layoutY="5.0" prefHeight="28.0" prefWidth="210.0" promptText="Einsatz" style="-fx-text-fill: black;" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="5.0" />
+                              <Label layoutY="10.0" text="Einsatz:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="510.0" AnchorPane.topAnchor="10.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <children>
+                  <AnchorPane layoutX="20.0" layoutY="20.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <children>
+                        <Pane AnchorPane.bottomAnchor="550.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+                           <children>
+                              <Label layoutX="274.0" style="-fx-text-fill: white;" text="Guthaben:">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="label_Guthaben" alignment="CENTER_RIGHT" layoutX="372.0" prefHeight="28.0" prefWidth="87.0" style="-fx-text-fill: white;" text="0,00€">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <ScrollPane fx:id="scrollPane_availableBets" fitToWidth="true" hbarPolicy="NEVER" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                            <VBox fx:id="vBox_availableBets" fillWidth="false" nodeOrientation="LEFT_TO_RIGHT" />
+                           <styleClass>
+                              <String fx:value="scrollPaneDark" />
+                              <String fx:value="edge-to-edge" />
+                           </styleClass>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

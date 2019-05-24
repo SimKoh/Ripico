@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 
 public class BetViewController {
     private static final Logger logger = Logger.getLogger(BetViewController.class.getName());
+    @FXML
+    public Label label_errorMessage;
     private Spiel spiel;
     Stage betViewStage;
 
@@ -86,6 +88,13 @@ public class BetViewController {
 
     public void addBetToWettschein() {
         RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
+        if(selectedRadioButton==null) {
+            label_errorMessage.setText("JUNGE WÄHL NEN TEAM AUS!!!");
+            label_errorMessage.getStyleClass().add("errorMessage");
+            label_errorMessage.setVisible(true);
+            return;
+        }
+
         String radioButtonId = selectedRadioButton.getId();
         Wette wette;
         switch (radioButtonId) {
@@ -102,7 +111,7 @@ public class BetViewController {
                 logger.severe("Wette kann nicht erstellt werden, RadioButton nicht erkannt!");
                 return;
         }
-        mainView.aktualisiereAnsicht(wette, wette.getSpiel());
+        mainView.addWetteToMyList(wette);
 
         // AFTER ADD
 
