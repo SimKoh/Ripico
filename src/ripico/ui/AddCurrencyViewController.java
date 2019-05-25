@@ -1,8 +1,8 @@
 package ripico.ui;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -53,8 +53,16 @@ public class AddCurrencyViewController {
 //            stage.setResizable(false);
             // Hide/Close TOS-Window
             ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
+
+        } catch (LoadException le) {
+            logger.log(Level.SEVERE, "Fehler 47:", le);
+            label_errorMessage.setText("Laden der Applikation nicht möglich, vielleicht läuft der SQL-Server nicht?");
+            label_errorMessage.setVisible(true);
+            label_errorMessage.getStyleClass().add("errorMessage");
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Fehler 46:", e);
+
+            e.printStackTrace();
         }
     }
 

@@ -33,25 +33,16 @@ import java.util.logging.Logger;
 public class MainViewController<wettList> {
 
     private static final Logger logger = Logger.getLogger(MainViewController.class.getName());
-    static List<Spiel> verfuergbareSpieleList;
+    private static List<Spiel> verfuergbareSpieleList;
     private static List<Wette> meineWettenListe;
     private static WettscheinService wettscheinService;
-    public Label label_Guthaben;
-    Wettschein wettschein;
-    float guthaben;
+    private Label label_Guthaben;
+    private Wettschein wettschein;
+    private float guthaben;
 
-    public float getGuthaben() {
-        return guthaben;
-    }
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:MM");
 
-    public void setGuthaben(float guthaben) {
-        this.guthaben = guthaben;
-    }
-
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:MM");
-    private AppStart mainApp;
-    private SpielService spielService = ServiceFactory.createService(SpielService.class);
-    private Scene scene;
+    private SpielService spielService;
     @FXML
     private VBox vBox_availableBets;
     @FXML
@@ -64,9 +55,9 @@ public class MainViewController<wettList> {
     private Label labelDatumSchein;
     @FXML
     private Label labelGesamtquote;
-
     @FXML
     private TextField tfBetEinsatz;
+
     @FXML
     private Button btnSubmitWettschein;
 
@@ -80,17 +71,20 @@ public class MainViewController<wettList> {
     }
 
     // NOT FULLY INITIALIZED..
+
     @FXML
     private void initialize() {
         Logger.getLogger(getClass().getName()).info("MainViewController initialized");
-
-
+        spielService = ServiceFactory.createService(SpielService.class);
         // Setup Start-Variablen
+        assert spielService != null;
         verfuergbareSpieleList = new ArrayList<>(spielService.ladeSpiele());
-        meineWettenListe = new ArrayList<Wette>();
+
+        meineWettenListe = new ArrayList<>();
         wettscheinService = ServiceFactory.createService(WettscheinService.class);
 
         // Erstelle leeren, neuen Wettschein
+        assert wettscheinService != null;
         wettschein = wettscheinService.erstelleLeerenWettschein();
 
         // Setup Controls
@@ -104,7 +98,6 @@ public class MainViewController<wettList> {
     }
 
     // TODO anpassen in eine Methode ..
-
     private Pane createBetRow(int counter, Spiel spiel) {
         Pane paneBet = new Pane();
 
@@ -142,7 +135,6 @@ public class MainViewController<wettList> {
         label_mannschaft2.setFont(new Font("Arial", 19));
         paneBet.getChildren().add(label_mannschaft2);
 
-
         Label label_quoteMannschaft1 = new Label(String.valueOf(spiel.getQuoten().get(QuotenArt.HEIM)));
         label_quoteMannschaft1.setLayoutX(75);
         label_quoteMannschaft1.setLayoutY(45);
@@ -160,7 +152,6 @@ public class MainViewController<wettList> {
         label_quoteMannschaft2.setLayoutY(45);
         label_quoteMannschaft2.setFont(new Font("Arial", 19));
         paneBet.getChildren().add(label_quoteMannschaft2);
-
 
         paneBet.setMinHeight(75);
         paneBet.setMaxHeight(75);
@@ -266,10 +257,6 @@ public class MainViewController<wettList> {
         return paneBet;
     }
 
-    public void setMainApp(AppStart app) {
-        mainApp = app;
-        logger.info("MainViewController: App loaded!");
-    }
 
     public void addWetteToMyList(Wette wette) {
         Spiel spiel = wette.getSpiel();
@@ -298,7 +285,7 @@ public class MainViewController<wettList> {
             // option != null.
             Optional<ButtonType> option = alert.showAndWait();
 
-            if (option.get() == ButtonType.OK) {
+            if (option.isPresent() && option.get() == ButtonType.OK) {
                 verfuergbareSpieleList.add(spiel);
                 aktualisiereAvailableBets();
 
@@ -315,14 +302,14 @@ public class MainViewController<wettList> {
     public void aktualisiereAvailableBets() {
         if (isAvailableBetsEmpty()) {
             return;
-        } else {
-            vBox_availableBets.getChildren().clear();
-            for (Spiel spiel : verfuergbareSpieleList) {
-                Pane paneBet = createBetRow(1, spiel);
-                paneBet.setOnMouseClicked(event -> openBetView(spiel));
-                vBox_availableBets.getChildren().add(paneBet);
-            }
         }
+        vBox_availableBets.getChildren().clear();
+        for (Spiel spiel : verfuergbareSpieleList) {
+            Pane paneBet = createBetRow(1, spiel);
+            paneBet.setOnMouseClicked(event -> openBetView(spiel));
+            vBox_availableBets.getChildren().add(paneBet);
+        }
+
     }
 
 
@@ -349,7 +336,7 @@ public class MainViewController<wettList> {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        if(einsatz < 1){
+        if (einsatz < 1) {
 
             return;
         }
@@ -384,5 +371,13 @@ public class MainViewController<wettList> {
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
+    }
+
+    public float getGuthaben() {
+        return guthaben;
+    }
+
+    public void setGuthaben(float guthaben) {
+        this.guthaben = guthaben;
     }
 }
