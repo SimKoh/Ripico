@@ -74,7 +74,6 @@ public class AppStart extends Application {
         }
 
         MainViewController mainViewController = loader.getController();
-        mainViewController.setMainApp(this);
 
         this.primaryStage.show();
     }

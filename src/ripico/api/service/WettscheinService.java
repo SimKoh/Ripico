@@ -2,7 +2,7 @@ package ripico.api.service;
 
 import ripico.api.domain.Wette;
 import ripico.api.domain.Wettschein;
-import ripico.service.exception.ResourceNotFoundException;
+import ripico.api.exception.ResourceNotFoundException;
 
 import java.util.List;
 

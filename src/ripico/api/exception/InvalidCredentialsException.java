@@ -1,4 +1,4 @@
-package ripico.service.exception;
+package ripico.api.exception;
 
 public class InvalidCredentialsException extends Exception {
     public InvalidCredentialsException() {

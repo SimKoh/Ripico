@@ -308,6 +308,10 @@ ALTER TABLE `spiel`
 ALTER TABLE `sportart`
     ADD PRIMARY KEY (`sportart_id`);
 
+
+ALTER TABLE `wettschein`
+    ADD PRIMARY KEY (`wettschein_id`);
+
 ALTER TABLE `wette`
     ADD PRIMARY KEY (`wette_id`);
 

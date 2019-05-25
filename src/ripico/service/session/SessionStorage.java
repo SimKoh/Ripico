@@ -12,10 +12,6 @@ public class SessionStorage {
     private SessionStorage() {
     }
 
-    public static void setOurInstance(SessionStorage ourInstance) {
-        SessionStorage.ourInstance = ourInstance;
-    }
-
     public SessionTyp getSessionTyp() {
         return sessionTyp;
     }

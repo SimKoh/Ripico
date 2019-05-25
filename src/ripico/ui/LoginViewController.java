@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import ripico.api.ServiceFactory;
 import ripico.api.domain.Mitarbeiter;
 import ripico.api.service.MitarbeiterService;
-import ripico.service.exception.InvalidCredentialsException;
+import ripico.api.exception.InvalidCredentialsException;
 
 import java.io.IOException;
 

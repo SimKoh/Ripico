@@ -1,4 +1,4 @@
-package ripico.service.exception;
+package ripico.api.exception;
 
 public class ResourceNotFoundException extends Exception {
     public ResourceNotFoundException() {

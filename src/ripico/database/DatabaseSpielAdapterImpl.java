@@ -8,7 +8,7 @@ import ripico.api.domain.SpielBuilder;
 import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.enums.Sportart;
 import ripico.database.connection.DefaultConnectionPool;
-import ripico.service.exception.ResourceNotFoundException;
+import ripico.api.exception.ResourceNotFoundException;
 
 import java.sql.*;
 import java.util.Date;
