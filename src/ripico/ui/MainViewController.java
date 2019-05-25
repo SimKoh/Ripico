@@ -22,27 +22,26 @@ import ripico.api.service.WettscheinService;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class MainViewController<wettList> {
+public class MainViewController{
 
     private static final Logger logger = Logger.getLogger(MainViewController.class.getName());
     private static List<Spiel> verfuergbareSpieleList;
     private static List<Wette> meineWettenListe;
     private static WettscheinService wettscheinService;
-    private Label label_Guthaben;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:MM");
     private Wettschein wettschein;
     private float guthaben;
-
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:MM");
-
+    private float gesamtQuote = 0.f;
+    private float gesamtGewinn = 0.f;
+    private float einsatz = 0.f;
     private SpielService spielService;
+    @FXML
+    private Label label_Guthaben;
     @FXML
     private VBox vBox_availableBets;
     @FXML
@@ -57,21 +56,31 @@ public class MainViewController<wettList> {
     private Label labelGesamtquote;
     @FXML
     private TextField tfBetEinsatz;
-
     @FXML
     private Button btnSubmitWettschein;
-
-    public static List<Wette> getMeineWettenListe() {
-        return meineWettenListe;
-    }
+    @FXML
+    private Label label_gesamtGewinn;
 
     void init() {
         label_Guthaben.setText(String.format("%.2f €", getGuthaben()));
 
+        tfBetEinsatz.setOnKeyReleased(event -> {
+            if (tfBetEinsatz.getText().isEmpty() ) {
+                tfBetEinsatz.setText("0");
+            }
+            einsatz = Float.parseFloat(tfBetEinsatz.getText());
+            System.out.println("Einsatz:"+einsatz);
+            aktualisiereGesamtGewinn();
+        });
     }
 
-    // NOT FULLY INITIALIZED..
+    private void aktualisiereGesamtGewinn() {
+        gesamtGewinn  = gesamtQuote * einsatz;
+        label_gesamtGewinn.setText(gesamtGewinn+" €");
+    }
 
+
+    // NOT FULLY INITIALIZED..
     @FXML
     private void initialize() {
         Logger.getLogger(getClass().getName()).info("MainViewController initialized");
@@ -98,9 +107,9 @@ public class MainViewController<wettList> {
     }
 
     // TODO anpassen in eine Methode ..
+
     private Pane createBetRow(int counter, Spiel spiel) {
         Pane paneBet = new Pane();
-
 
         Label label_sportArtDesc = new Label("Sportart:");
         label_sportArtDesc.setLayoutX(20);
@@ -156,21 +165,9 @@ public class MainViewController<wettList> {
         paneBet.setMinHeight(75);
         paneBet.setMaxHeight(75);
         paneBet.setPrefWidth(475);
-
         paneBet.getStyleClass().add("betEntry");
-
-
-        // TODO AUS UGLY HUEBSCH MACHEN
-//        if (counter % 2 == 0) {
-//            paneBet.getStyleClass().add("betEntryEven");
-//
-//        } else {
-//            paneBet.getStyleClass().add("betEntryOdd");
-//        }
-
         return paneBet;
     }
-
     private Pane createMyBetRow(int counter, Wette wette) {
         Pane paneBet = new Pane();
         Spiel spiel = wette.getSpiel();
@@ -245,15 +242,6 @@ public class MainViewController<wettList> {
 
         paneBet.getStyleClass().add("betEntry");
 
-
-        // TODO AUS UGLY HUEBSCH MACHEN
-//        if (counter % 2 == 0) {
-//            paneBet.getStyleClass().add("betEntryEven");
-//
-//        } else {
-//            paneBet.getStyleClass().add("betEntryOdd");
-//        }
-
         return paneBet;
     }
 
@@ -314,8 +302,11 @@ public class MainViewController<wettList> {
 
 
     public void aktualisiereGesamtquote() {
-        float gesamtQuote = wettscheinService.berechneGesamtQuote(meineWettenListe);
-        labelGesamtquote.setText(String.format("%.2f", gesamtQuote));
+        gesamtQuote = wettscheinService.berechneGesamtQuote(meineWettenListe);
+        labelGesamtquote.setText(String.format(Locale.ROOT,"%.2f", gesamtQuote));
+        aktualisiereGesamtGewinn();
+
+
     }
 
     private boolean isAvailableBetsEmpty() {
@@ -379,5 +370,9 @@ public class MainViewController<wettList> {
 
     public void setGuthaben(float guthaben) {
         this.guthaben = guthaben;
+    }
+
+    public static List<Wette> getMeineWettenListe() {
+        return meineWettenListe;
     }
 }

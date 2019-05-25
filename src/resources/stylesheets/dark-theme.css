@@ -65,13 +65,14 @@
 }
 
 .betEntry {
-    -fx-background-color: rgb(50, 50, 50);
+    -fx-background-color: rgba(58, 58, 58, 0.82);
     -fx-border-width: 0 0 1 0;
     -fx-border-color: white;
 }
 
 .betEntry:hover {
-    -fx-background-color: rgba(209, 57, 50, 0.7);
+    -fx-background-color: rgba(191, 38, 45, 0.8);
+
 }
 
 
@@ -193,4 +194,8 @@
 
 .successMessage{
     -fx-text-fill: green;
+}
+
+.text-field{
+    -fx-prompt-text-fill: grey;
 }
