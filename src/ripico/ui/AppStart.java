@@ -53,7 +53,8 @@ public class AppStart extends Application {
     }
 
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         //System.setProperty("java.util.logging.SimpleFormatter.format",     "[%1$tF %1$tT] [%4$-7s] %5$s %n");
         launch(args);
     }
