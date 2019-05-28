@@ -1,8 +1,16 @@
 package ripico.ui;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import ripico.api.ServiceFactory;
 import ripico.api.domain.Mannschaft;
 import ripico.api.domain.Spiel;
@@ -12,12 +20,17 @@ import ripico.api.domain.enums.Sportart;
 import ripico.api.service.MannschaftService;
 import ripico.api.service.SpielService;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddGameController {
+    private static final Logger logger = Logger.getLogger(AddGameController.class.getName());
+
     @FXML
     public TextField tfHeimQuote;
     @FXML
@@ -189,5 +202,29 @@ public class AddGameController {
         }
 
 
+    }
+
+    public void ergebnisViewOeffnen(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/AddResultView.fxml"));
+            // Get MainView RootElement
+            Parent root = loader.load();
+
+            AddResultViewController controller = loader.getController();
+
+            Stage stage = new Stage(); // Neues Fenster
+            stage.setTitle("Ripico Ergebnis eintragen");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+            controller.init();
+            // Set Icon
+            stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
+            stage.setResizable(false);
+
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Fehler 46:", e);
+        }
     }
 }

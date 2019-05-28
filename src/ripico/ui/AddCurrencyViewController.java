@@ -46,6 +46,7 @@ public class AddCurrencyViewController {
             stage.setTitle("Ripico Sportwetten");
             stage.setScene(new Scene(root));
             stage.show();
+            stage.setResizable(false);
 
             // Set Icon
             stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));

@@ -11,8 +11,11 @@
 <AnchorPane prefHeight="174.0" prefWidth="458.0" stylesheets="@stylesheets/dark-theme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.AddResultViewController">
 
     <children>
-        <Label fx:id="lSpiel" layoutX="15.0" layoutY="12.0" text="Spiel:" />
         <ComboBox fx:id="cbSpiel" layoutX="15.0" layoutY="33.0" prefHeight="25.0" prefWidth="266.0" />
+        <ComboBox fx:id="cbErgebnis" layoutX="298.0" layoutY="101.0" prefWidth="150.0" />
+        <Button fx:id="btnAbbrechen" layoutX="15.0" layoutY="140.0" mnemonicParsing="false" onAction="#closeErgebnisView" prefHeight="23.0" prefWidth="266.0" styleClass="ripicoBtn" text="Abbrechen" />
+        <Button fx:id="btnErgebnisBestaetigen" layoutX="299.0" layoutY="139.0" mnemonicParsing="false" onAction="#ergebnisEintragen" prefHeight="23.0" prefWidth="150.0" styleClass="succesBtn" text="Ergebnis bestätigen" />
+        <Label fx:id="lSpiel" layoutX="15.0" layoutY="12.0" text="Spiel:" />
         <Label fx:id="lSportart" layoutX="15.0" layoutY="67.0" text="Sportart:" />
         <Label fx:id="lSportartValue" alignment="CENTER_RIGHT" layoutX="77.0" layoutY="67.0" prefHeight="17.0" prefWidth="202.0" textAlignment="RIGHT" />
         <Label fx:id="lDatum" layoutX="15.0" layoutY="86.0" text="Datum:" />
@@ -31,8 +34,5 @@
         </Label>
         <Label fx:id="lAuswaertsValue" alignment="CENTER_RIGHT" layoutX="153.0" layoutY="105.0" prefHeight="17.0" prefWidth="124.0" style="-fx-text-fill: yellow;" />
         <Label fx:id="lErgebnis" layoutX="298.0" layoutY="81.0" text="Wer hat gewonnen?" />
-        <ComboBox fx:id="cbErgebnis" layoutX="298.0" layoutY="101.0" prefWidth="150.0" />
-        <Button fx:id="btnAbbrechen" layoutX="15.0" layoutY="140.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="266.0" styleClass="ripicoBtn" text="Abbrechen" />
-        <Button fx:id="btnErgebnisBestaetigen" layoutX="299.0" layoutY="139.0" mnemonicParsing="false" onAction="#ergebnisEintragen" prefHeight="23.0" prefWidth="150.0" styleClass="succesBtn" text="Ergebnis bestätigen" />
     </children>
 </AnchorPane>

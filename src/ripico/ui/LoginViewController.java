@@ -60,7 +60,7 @@ public class LoginViewController {
             AddGameController controller = loader.getController();
 
             Stage stage = new Stage(); // Neues Fenster
-            stage.setTitle("Ripico");
+            stage.setTitle("Ripico Spiel hinzufügen");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
@@ -73,7 +73,7 @@ public class LoginViewController {
 
 
         } catch (IOException e) {
-            System.out.println("ERORR HJUNGE");
+            System.out.println("Wallah Error");
             e.printStackTrace();
         }
     }

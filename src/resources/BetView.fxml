@@ -13,6 +13,9 @@
    <children>
       <AnchorPane layoutX="26.0" layoutY="24.0" maxHeight="200.0" maxWidth="400.0" minHeight="200.0" minWidth="400.0" prefHeight="200.0" prefWidth="400.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
+            <RadioButton fx:id="radioHeim" layoutX="103.0" layoutY="116.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="275.0" />
+            <RadioButton fx:id="radioUnentschieden" layoutX="197.0" layoutY="116.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="188.0" />
+            <RadioButton fx:id="radioAuswaerts" layoutX="282.0" layoutY="116.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="103.0" />
             <ImageView fx:id="aLogo" fitHeight="64.0" fitWidth="64.0" layoutX="136.0" layoutY="-26.0" pickOnBounds="true" smooth="false" style="-fx-background-color: white;" x="64.0" y="64.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="10.0">
                <image>
                   <Image url="@../resources/imgs/logos/Fußball/hannover96.png" />
@@ -44,9 +47,6 @@
             <Label fx:id="hQuote" alignment="CENTER" layoutX="82.0" layoutY="96.0" prefWidth="40.0" text="1,84" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="268.0" />
             <Label fx:id="aQuote" alignment="CENTER" layoutX="260.0" layoutY="96.0" prefWidth="40.0" text="1,86" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="90.0" />
             <Label fx:id="uQuote" alignment="CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="96.0" prefWidth="40.0" text="1,85" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="181.0" AnchorPane.rightAnchor="179.0" />
-            <RadioButton fx:id="radioHeim" layoutX="103.0" layoutY="116.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="275.0" />
-            <RadioButton fx:id="radioAuswaerts" layoutX="282.0" layoutY="116.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="103.0" />
-            <RadioButton fx:id="radioUnentschieden" layoutX="197.0" layoutY="116.0" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="188.0" />
          </children>
       </AnchorPane>
       <Separator layoutY="155.0" prefWidth="400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />

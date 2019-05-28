@@ -68,12 +68,12 @@
          <children>
             <Pane prefHeight="110.0" prefWidth="460.0">
                <children>
-                  <Label layoutX="274.0" style="-fx-text-fill: white;" text="Guthaben:">
+                  <Label layoutX="217.0" style="-fx-text-fill: white;" text="Guthaben:">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label_Guthaben" alignment="CENTER_RIGHT" layoutX="372.0" prefHeight="28.0" prefWidth="87.0" style="-fx-text-fill: white;" text="0,00€">
+                  <Label fx:id="label_Guthaben" alignment="CENTER_RIGHT" layoutX="309.0" layoutY="1.0" prefHeight="28.0" prefWidth="150.0" style="-fx-text-fill: green;" text="0,00€">
                      <font>
                         <Font size="19.0" />
                      </font>

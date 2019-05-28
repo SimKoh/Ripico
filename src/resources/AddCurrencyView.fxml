@@ -7,13 +7,13 @@
 
 <AnchorPane prefHeight="140.0" prefWidth="475.0" stylesheets="@stylesheets/dark-theme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.AddCurrencyViewController">
    <children>
-      <Button fx:id="btnEinzahlen" mnemonicParsing="false" onAction="#betragEinzahlen" styleClass="succesBtn" text="Einzahlen" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="90.0" />
-      <Label text="Betrag:" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="25.0" />
       <TextField fx:id="tfBetrag" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="23.0" />
       <Button fx:id="btnAdd1" mnemonicParsing="false" onAction="#btnAdd" prefWidth="105.0" text="100€" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="55.0" />
       <Button fx:id="btnAdd2" layoutX="35.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnAdd" prefWidth="105.0" text="250€" AnchorPane.leftAnchor="135.0" AnchorPane.topAnchor="55.0" />
       <Button fx:id="btnAdd3" layoutX="140.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnAdd" prefWidth="105.0" text="1000€" AnchorPane.leftAnchor="245.0" AnchorPane.topAnchor="55.0" />
       <Button fx:id="btnAdd4" layoutX="245.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnAdd" prefWidth="105.0" text="10000€" AnchorPane.leftAnchor="355.0" AnchorPane.topAnchor="55.0" />
+      <Button fx:id="btnEinzahlen" mnemonicParsing="false" onAction="#betragEinzahlen" styleClass="succesBtn" text="Einzahlen" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="90.0" />
       <Label fx:id="label_errorMessage" alignment="CENTER" text="ErrorMessage" visible="false" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="115.0" />
+      <Label text="Betrag:" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="25.0" />
    </children>
 </AnchorPane>

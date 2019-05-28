@@ -48,10 +48,14 @@ public class AddResultViewController {
         if (cbSpiel.getSelectionModel().isEmpty()) return;
         Spiel pickedGame = (Spiel) cbSpiel.getSelectionModel().getSelectedItem();
         SpielService ss = ServiceFactory.createService(SpielService.class);
-        ss.setzeErgebnis(pickedGame, (QuotenArt)cbErgebnis.getSelectionModel().getSelectedItem());
+        ss.setzeErgebnis(pickedGame, (QuotenArt) cbErgebnis.getSelectionModel().getSelectedItem());
 
         //Close
         ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
 
+    }
+
+    public void closeErgebnisView(ActionEvent actionEvent) {
+        ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
     }
 }
