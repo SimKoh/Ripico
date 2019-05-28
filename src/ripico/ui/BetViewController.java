@@ -114,7 +114,6 @@ public class BetViewController {
         mainView.addWetteToMyList(wette);
 
         // AFTER ADD
-
         betViewStage.close();
     }
 

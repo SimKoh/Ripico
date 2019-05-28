@@ -2,8 +2,8 @@ package ripico.service;
 
 import ripico.api.ServiceFactory;
 import ripico.api.dal.SpielAdapter;
-import ripico.api.domain.enums.QuotenArt;
 import ripico.api.domain.Spiel;
+import ripico.api.domain.enums.QuotenArt;
 import ripico.api.service.SpielService;
 
 import java.sql.SQLException;
@@ -22,7 +22,7 @@ public class DefaultSpielServiceImpl implements SpielService {
     public List<Spiel> ladeSpiele() {
         return spielAdapter.getAllSpiele()
                 .stream()
-                .filter(e -> e.getDatum().after(new Date()))
+                .filter(e -> e.getDatum().after(new Date()) && e.getErgebnis() == null)
                 .collect(Collectors.toList());
     }
 

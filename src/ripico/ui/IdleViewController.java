@@ -115,8 +115,29 @@ public class IdleViewController {
     }
 
     @FXML
-    void pruefeWettschein(){
+    void pruefeWettschein(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/AddResultView.fxml"));
+            // Get MainView RootElement
+            Parent root = loader.load();
 
+            AddResultViewController controller = loader.getController();
+
+            Stage stage = new Stage(); // Neues Fenster
+            stage.setTitle("Ripico Sportwetten");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            controller.init();
+
+            // Set Icon
+            stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
+            stage.setResizable(false);
+            // Hide/Close TOS-Window
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Fehler 46:", e);
+        }
     }
 
 

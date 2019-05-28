@@ -23,9 +23,8 @@ public class AddCurrencyViewController {
 
     public void betragEinzahlen(ActionEvent actionEvent) {
         if (tfBetrag.getText().isEmpty() || tfBetrag.getText() == null || Float.parseFloat(tfBetrag.getText()) < 1) {
-
-
-            label_errorMessage.setText("Junge wo ist das Geld?!");
+            label_errorMessage.setText("Bruder, was ist denn das!? Komm, ein Taui geht doch noch");
+            tfBetrag.setText("1000.0");
             label_errorMessage.getStyleClass().add("errorMessage");
             label_errorMessage.setVisible(true);
             return;

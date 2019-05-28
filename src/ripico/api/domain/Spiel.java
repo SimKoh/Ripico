@@ -83,4 +83,9 @@ public class Spiel {
         this.quoten.put(QuotenArt.UNENTSCHIEDEN, unentschieden);
 
     }
+
+    @Override
+    public String toString() {
+        return "ID " + getSpielId() + " - " + getMannschaftHeim() + " : " + getMannschaftAuswaerts();
+    }
 }

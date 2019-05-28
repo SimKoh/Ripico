@@ -1,8 +1,11 @@
 package ripico.ui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.LoadException;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -41,6 +44,8 @@ public class MainViewController{
     private float einsatz = 0.f;
     private SpielService spielService;
     @FXML
+    private Label labelErrorMessage;
+    @FXML
     private Label label_Guthaben;
     @FXML
     private VBox vBox_availableBets;
@@ -68,9 +73,9 @@ public class MainViewController{
             if (tfBetEinsatz.getText().isEmpty() ) {
                 tfBetEinsatz.setText("0");
             }
-            einsatz = Float.parseFloat(tfBetEinsatz.getText());
-            System.out.println("Einsatz:"+einsatz);
-            aktualisiereGesamtGewinn();
+            aktualisiereGesamtGewinn(Float.parseFloat(tfBetEinsatz.getText()));
+            // CLear Error after new manual edit
+            labelErrorMessage.setVisible(false);
         });
     }
 
@@ -247,10 +252,14 @@ public class MainViewController{
 
 
     public void addWetteToMyList(Wette wette) {
+
+
         Spiel spiel = wette.getSpiel();
         if (wette == null || spiel == null) {
             return;
         }
+        // Clear Error message "Füge erst eine Wette hinzu" falls vorhanden
+        labelErrorMessage.setVisible(false);
 
         // Add Wette to meineWetten
         meineWettenListe.add(wette);
@@ -319,22 +328,100 @@ public class MainViewController{
         return false;
     }
 
-    public void submitWettschein() {
+    public void submitWettschein(ActionEvent event) {
+        if(meineWettenListe.isEmpty()) {
+            writeToErrorLabel(labelErrorMessage, "Du musst erst Wetten zu deinem Wettschein hinzufügen!");
+            return;
+        }
+
         String strEinsatz = tfBetEinsatz.getText();
         float einsatz = 0;
+
         try {
             einsatz = Float.parseFloat(strEinsatz);
         } catch (NumberFormatException e) {
+            writeToErrorLabel(labelErrorMessage, "Einsätze nur in Form mit dem Dezimalzeichen: 5,87!");
+            tfBetEinsatz.setText(getGuthaben()+"");
+            aktualisiereGesamtGewinn(Float.parseFloat(tfBetEinsatz.getText()));
             e.printStackTrace();
+            return;
         }
         if (einsatz < 1) {
+            writeToErrorLabel(labelErrorMessage, "Einsatz muss größer als 0 sein!");
+            tfBetEinsatz.setText(getGuthaben()+"");
+            aktualisiereGesamtGewinn(Float.parseFloat(tfBetEinsatz.getText()));
+            return;
+        }
+        if(getGuthaben()-einsatz<0){
+            writeToErrorLabel(labelErrorMessage, "Du hast zu wenig Guthaben für diesen Einsatz!");
+            tfBetEinsatz.setText(getGuthaben()+"");
+            aktualisiereGesamtGewinn(Float.parseFloat(tfBetEinsatz.getText()));
 
             return;
         }
+
+        labelErrorMessage.setVisible(false);
+
+
         wettschein.setEinsatz(einsatz);
         this.wettschein.setWetten(meineWettenListe);
         wettscheinService.speichereWettschein(wettschein);
+        setGuthaben(getGuthaben()-einsatz);
 
+        // Bestätige Wettscheinnummer
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Wettschein erstellt");
+        alert.setHeaderText("Bald bist du reichm, versprochen!");
+        alert.setContentText("Verlier bloß nicht deine Wettschein-Id: "+wettschein.getWettscheinId());
+        Optional<ButtonType> option = alert.showAndWait();
+
+        // Load MainApp on Success
+        openMainView(event);
+
+    }
+
+    private void aktualisiereGesamtGewinn(float parseFloat) {
+        einsatz = parseFloat;
+        gesamtGewinn  = gesamtQuote * einsatz;
+        label_gesamtGewinn.setText(gesamtGewinn+" €");
+    }
+
+    private void writeToErrorLabel(Label labelError, String s) {
+        labelError.setText(s);
+        labelError.setVisible(true);
+        labelError.getStyleClass().add("errorMessage");
+    }
+
+    private void openMainView(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/MainView.fxml"));
+            // Get MainView RootElement
+            Parent root = loader.load();
+
+            // Set Variables
+            MainViewController controller = loader.getController();
+            controller.setGuthaben(getGuthaben());
+            controller.init();
+
+            Stage stage = new Stage(); // Neues Fenster
+            stage.setTitle("Ripico Sportwetten");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // Set Icon
+            stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
+//            stage.setResizable(false);
+            // Hide/Close TOS-Window
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+        } catch (LoadException le) {
+            logger.log(Level.SEVERE, "Fehler 47: Siehe logs", le);
+            writeToErrorLabel(labelErrorMessage, "Fehler beim Laden der Hauptapplikation");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Fehler 46:", e);
+
+            e.printStackTrace();
+        }
     }
 
     private void openBetView(Spiel spiel) {
