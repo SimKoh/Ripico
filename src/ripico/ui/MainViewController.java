@@ -78,6 +78,7 @@ public class MainViewController {
         verfuergbareSpieleList = new ArrayList<>(spielService.ladeSpiele());
         wettschein = wettscheinService.erstelleLeerenWettschein();
     }
+
     public void init(){
         label_Guthaben.setText(String.format("%.2f €", guthaben));
         statusManager = new StatusLabelManager(labelStatusMessage);
