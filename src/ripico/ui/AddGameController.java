@@ -30,44 +30,35 @@ import java.util.logging.Logger;
 
 public class AddGameController {
     private static final Logger logger = Logger.getLogger(AddGameController.class.getName());
-
-    @FXML
-    public TextField tfHeimQuote;
-    @FXML
-    public TextField tfUnentschiedenQuote;
-    @FXML
-    public TextField tfAuswaertsQuote;
-
-    @FXML
-    public DatePicker dpSpielDatum;
-    @FXML
-    public TextField tfSpielZeit;
-
-    @FXML
-    public Label label_StatusMessage;
-    @FXML
-    ComboBox cbSportart;
-    @FXML
-    ComboBox cbHeimMannschaft;
-    @FXML
-    ComboBox cbAuswaertsMannschaft;
-
-    List<Control> controlList = new ArrayList<>();
-
+    private StatusLabelManager statusManager;
+    private List<Control> controlList = new ArrayList<>();
     private final MannschaftService mannschaftService;
     private final SpielService ss;
 
-    public AddGameController() {
-        mannschaftService = ServiceFactory.createService(MannschaftService.class);
-        ss = ServiceFactory.createService(SpielService.class);
-    }
-
+    @FXML
+    private TextField tfHeimQuote;
+    @FXML
+    private TextField tfUnentschiedenQuote;
+    @FXML
+    private TextField tfAuswaertsQuote;
+    @FXML
+    private DatePicker dpSpielDatum;
+    @FXML
+    private TextField tfSpielZeit;
+    @FXML
+    private Label label_StatusMessage;
+    @FXML
+    private ComboBox cbSportart;
+    @FXML
+    private ComboBox cbHeimMannschaft;
+    @FXML
+    private ComboBox cbAuswaertsMannschaft;
     @FXML
     void initialize() {
+        statusManager = new StatusLabelManager(label_StatusMessage);
         cbSportart.setItems(FXCollections.observableArrayList(Sportart.values()));
 
         // TODO mannschaften basierend auf gewählter Sportart filtern
-
         cbAuswaertsMannschaft.setItems(FXCollections.observableArrayList(mannschaftService.alleMannschaften()));
         cbHeimMannschaft.setItems(FXCollections.observableArrayList(mannschaftService.alleMannschaften()));
 
@@ -75,7 +66,6 @@ public class AddGameController {
         addComboBoxValidierung(cbHeimMannschaft, cbAuswaertsMannschaft, cbSportart);
         addSpielzeitValidierung(tfSpielZeit);
         addSpielDatumValidierung(dpSpielDatum);
-
 
         controlList.add(tfHeimQuote);
         controlList.add(tfUnentschiedenQuote);
@@ -86,11 +76,14 @@ public class AddGameController {
         controlList.add(dpSpielDatum);
         controlList.add(tfSpielZeit);
 
-        // Alle Controls als Rotborder markieren weil PFLICHT
         for (Control control : controlList) {
             control.getStyleClass().add("border");
         }
+    }
 
+    public AddGameController() {
+        mannschaftService = ServiceFactory.createService(MannschaftService.class);
+        ss = ServiceFactory.createService(SpielService.class);
     }
 
     private void addSpielDatumValidierung(DatePicker dpSpielDatum) {
@@ -218,14 +211,12 @@ public class AddGameController {
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
-
-            controller.init();
             // Set Icon
             stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
             stage.setResizable(false);
 
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Fehler 46:", e);
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 }

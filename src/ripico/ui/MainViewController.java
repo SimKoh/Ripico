@@ -463,7 +463,6 @@ public class MainViewController {
             stage.initModality(Modality.APPLICATION_MODAL);
 
             BetViewController controller = loader.getController();
-            controller.setBetViewStage(stage);
             controller.setSpiel(spiel);
             controller.setMainView(this);
 

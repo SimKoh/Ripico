@@ -7,8 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,27 +17,10 @@ import java.util.logging.Logger;
 
 
 public class IdleViewController {
-
     private static final Logger logger = Logger.getLogger(IdleViewController.class.getName());
 
-    private AppStart mainApp;
-
     @FXML
-    private Hyperlink aEinloggen;
-
-    @FXML
-    private Hyperlink aWettscheinPruefen;
-
-    @FXML
-    private Button btn_agreeTos;
-
-    @FXML
-    private void initialize() {
-        logger.info("Idle View Initialized");
-    }
-
-    // Schein prüfen VIEW
-    public void oeffneCheckWettscheinView(ActionEvent event) {
+    public void openCheckWettscheinView(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/CheckWettscheinView.fxml"));
             // Get MainView RootElement
@@ -57,12 +38,12 @@ public class IdleViewController {
             stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
             stage.setResizable(false);
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Fehler 46:", e);
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
-    // LOAD EINZAHLEN DIREKT
-    public void onClick_agreeTos(ActionEvent event) {
+    @FXML
+    public void openAddCurrencyView(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/AddCurrencyView.fxml"));
             // Get MainView RootElement
@@ -75,19 +56,18 @@ public class IdleViewController {
             stage.setScene(new Scene(root));
             stage.show();
 
-
             // Set Icon
             stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
             stage.setResizable(false);
             // Hide/Close TOS-Window
             ((Node) (event.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Fehler 46:", e);
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
     @FXML
-    void login(ActionEvent event){
+    void openLoginView(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/LoginView.fxml"));
             // Get MainView RootElement
@@ -107,13 +87,7 @@ public class IdleViewController {
             stage.setResizable(false);
 
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Fehler 46:", e);
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
-
-    public void setMainApp(AppStart app) {
-        this.mainApp = app;
-        logger.info("IdleViewController: App loaded!");
-    }
-
 }

@@ -17,38 +17,35 @@ import ripico.api.service.MitarbeiterService;
 import ripico.api.exception.InvalidCredentialsException;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoginViewController {
-
-
+    private static final Logger logger = Logger.getLogger(LoginViewController.class.getName());
+    private StatusLabelManager statusManager;
     @FXML
-    public Label label_errorMessage;
+    private Label label_errorMessage;
     @FXML
-    TextField tfUsername;
+    private TextField tfUsername;
     @FXML
-    TextField tfPassword;
-
-
+    private TextField tfPassword;
     @FXML
     void initialize() {
-
+        statusManager = new StatusLabelManager(label_errorMessage);
     }
 
     @FXML
     void login(ActionEvent event) {
         MitarbeiterService ms = ServiceFactory.createService(MitarbeiterService.class);
-
         String username = tfUsername.getText();
         String password = tfPassword.getText();
 
         try {
             Mitarbeiter mitarbeiter = ms.login(username, password);
-            if (mitarbeiter == null) throw new InvalidCredentialsException("Mitarbeiter ist null, Error!");
-
+            if (mitarbeiter == null) throw new InvalidCredentialsException();
         } catch (InvalidCredentialsException e) {
-            label_errorMessage.setText("Login nicht möglich! Benutzer/Passwort fehlerhaft?");
-            label_errorMessage.setVisible(true);
-            e.printStackTrace();
+            statusManager.setFailureMessage("Login nicht möglich! Benutzer/Passwort fehlerhaft?");
+            logger.log(Level.SEVERE, e.getMessage(), e);
             return;
         }
 
@@ -73,8 +70,9 @@ public class LoginViewController {
 
 
         } catch (IOException e) {
-            System.out.println("Wallah Error");
-            e.printStackTrace();
+            statusManager.setFailureMessage("IOException aufgetreten!");
+            logger.log(Level.SEVERE, e.getMessage(), e);
+            return;
         }
     }
 }

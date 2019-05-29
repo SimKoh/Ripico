@@ -12,9 +12,9 @@
 
 <AnchorPane maxHeight="240.0" maxWidth="240.0" minHeight="240.0" minWidth="240.0" prefHeight="240.0" prefWidth="240.0" stylesheets="@stylesheets/dark-theme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ripico.ui.IdleViewController">
    <children>
-      <Button fx:id="btn_agreeTos" layoutX="41.0" layoutY="159.0" mnemonicParsing="false" onAction="#onClick_agreeTos" prefHeight="35.0" prefWidth="166.0" styleClass="ripicoBtn" text="Lass mich rein!" />
-      <Hyperlink fx:id="aWettscheinPruefen" alignment="CENTER" contentDisplay="CENTER" layoutX="73.0" layoutY="193.0" onAction="#oeffneCheckWettscheinView" style="-fx-text-fill: #efefef;" text="Wettschein prüfen" underline="true" />
-      <Hyperlink fx:id="aEinloggen" alignment="CENTER" contentDisplay="CENTER" layoutX="182.0" layoutY="-1.0" onAction="#login" style="-fx-text-fill: #efefef;" text="einloggen" underline="true" />
+      <Button fx:id="btn_agreeTos" layoutX="41.0" layoutY="159.0" mnemonicParsing="false" onAction="#openAddCurrencyView" prefHeight="35.0" prefWidth="166.0" styleClass="ripicoBtn" text="Lass mich rein!" />
+      <Hyperlink fx:id="aWettscheinPruefen" alignment="CENTER" contentDisplay="CENTER" layoutX="73.0" layoutY="193.0" onAction="#openCheckWettscheinView" style="-fx-text-fill: #efefef;" text="Wettschein prüfen" underline="true" />
+      <Hyperlink fx:id="aEinloggen" alignment="CENTER" contentDisplay="CENTER" layoutX="182.0" layoutY="-1.0" onAction="#openLoginView" style="-fx-text-fill: #efefef;" text="einloggen" underline="true" />
       <ImageView fitHeight="66.0" fitWidth="60.0" layoutX="43.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" smooth="false">
          <image>
             <Image url="@imgs/logo_highRes.png" />

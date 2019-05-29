@@ -1,6 +1,7 @@
 package ripico.ui;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.LoadException;
 import javafx.scene.Node;
@@ -18,18 +19,23 @@ import java.util.logging.Logger;
 
 public class AddCurrencyViewController {
     private static final Logger logger = Logger.getLogger(AddCurrencyViewController.class.getName());
-    public TextField tfBetrag;
-    public Label label_errorMessage;
+    private StatusLabelManager statusManager;
+
+    @FXML
+    private Label label_errorMessage;
+    @FXML
+    private TextField tfBetrag;
+    @FXML
+    public void initialize(){
+        statusManager = new StatusLabelManager(label_errorMessage);
+    }
 
     public void betragEinzahlen(ActionEvent actionEvent) {
         if (tfBetrag.getText().isEmpty() || tfBetrag.getText() == null || Float.parseFloat(tfBetrag.getText()) < 1) {
-            label_errorMessage.setText("Bruder, was ist denn das!? Komm, ein Taui geht doch noch");
             tfBetrag.setText("1000.0");
-            label_errorMessage.getStyleClass().add("errorMessage");
-            label_errorMessage.setVisible(true);
+            statusManager.setFailureMessage("Bruder, was ist denn das!? Komm, ein Taui geht doch noch");
             return;
         }
-
 
         // Load MainApp on Success
         try {
@@ -56,13 +62,10 @@ public class AddCurrencyViewController {
 
         } catch (LoadException le) {
             logger.log(Level.SEVERE, "Fehler 47:", le);
-            label_errorMessage.setText("Laden der Applikation nicht möglich, vielleicht läuft der SQL-Server nicht?");
-            label_errorMessage.setVisible(true);
-            label_errorMessage.getStyleClass().add("errorMessage");
+            statusManager.setFailureMessage("Laden der Applikation nicht möglich, vielleicht läuft der SQL-Server nicht?");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Fehler 46:", e);
-
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage(), e);
+            statusManager.setFailureMessage("Laden der Applikation nicht möglich");
         }
     }
 
@@ -84,7 +87,5 @@ public class AddCurrencyViewController {
             default:
                 break;
         }
-
     }
-
 }

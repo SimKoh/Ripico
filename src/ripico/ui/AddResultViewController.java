@@ -2,6 +2,7 @@ package ripico.ui;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -11,23 +12,32 @@ import ripico.api.domain.Spiel;
 import ripico.api.domain.enums.QuotenArt;
 import ripico.api.service.SpielService;
 
-public class AddResultViewController {
-    public Label lSportart;
-    public Label lSportartValue;
-    public Label lDatum;
-    public Label lDatumValue;
-    public Label labelDivider;
-    public Label lHeimValue;
-    public Label lSpiel;
-    public Label lAuswaertsValue;
-    public Label lErgebnis;
-    public ComboBox cbErgebnis;
-    public Button btnAbbrechen;
-    public Button btnErgebnisBestaetigen;
-    public ComboBox cbSpiel;
+import java.util.logging.Logger;
 
-    public void init() {
-        SpielService ss = ServiceFactory.createService(SpielService.class);
+public class AddResultViewController {
+    private static final Logger logger = Logger.getLogger(AddResultViewController.class.getName());
+    private final SpielService ss;
+
+    @FXML
+    private Label lSportartValue;
+    @FXML
+    private Label lDatumValue;
+    @FXML
+    private Label lHeimValue;
+    @FXML
+    private Label lAuswaertsValue;
+    @FXML
+    private Label labelDivider;
+    @FXML
+    private ComboBox cbErgebnis;
+    @FXML
+    private ComboBox cbSpiel;
+
+    public AddResultViewController() {
+        ss = ServiceFactory.createService(SpielService.class);
+    }
+
+    public void initialize() {
         this.cbSpiel.setItems(FXCollections.observableArrayList(ss.ladeSpiele()));
         cbSpiel.getSelectionModel().selectedItemProperty().addListener((arg0, oldValue, newValue) -> {
             if (!cbSpiel.getSelectionModel().isEmpty()) {

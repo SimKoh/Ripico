@@ -1,6 +1,8 @@
 package ripico.ui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,58 +18,37 @@ import java.util.logging.Logger;
 
 public class BetViewController {
     private static final Logger logger = Logger.getLogger(BetViewController.class.getName());
-    @FXML
-    public Label label_errorMessage;
-    private Spiel spiel;
-    Stage betViewStage;
-
-    @FXML
-    AnchorPane anchorPaneRoot;
-
-    @FXML
-    ImageView aLogo;
-
-    @FXML
-    ImageView hLogo;
-
-    @FXML
-    Label mannschaftHeimLabel;
-
-    @FXML
-    Label mannschaftAuswaertsLabel;
-
-    @FXML
-    Label hQuote;
-
-    @FXML
-    Label aQuote;
-
-    @FXML
-    Label uQuote;
-
-    @FXML
-    RadioButton radioHeim;
-
-    @FXML
-    RadioButton radioAuswaerts;
-
-    @FXML
-    RadioButton radioUnentschieden;
-
-    @FXML
-    TextField tfBetEinsatz;
-
-    @FXML
-    Button btnCancelBet;
-
-    @FXML
-    Button btnAddBet;
-
-    ToggleGroup toggleGroup;
+    private StatusLabelManager statusManager;
     private MainViewController mainView;
+    private Spiel spiel;
+    private ToggleGroup toggleGroup;
+
+    @FXML
+    private Label label_errorMessage;
+    @FXML
+    private ImageView aLogo;
+    @FXML
+    private ImageView hLogo;
+    @FXML
+    private Label mannschaftHeimLabel;
+    @FXML
+    private Label mannschaftAuswaertsLabel;
+    @FXML
+    private Label hQuote;
+    @FXML
+    private Label aQuote;
+    @FXML
+    private Label uQuote;
+    @FXML
+    private RadioButton radioHeim;
+    @FXML
+    private RadioButton radioAuswaerts;
+    @FXML
+    private RadioButton radioUnentschieden;
 
     @FXML
     void initialize() {
+        statusManager = new StatusLabelManager(label_errorMessage);
         toggleGroup = new ToggleGroup();
         radioHeim.setToggleGroup(toggleGroup);
         radioAuswaerts.setToggleGroup(toggleGroup);
@@ -86,14 +67,14 @@ public class BetViewController {
 
     }
 
-    public void addBetToWettschein() {
+    @FXML
+    public void addBetToWettschein(ActionEvent actionEvent) {
         RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
         if(selectedRadioButton==null) {
-            label_errorMessage.setText("JUNGE WÄHL NEN TEAM AUS!!!");
-            label_errorMessage.getStyleClass().add("errorMessage");
-            label_errorMessage.setVisible(true);
+            statusManager.setFailureMessage("JUNGE WÄHL NEN TEAM AUS!!!");
             return;
         }
+        statusManager.clearStatus();
 
         String radioButtonId = selectedRadioButton.getId();
         Wette wette;
@@ -112,23 +93,14 @@ public class BetViewController {
                 return;
         }
         mainView.addWetteToMyList(wette);
-
-        // AFTER ADD
-        betViewStage.close();
+        // Close Window after Click
+        ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
 
-    public void cancelBet() {
-        betViewStage.close();
+    @FXML
+    public void cancelBet(ActionEvent actionEvent) {
+        ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
-
-    public Stage getBetViewStage() {
-        return betViewStage;
-    }
-
-    public void setBetViewStage(Stage betViewStage) {
-        this.betViewStage = betViewStage;
-    }
-
 
     public void setMainView(MainViewController mainViewController) {
         this.mainView = mainViewController;

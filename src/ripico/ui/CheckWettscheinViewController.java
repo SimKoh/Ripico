@@ -8,53 +8,45 @@ import ripico.api.ServiceFactory;
 import ripico.api.exception.ResourceNotFoundException;
 import ripico.api.service.WettscheinService;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class CheckWettscheinViewController {
-    public Label labelResult;
-    public TextField tfWettscheinId;
+    private static final Logger logger = Logger.getLogger(CheckWettscheinViewController.class.getName());
     private WettscheinService ws;
+    private StatusLabelManager statusManager;
 
     @FXML
-    public void initialize() {
-        ws = ServiceFactory.createService(WettscheinService.class);
-    }
+    private Label labelResult;
+    @FXML
+    private TextField tfWettscheinId;
+    @FXML
+    public void initialize() { statusManager = new StatusLabelManager(labelResult); }
+
+    public CheckWettscheinViewController() { ws = ServiceFactory.createService(WettscheinService.class); }
 
     public void pruefeWettschein(ActionEvent actionEvent) {
         int userWettscheinId = 0;
         try {
             userWettscheinId = Integer.parseInt(tfWettscheinId.getText());
-            if(userWettscheinId<0) {
-                showErrorMessage("Wettschein-ID kann nicht kleiner als 0 sein");
+            if (userWettscheinId < 0) {
+                statusManager.setFailureMessage("Wettschein-ID kann nicht kleiner als 0 sein");
                 return;
             }
+            // TODO Wettschein zurückgeben anstatt
             if (ws.pruefeWettschein(userWettscheinId)) {
-                showWinMessage();
-            } else{
-                showLoseMessage();
+                statusManager.setSuccessMessage("Du hast gewonnen! Auszahlung dauert i.d.R. 24 Wochen");
+            } else {
+                statusManager.setFailureMessage("Du hast verloren! Spast");
             }
         } catch (NumberFormatException e) {
-            showErrorMessage("Falsches ID-Format");
+            statusManager.setFailureMessage("Falsches ID-Format");
+            logger.log(Level.SEVERE, e.getMessage(), e);
             return;
         } catch (ResourceNotFoundException e) {
-            showErrorMessage("ID nicht gefunden! Tja, Geld ist wohl weg!");
-            e.printStackTrace();
+            statusManager.setFailureMessage("ID nicht gefunden! Tja, Geld ist wohl weg!");
+            logger.log(Level.SEVERE, e.getMessage(), e);
             return;
         }
-    }
-
-    private void showWinMessage(){
-        labelResult.setText("Du hast gewonnen! Auszahlung dauert i.d.R. 24 Wochen");
-        labelResult.setVisible(true);
-        labelResult.getStyleClass().add("successMessage");
-    }
-
-    private void showLoseMessage(){
-        labelResult.setText("Du hast verloren! Spast");
-        labelResult.setVisible(true);
-        labelResult.getStyleClass().add("errorMessage");
-    }
-    private void showErrorMessage(String msg){
-        labelResult.setText(msg);
-        labelResult.setVisible(true);
-        labelResult.getStyleClass().add("errorMessage");
     }
 }
