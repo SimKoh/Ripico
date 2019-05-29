@@ -78,13 +78,9 @@ public class MainViewController {
         });
     }
 
-    private void aktualisiereGesamtGewinn() {
-        gesamtGewinn = gesamtQuote * einsatz;
-        label_gesamtGewinn.setText(gesamtGewinn + " €");
-    }
-
 
     // NOT FULLY INITIALIZED..
+
     @FXML
     private void initialize() {
         Logger.getLogger(getClass().getName()).info("MainViewController initialized");
@@ -110,8 +106,94 @@ public class MainViewController {
         scrollPane_availableBets.setContent(vBox_availableBets);
     }
 
-    // TODO anpassen in eine Methode ..
+    public void aktualisiereAvailableBets() {
+        if (isAvailableBetsEmpty()) {
+            return;
+        }
+        vBox_availableBets.getChildren().clear();
+        for (Spiel spiel : verfuergbareSpieleList) {
+            Pane paneBet = createBetRow(1, spiel);
+            paneBet.setOnMouseClicked(event -> openBetView(spiel));
+            vBox_availableBets.getChildren().add(paneBet);
+        }
 
+    }
+
+    public void aktualisiereGesamtquote() {
+        gesamtQuote = wettscheinService.berechneGesamtQuote(meineWettenListe);
+        labelGesamtquote.setText(String.format(Locale.ROOT, "%.2f", gesamtQuote));
+        aktualisiereGesamtGewinn();
+
+
+    }
+
+    private void aktualisiereGesamtGewinn() {
+        gesamtGewinn = gesamtQuote * einsatz;
+        label_gesamtGewinn.setText(String.format(Locale.ROOT,"%.2f €",gesamtGewinn ));
+    }
+
+    private void aktualisiereGesamtGewinn(float parseFloat) {
+        einsatz = parseFloat;
+        gesamtGewinn = gesamtQuote * einsatz;
+        label_gesamtGewinn.setText(String.format(Locale.ROOT,"%.2f €",gesamtGewinn ));
+    }
+
+    public void addWetteToMyList(Wette wette) {
+
+
+        Spiel spiel = wette.getSpiel();
+        if (wette == null || spiel == null) {
+            return;
+        }
+        // Clear Error message "Füge erst eine Wette hinzu" falls vorhanden
+        labelErrorMessage.setVisible(false);
+
+        // Add Wette to meineWetten
+        meineWettenListe.add(wette);
+        aktualisiereGesamtquote();
+
+        // Remove Spiel from available Bets and GUI
+        int i = verfuergbareSpieleList.indexOf(spiel);
+        verfuergbareSpieleList.remove(i);
+        vBox_availableBets.getChildren().remove(i);
+
+        // Lade ganze Liste neu..
+        aktualisiereAvailableBets();
+
+        Pane myBetRow = createMyBetRow(1, wette);
+        myBetRow.setOnMouseClicked(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Wette entfernen");
+            alert.setHeaderText("Bist du sicher dass du die Wette entfernen willst? Überleg nochmal!");
+            alert.setContentText(spiel.getMannschaftHeim().getMannschaftsName() + " : " + spiel.getMannschaftAuswaerts().getMannschaftsName());
+            // option != null.
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if (option.isPresent() && option.get() == ButtonType.OK) {
+                verfuergbareSpieleList.add(spiel);
+                aktualisiereAvailableBets();
+
+                meineWettenListe.remove(wette);
+                aktualisiereGesamtquote();
+
+                vBox_meineWetten.getChildren().remove(myBetRow);
+            }
+        });
+
+        vBox_meineWetten.getChildren().add(myBetRow);
+    }
+
+    private boolean isAvailableBetsEmpty() {
+        if (verfuergbareSpieleList.isEmpty()) {
+            Label noBetsLabel = new Label("Keine Wetten verfügbar!");
+            noBetsLabel.setPadding(new Insets(25, 25, 25, 25));
+            vBox_availableBets.getChildren().add(noBetsLabel);
+            return true;
+        }
+        return false;
+    }
+
+    // TODO anpassen in eine Methode ..
     private Pane createBetRow(int counter, Spiel spiel) {
         Pane paneBet = new Pane();
 
@@ -250,84 +332,6 @@ public class MainViewController {
         return paneBet;
     }
 
-
-    public void addWetteToMyList(Wette wette) {
-
-
-        Spiel spiel = wette.getSpiel();
-        if (wette == null || spiel == null) {
-            return;
-        }
-        // Clear Error message "Füge erst eine Wette hinzu" falls vorhanden
-        labelErrorMessage.setVisible(false);
-
-        // Add Wette to meineWetten
-        meineWettenListe.add(wette);
-        aktualisiereGesamtquote();
-
-        // Remove Spiel from available Bets and GUI
-        int i = verfuergbareSpieleList.indexOf(spiel);
-        verfuergbareSpieleList.remove(i);
-        vBox_availableBets.getChildren().remove(i);
-
-        // Lade ganze Liste neu..
-        aktualisiereAvailableBets();
-
-        Pane myBetRow = createMyBetRow(1, wette);
-        myBetRow.setOnMouseClicked(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Wette entfernen");
-            alert.setHeaderText("Bist du sicher dass du die Wette entfernen willst? Überleg nochmal!");
-            alert.setContentText(spiel.getMannschaftHeim().getMannschaftsName() + " : " + spiel.getMannschaftAuswaerts().getMannschaftsName());
-            // option != null.
-            Optional<ButtonType> option = alert.showAndWait();
-
-            if (option.isPresent() && option.get() == ButtonType.OK) {
-                verfuergbareSpieleList.add(spiel);
-                aktualisiereAvailableBets();
-
-                meineWettenListe.remove(wette);
-                aktualisiereGesamtquote();
-
-                vBox_meineWetten.getChildren().remove(myBetRow);
-            }
-        });
-
-        vBox_meineWetten.getChildren().add(myBetRow);
-    }
-
-    public void aktualisiereAvailableBets() {
-        if (isAvailableBetsEmpty()) {
-            return;
-        }
-        vBox_availableBets.getChildren().clear();
-        for (Spiel spiel : verfuergbareSpieleList) {
-            Pane paneBet = createBetRow(1, spiel);
-            paneBet.setOnMouseClicked(event -> openBetView(spiel));
-            vBox_availableBets.getChildren().add(paneBet);
-        }
-
-    }
-
-
-    public void aktualisiereGesamtquote() {
-        gesamtQuote = wettscheinService.berechneGesamtQuote(meineWettenListe);
-        labelGesamtquote.setText(String.format(Locale.ROOT, "%.2f", gesamtQuote));
-        aktualisiereGesamtGewinn();
-
-
-    }
-
-    private boolean isAvailableBetsEmpty() {
-        if (verfuergbareSpieleList.isEmpty()) {
-            Label noBetsLabel = new Label("Keine Wetten verfügbar!");
-            noBetsLabel.setPadding(new Insets(25, 25, 25, 25));
-            vBox_availableBets.getChildren().add(noBetsLabel);
-            return true;
-        }
-        return false;
-    }
-
     // TODO wenn Guthaben <= 0, dann open AddCurrencyView
     public void submitWettschein(ActionEvent event) {
         if (meineWettenListe.isEmpty()) {
@@ -384,12 +388,6 @@ public class MainViewController {
             openAddCurrencyView(event);
         }
 
-    }
-
-    private void aktualisiereGesamtGewinn(float parseFloat) {
-        einsatz = parseFloat;
-        gesamtGewinn = gesamtQuote * einsatz;
-        label_gesamtGewinn.setText(gesamtGewinn + " €");
     }
 
     private void writeToErrorLabel(Label labelError, String s) {
