@@ -50,7 +50,7 @@ public class AddCurrencyViewController {
 
             // Set Icon
             stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
-//            stage.setResizable(false);
+            stage.setResizable(false);
             // Hide/Close TOS-Window
             ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
 

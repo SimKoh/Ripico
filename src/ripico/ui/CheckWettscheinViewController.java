@@ -11,7 +11,7 @@ import ripico.api.service.WettscheinService;
 public class CheckWettscheinViewController {
     public Label labelResult;
     public TextField tfWettscheinId;
-    WettscheinService ws;
+    private WettscheinService ws;
 
     @FXML
     public void initialize() {
