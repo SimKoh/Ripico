@@ -53,15 +53,15 @@ public class DatabaseWettscheinAdapterImpl implements WettscheinAdapter {
             while (resultSetEinsatz.next()) {
                 einsatz = resultSetEinsatz.getFloat(1);
             }
+            if (wetten.isEmpty() || einsatz == 0) {
+                return Optional.empty();
+            }
             Wettschein wettschein = WettscheinBuilder
                     .newWettschein()
                     .withWettscheinId(wettenscheinId)
                     .withWetten(wetten)
                     .withEinsatz(einsatz)
                     .build();
-            if (wettschein == null) {
-                return Optional.empty();
-            }
             connectionPool.releaseConnection(connection);
             return Optional.of(wettschein);
         } catch (SQLException e) {
