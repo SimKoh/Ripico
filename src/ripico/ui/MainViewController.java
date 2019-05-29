@@ -112,7 +112,7 @@ public class MainViewController {
         }
         vBox_availableBets.getChildren().clear();
         for (Spiel spiel : verfuergbareSpieleList) {
-            Pane paneBet = createBetRow(1, spiel);
+            Pane paneBet = createBetRow(spiel);
             paneBet.setOnMouseClicked(event -> openBetView(spiel));
             vBox_availableBets.getChildren().add(paneBet);
         }
@@ -158,7 +158,7 @@ public class MainViewController {
         // Lade ganze Liste neu..
         aktualisiereAvailableBets();
 
-        Pane myBetRow = createMyBetRow(1, wette);
+        Pane myBetRow = createMyBetRow(wette);
         myBetRow.setOnMouseClicked(event -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Wette entfernen");
@@ -192,7 +192,7 @@ public class MainViewController {
     }
 
     // TODO anpassen in eine Methode ..
-    private Pane createBetRow(int counter, Spiel spiel) {
+    private Pane createBetRow(Spiel spiel) {
         Pane paneBet = new Pane();
 
         Label label_sportArtDesc = new Label("Sportart:");
@@ -253,7 +253,7 @@ public class MainViewController {
         return paneBet;
     }
 
-    private Pane createMyBetRow(int counter, Wette wette) {
+    private Pane createMyBetRow(Wette wette) {
         Pane paneBet = new Pane();
         Spiel spiel = wette.getSpiel();
 
@@ -309,7 +309,6 @@ public class MainViewController {
         label_quoteMannschaft2.setFont(new Font("Arial", 19));
         paneBet.getChildren().add(label_quoteMannschaft2);
 
-
         if (wette.getGesetzteWette() == QuotenArt.HEIM) {
             label_quoteMannschaft1.setStyle("-fx-text-fill: green;");
         }
@@ -324,9 +323,7 @@ public class MainViewController {
         paneBet.setMinHeight(75);
         paneBet.setMaxHeight(75);
         paneBet.setPrefWidth(475);
-
         paneBet.getStyleClass().add("betEntry");
-
         return paneBet;
     }
 
@@ -430,7 +427,6 @@ public class MainViewController {
             stage.setTitle("Ripico Sportwetten - Einzahlung");
             stage.setScene(new Scene(root));
             stage.show();
-
 
             // Set Icon
             stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
