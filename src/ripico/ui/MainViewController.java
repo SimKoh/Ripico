@@ -84,9 +84,15 @@ public class MainViewController {
         statusManager = new StatusLabelManager(labelStatusMessage);
         tfBetEinsatz.setOnKeyReleased(event -> {
             if (tfBetEinsatz.getText().isEmpty()) {
+                try {
+                    aktualisiereGesamtGewinn(Float.parseFloat(tfBetEinsatz.getText()));
+                } catch (NumberFormatException e) {
+                    statusManager.setFailureMessage("Bitte nur Zahlen als Einsatz!");
+                    logger.log(Level.SEVERE, e.getMessage(), e);
+                    return;
+                }
                 tfBetEinsatz.setText("0");
             }
-            aktualisiereGesamtGewinn(Float.parseFloat(tfBetEinsatz.getText()));
             // CLear Error after new manual edit
             statusManager.clearStatus();
         });

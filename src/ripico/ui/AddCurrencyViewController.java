@@ -37,6 +37,11 @@ public class AddCurrencyViewController {
             statusManager.setFailureMessage("Bruder, was ist denn das!? Komm, ein Taui geht doch noch");
             return;
         }
+        if(Float.parseFloat(tfBetrag.getText())>99999){
+            tfBetrag.setText("1000.0");
+            statusManager.setFailureMessage("Bruder, wir wollen dich nicht arm machen.. Mach nicht über 99.999€");
+            return;
+        }
 
         // Load MainApp on Success
         try {
