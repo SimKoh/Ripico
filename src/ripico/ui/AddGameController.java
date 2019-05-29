@@ -54,18 +54,22 @@ public class AddGameController {
 
     List<Control> controlList = new ArrayList<>();
 
+    private final MannschaftService mannschaftService;
+    private final SpielService ss;
+
+    public AddGameController() {
+        mannschaftService = ServiceFactory.createService(MannschaftService.class);
+        ss = ServiceFactory.createService(SpielService.class);
+    }
+
     @FXML
     void initialize() {
-        //TODO debug-entfernen
-        System.out.println("Bin Login geladen");
         cbSportart.setItems(FXCollections.observableArrayList(Sportart.values()));
 
         // TODO mannschaften basierend auf gewählter Sportart filtern
-        MannschaftService mannschaftService = ServiceFactory.createService(MannschaftService.class);
+
         cbAuswaertsMannschaft.setItems(FXCollections.observableArrayList(mannschaftService.alleMannschaften()));
         cbHeimMannschaft.setItems(FXCollections.observableArrayList(mannschaftService.alleMannschaften()));
-        //cbHeimMannschaft.setItems(FXCollections.observableArrayList(mannschaftService.alleMannschaften().stream().map(mannschaft -> mannschaft.getMannschaftsName()).collect(Collectors.toList())));
-
 
         addQuotenValidierung(tfHeimQuote, tfUnentschiedenQuote, tfAuswaertsQuote);
         addComboBoxValidierung(cbHeimMannschaft, cbAuswaertsMannschaft, cbSportart);
@@ -134,7 +138,6 @@ public class AddGameController {
     }
 
 
-    // TODO smoother maken
     private void clearControls() {
         tfHeimQuote.clear();
         tfUnentschiedenQuote.clear();
@@ -172,16 +175,14 @@ public class AddGameController {
 
             String datum = dpSpielDatum.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + " " + tfSpielZeit.getText();
             Date date = new SimpleDateFormat("dd.MM.yyyy HH:mm").parse(datum);
-            System.out.println(datum);
+            logger.info(datum);
 
-            Map<QuotenArt, Float> quotenMap = new HashMap<QuotenArt, Float>() {{
-                put(QuotenArt.HEIM, heimQuote);
-                put(QuotenArt.UNENTSCHIEDEN, unentschiedenQuote);
-                put(QuotenArt.AUSWAERTS, auswaertsQuote);
-            }};
+            Map<QuotenArt, Float> quotenMap = new EnumMap<>(QuotenArt.class);
+            quotenMap.put(QuotenArt.HEIM, heimQuote);
+            quotenMap.put(QuotenArt.UNENTSCHIEDEN, unentschiedenQuote);
+            quotenMap.put(QuotenArt.AUSWAERTS, auswaertsQuote);
 
 
-            SpielService ss = ServiceFactory.createService(SpielService.class);
             Spiel spiel = SpielBuilder.newSpiel()
                     .withDatum(date)
                     .withMannschaftHeim(heimMannschaft)

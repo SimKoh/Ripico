@@ -129,13 +129,13 @@ public class MainViewController {
 
     private void aktualisiereGesamtGewinn() {
         gesamtGewinn = gesamtQuote * einsatz;
-        label_gesamtGewinn.setText(String.format(Locale.ROOT,"%.2f €",gesamtGewinn ));
+        label_gesamtGewinn.setText(String.format(Locale.ROOT, "%.2f €", gesamtGewinn));
     }
 
     private void aktualisiereGesamtGewinn(float parseFloat) {
         einsatz = parseFloat;
         gesamtGewinn = gesamtQuote * einsatz;
-        label_gesamtGewinn.setText(String.format(Locale.ROOT,"%.2f €",gesamtGewinn ));
+        label_gesamtGewinn.setText(String.format(Locale.ROOT, "%.2f €", gesamtGewinn));
     }
 
     public void addWetteToMyList(Wette wette) {
@@ -332,7 +332,6 @@ public class MainViewController {
         return paneBet;
     }
 
-    // TODO wenn Guthaben <= 0, dann open AddCurrencyView
     public void submitWettschein(ActionEvent event) {
         if (meineWettenListe.isEmpty()) {
             writeToErrorLabel(labelErrorMessage, "Du musst erst Wetten zu deinem Wettschein hinzufügen!");
