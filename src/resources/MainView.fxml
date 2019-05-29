@@ -66,14 +66,14 @@
       </VBox>
       <VBox fx:id="vBox_zweiteHaelfte" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="505.0">
          <children>
-            <Pane prefHeight="110.0" prefWidth="460.0">
+            <Pane prefHeight="104.0" prefWidth="474.0">
                <children>
-                  <Label layoutX="217.0" style="-fx-text-fill: white;" text="Guthaben:">
+                  <Label layoutX="300.0" layoutY="2.0" style="-fx-text-fill: white;" text="Guthaben:">
                      <font>
-                        <Font size="19.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label_Guthaben" alignment="CENTER_RIGHT" layoutX="309.0" layoutY="1.0" prefHeight="28.0" prefWidth="150.0" style="-fx-text-fill: green;" text="0,00€">
+                  <Label fx:id="label_Guthaben" alignment="CENTER_RIGHT" layoutX="321.0" layoutY="1.0" prefHeight="28.0" prefWidth="150.0" style="-fx-text-fill: green;" text="10000,00€">
                      <font>
                         <Font size="19.0" />
                      </font>
