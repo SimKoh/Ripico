@@ -10,6 +10,6 @@
       <TextField fx:id="tfWettscheinId" layoutX="100.0" layoutY="23.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0" />
       <Label layoutX="29.0" layoutY="35.0" text="Wettschein-ID" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
       <Button layoutX="10.0" layoutY="57.0" mnemonicParsing="false" onAction="#pruefeWettschein" prefHeight="25.0" prefWidth="298.0" text="Wettschein prüfen" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="57.0" />
-      <Label fx:id="labelResult" alignment="CENTER" layoutX="20.0" layoutY="89.0" text="statusMessage" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="90.0" />
+      <Label fx:id="labelResult" alignment="CENTER" layoutX="20.0" layoutY="89.0" text="statusMessage" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="90.0" />
    </children>
 </AnchorPane>

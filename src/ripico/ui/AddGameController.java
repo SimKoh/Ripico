@@ -112,7 +112,7 @@ public class AddGameController {
     private void addQuotenValidierung(TextField... textFields) {
         for (TextField tf : textFields) {
             tf.textProperty().addListener((arg0, oldValue, newValue) -> {
-                if (!tf.getText().matches("[0-9]\\.[0-9]+")) {
+                if (!tf.getText().matches("[0-9]+\\.[0-9]+")) {
                     tf.getStyleClass().add("border");
                 } else {
                     tf.getStyleClass().removeAll("border");
