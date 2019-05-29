@@ -25,8 +25,9 @@ public class AddCurrencyViewController {
     private Label label_errorMessage;
     @FXML
     private TextField tfBetrag;
+
     @FXML
-    public void initialize(){
+    public void initialize() {
         statusManager = new StatusLabelManager(label_errorMessage);
     }
 
@@ -47,7 +48,6 @@ public class AddCurrencyViewController {
             MainViewController controller = loader.getController();
             controller.setGuthaben(Float.parseFloat(tfBetrag.getText()));
             controller.init();
-
             Stage stage = new Stage(); // Neues Fenster
             stage.setTitle("Ripico Sportwetten");
             stage.setScene(new Scene(root));

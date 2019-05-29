@@ -32,18 +32,21 @@ import java.util.logging.Logger;
 
 public class MainViewController {
     private static final Logger logger = Logger.getLogger(MainViewController.class.getName());
-    private static List<Spiel> verfuergbareSpieleList;
-    private static List<Wette> meineWettenListe;
-    private static WettscheinService wettscheinService;
+    private final WettscheinService wettscheinService;
+    private final SpielService spielService;
+    private static StatusLabelManager statusManager;
+
+    private List<Spiel> verfuergbareSpieleList;
+    private List<Wette> meineWettenListe;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:MM");
     private Wettschein wettschein;
-    private float guthaben;
+    private float guthaben = 0.f;
     private float gesamtQuote = 0.f;
     private float gesamtGewinn = 0.f;
     private float einsatz = 0.f;
-    private SpielService spielService;
+
     @FXML
-    private Label labelErrorMessage;
+    private Label labelStatusMessage;
     @FXML
     private Label label_Guthaben;
     @FXML
@@ -61,45 +64,35 @@ public class MainViewController {
     @FXML
     private TextField tfBetEinsatz;
     @FXML
-    private Button btnSubmitWettschein;
-    @FXML
     private Label label_gesamtGewinn;
 
-    void init() {
-        label_Guthaben.setText(String.format("%.2f €", getGuthaben()));
+    public MainViewController() {
+        spielService = ServiceFactory.createService(SpielService.class);
+        wettscheinService = ServiceFactory.createService(WettscheinService.class);
+        meineWettenListe = new ArrayList<>();
 
+        // TODO assert erklären
+        assert spielService != null;
+        assert wettscheinService != null;
+
+        verfuergbareSpieleList = new ArrayList<>(spielService.ladeSpiele());
+        wettschein = wettscheinService.erstelleLeerenWettschein();
+    }
+    public void init(){
+        label_Guthaben.setText(String.format("%.2f €", guthaben));
+        statusManager = new StatusLabelManager(labelStatusMessage);
         tfBetEinsatz.setOnKeyReleased(event -> {
             if (tfBetEinsatz.getText().isEmpty()) {
                 tfBetEinsatz.setText("0");
             }
             aktualisiereGesamtGewinn(Float.parseFloat(tfBetEinsatz.getText()));
             // CLear Error after new manual edit
-            labelErrorMessage.setVisible(false);
+            statusManager.clearStatus();
         });
-    }
-
-
-    // NOT FULLY INITIALIZED..
-
-    @FXML
-    private void initialize() {
-        Logger.getLogger(getClass().getName()).info("MainViewController initialized");
-        spielService = ServiceFactory.createService(SpielService.class);
-        // Setup Start-Variablen
-        assert spielService != null;
-        verfuergbareSpieleList = new ArrayList<>(spielService.ladeSpiele());
-
-        meineWettenListe = new ArrayList<>();
-        wettscheinService = ServiceFactory.createService(WettscheinService.class);
-
-        // Erstelle leeren, neuen Wettschein
-        assert wettscheinService != null;
-        wettschein = wettscheinService.erstelleLeerenWettschein();
 
         // Setup Controls
         labelDatumSchein.setText(simpleDateFormat.format(new Date()));
         labelWettscheinId.setText(String.valueOf(wettschein.getWettscheinId()));
-
 
         aktualisiereAvailableBets();
 
@@ -123,8 +116,6 @@ public class MainViewController {
         gesamtQuote = wettscheinService.berechneGesamtQuote(meineWettenListe);
         labelGesamtquote.setText(String.format(Locale.ROOT, "%.2f", gesamtQuote));
         aktualisiereGesamtGewinn();
-
-
     }
 
     private void aktualisiereGesamtGewinn() {
@@ -143,10 +134,10 @@ public class MainViewController {
 
         Spiel spiel = wette.getSpiel();
         if (wette == null || spiel == null) {
+            statusManager.setFailureMessage("Fehler, Wette oder Spiel sind null");
             return;
         }
-        // Clear Error message "Füge erst eine Wette hinzu" falls vorhanden
-        labelErrorMessage.setVisible(false);
+        statusManager.clearStatus();
 
         // Add Wette to meineWetten
         meineWettenListe.add(wette);
@@ -334,7 +325,7 @@ public class MainViewController {
 
     public void submitWettschein(ActionEvent event) {
         if (meineWettenListe.isEmpty()) {
-            writeToErrorLabel(labelErrorMessage, "Du musst erst Wetten zu deinem Wettschein hinzufügen!");
+            statusManager.setFailureMessage("Du musst erst Wetten zu deinem Wettschein hinzufügen!");
             return;
         }
 
@@ -344,33 +335,31 @@ public class MainViewController {
         try {
             einsatz = Float.parseFloat(strEinsatz);
         } catch (NumberFormatException e) {
-            writeToErrorLabel(labelErrorMessage, "Einsätze nur in Form mit dem Dezimalzeichen: 5,87!");
-            tfBetEinsatz.setText(getGuthaben() + "");
+            statusManager.setFailureMessage("Einsätze nur in Form mit dem Dezimalzeichen: 5,87!");
+            tfBetEinsatz.setText(guthaben + "");
             aktualisiereGesamtGewinn(Float.parseFloat(tfBetEinsatz.getText()));
+            //TODO nach allen stackTracePrints suchen
             e.printStackTrace();
             return;
         }
         if (einsatz < 1) {
-            writeToErrorLabel(labelErrorMessage, "Einsatz muss größer als 0 sein!");
-            tfBetEinsatz.setText(getGuthaben() + "");
+            statusManager.setFailureMessage("Einsatz muss größer als 0 sein!");
+            tfBetEinsatz.setText(guthaben + "");
             aktualisiereGesamtGewinn(Float.parseFloat(tfBetEinsatz.getText()));
             return;
         }
-        if (getGuthaben() - einsatz < 0) {
-            writeToErrorLabel(labelErrorMessage, "Du hast zu wenig Guthaben für diesen Einsatz!");
-            tfBetEinsatz.setText(getGuthaben() + "");
+        if ((guthaben - einsatz) < 0) {
+            statusManager.setFailureMessage("Du hast zu wenig Guthaben für diesen Einsatz!");
+            tfBetEinsatz.setText(guthaben + "");
             aktualisiereGesamtGewinn(Float.parseFloat(tfBetEinsatz.getText()));
-
             return;
         }
-
-        labelErrorMessage.setVisible(false);
-
+        statusManager.clearStatus();
 
         wettschein.setEinsatz(einsatz);
-        this.wettschein.setWetten(meineWettenListe);
+        wettschein.setWetten(meineWettenListe);
         wettscheinService.speichereWettschein(wettschein);
-        setGuthaben(getGuthaben() - einsatz);
+        setGuthaben(guthaben-einsatz);
 
         // Bestätige Wettscheinnummer
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -379,7 +368,7 @@ public class MainViewController {
         alert.setContentText("Verlier bloß nicht deine Wettschein-Id: " + wettschein.getWettscheinId());
         Optional<ButtonType> option = alert.showAndWait();
 
-        if (getGuthaben() > 0) {
+        if (guthaben > 0) {
             // Load MainApp on Success
             openMainView(event);
         } else {
@@ -389,13 +378,8 @@ public class MainViewController {
 
     }
 
-    private void writeToErrorLabel(Label labelError, String s) {
-        labelError.setText(s);
-        labelError.setVisible(true);
-        labelError.getStyleClass().add("errorMessage");
-    }
-
-    private void openMainView(ActionEvent event) {
+    private void openMainView(ActionEvent actionEvent) {
+        // Load MainApp on Success
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/MainView.fxml"));
             // Get MainView RootElement
@@ -403,28 +387,28 @@ public class MainViewController {
 
             // Set Variables
             MainViewController controller = loader.getController();
-            controller.setGuthaben(getGuthaben());
+            controller.setGuthaben(guthaben);
             controller.init();
-
             Stage stage = new Stage(); // Neues Fenster
             stage.setTitle("Ripico Sportwetten");
             stage.setScene(new Scene(root));
             stage.show();
             stage.setResizable(false);
+
             // Set Icon
             stage.getIcons().add(new Image(AppStart.class.getResourceAsStream("../../resources/imgs/icon.png")));
-//            stage.setResizable(false);
+            stage.setResizable(false);
             // Hide/Close TOS-Window
-            ((Node) (event.getSource())).getScene().getWindow().hide();
+            ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
 
         } catch (LoadException le) {
-            logger.log(Level.SEVERE, "Fehler 47: Siehe logs", le);
-            writeToErrorLabel(labelErrorMessage, "Fehler beim Laden der Hauptapplikation");
+            logger.log(Level.SEVERE, "Fehler 47:", le);
+            statusManager.setFailureMessage("Laden der Applikation nicht möglich, vielleicht läuft der SQL-Server nicht?");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Fehler 46:", e);
-
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage(), e);
+            statusManager.setFailureMessage("Laden der Applikation nicht möglich");
         }
+
     }
 
     private void openAddCurrencyView(ActionEvent event) {
@@ -447,7 +431,8 @@ public class MainViewController {
             // Hide/Close TOS-Window
             ((Node) (event.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Fehler 46:", e);
+            statusManager.setFailureMessage("Fehler beim Laden der Hauptapplikation: IOException");
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
@@ -473,15 +458,12 @@ public class MainViewController {
             // Hide/Close TOS-Window
 
         } catch (IOException e) {
+            statusManager.setFailureMessage("Fehler beim Laden der Hauptapplikation: IOException");
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
-    public float getGuthaben() {
-        return guthaben;
-    }
-
-    public void setGuthaben(float guthaben) {
-        this.guthaben = guthaben;
+    public void setGuthaben(float parseFloat) {
+        guthaben = parseFloat;
     }
 }

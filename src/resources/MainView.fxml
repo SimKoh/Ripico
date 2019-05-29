@@ -78,7 +78,7 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelErrorMessage" layoutX="8.0" layoutY="80.0" prefHeight="17.0" prefWidth="444.0" text="ErrorMessage" visible="false" />
+                  <Label fx:id="labelStatusMessage" layoutX="8.0" layoutY="80.0" prefHeight="17.0" prefWidth="444.0" text="ErrorMessage" visible="false" />
                </children></Pane>
             <ScrollPane fx:id="scrollPane_availableBets" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="475.0" VBox.vgrow="ALWAYS">
                 <VBox fx:id="vBox_availableBets" fillWidth="false" nodeOrientation="LEFT_TO_RIGHT" />

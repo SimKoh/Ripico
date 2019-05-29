@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 public class BetViewController {
     private static final Logger logger = Logger.getLogger(BetViewController.class.getName());
-    private StatusLabelManager statusManager;
+    private static StatusLabelManager statusManager;
     private MainViewController mainView;
     private Spiel spiel;
     private ToggleGroup toggleGroup;
